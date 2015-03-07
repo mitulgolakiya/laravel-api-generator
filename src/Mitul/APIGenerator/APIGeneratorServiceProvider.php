@@ -15,7 +15,9 @@ class APIGeneratorServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		//
+		$configPath = __DIR__ . '/../../config/generator.php';
+		echo $configPath;
+		$this->publishes([$configPath => config_path('generator.php')], 'config');
 	}
 
 	/**
