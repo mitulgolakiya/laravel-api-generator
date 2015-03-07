@@ -8,7 +8,7 @@ use $MODEL_NAMESPACE$;
 use Illuminate\Http\Request;
 use Response;
 
-class $MODEL_NAME$Controller extends AppBaseController
+class $MODEL_NAME$Controller extends Controller
 {
 
 	/**
