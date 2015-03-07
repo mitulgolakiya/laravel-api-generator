@@ -35,6 +35,9 @@ class RepositoryGenerator implements GeneratorProvider
 
 		$fileName = $this->commandData->modelName . "Repository.php";
 
+		if(!file_exists($this->path))
+			mkdir($this->path, 0777, true);
+
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
