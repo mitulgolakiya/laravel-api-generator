@@ -1,0 +1,60 @@
+<?php
+
+namespace $NAMESPACE$;
+
+
+use $MODEL_NAMESPACE$;
+
+class $MODEL_NAME$Repository
+{
+
+	/**
+	 * Returns all $MODEL_NAME_PLURAL$
+	 *
+	 * @return \Illuminate\Database\Eloquent\Collection|static[]
+	 */
+	public function all()
+	{
+		return $MODEL_NAME$::all();
+	}
+
+	/**
+	 * Stores $MODEL_NAME$ into database
+	 *
+	 * @param array $input
+	 *
+	 * @return $MODEL_NAME$
+	 */
+	public function store($input)
+	{
+		return $MODEL_NAME$::create($input);
+	}
+
+	/**
+	 * Find $MODEL_NAME$ by given id
+	 *
+	 * @param int $id
+	 *
+	 * @return \Illuminate\Support\Collection|null|static|$MODEL_NAME$
+	 */
+	public function find$MODEL_NAME$ById($id)
+	{
+		return $MODEL_NAME$::find($id);
+	}
+
+	/**
+	 * Updates $MODEL_NAME$ into database
+	 *
+	 * @param $MODEL_NAME$ $$MODEL_NAME_CAMEL$
+	 * @param array $input
+	 *
+	 * @return $MODEL_NAME$
+	 */
+	public function update($$MODEL_NAME_CAMEL$, $input)
+	{
+		$$MODEL_NAME_CAMEL$->fill($input);
+		$$MODEL_NAME_CAMEL$->save();
+
+		return $$MODEL_NAME_CAMEL$;
+	}
+}

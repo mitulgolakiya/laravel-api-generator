@@ -8,5 +8,15 @@
             "email": "me@mitul.me"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "files":[
+            "src/Mitul/APIGenerator/Constants/Constants.php"
+        ],
+        "psr-4": {
+            "Mitul\\": "src/Mitul/"
+        }
+    }
 }
