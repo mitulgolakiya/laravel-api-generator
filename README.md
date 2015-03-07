@@ -21,7 +21,7 @@ Here is the full documentation.
 Steps to Get Started
 ----------------------
 
-1.Require this package with composer using the following command:
+1. Require this package with composer using the following command:
   
         composer require mitulgolakiya/laravel-api-generator
   
@@ -46,9 +46,9 @@ Steps to Get Started
         php artisan mitul.generator:api Project
         php artisan mitul.generator:api Post
  
-4. Enter the fields with options
+6. Enter the fields with options<br><br>
 
-5. And You are ready to go. :)
+7. And You are ready to go. :)
 
 
 Screen shots
