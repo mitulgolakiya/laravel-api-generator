@@ -1,5 +1,6 @@
 Laravel API Generator (Laravel5)
 =======================
+[![Total Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/downloads.svg)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator)
 
 I am fan of creating APIs. I have worked on so many projects of creating APIs. Laravel provides really good and handy commands to setup your all required files like Controller, Model, Migration etc.
 
@@ -54,7 +55,7 @@ Steps to Get Started
 7. And You are ready to go. :)
 
 
-Screen shots
+Screenshots
 ------------
 
 ### Command Execution
