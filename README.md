@@ -141,28 +141,6 @@ data can be anything as per response.
 
 data will be optional. And code will be error code.
 
-
-Directory Structure
---------------------
-
-
-        app
-        |-- Http
-            |-- Controllers
-                |-- AppBaseController.php - Base controller for all controllers
-        |-- Libraries - Custom Library Folder
-            |-- Constants
-                |-- Constants.php - All Constants goes here
-            |-- Exceptions
-                |-- AppValidationException.php - Validation failed exception
-                |-- RecordNotFoundException.php - Record not found exception
-            |-- Mitul - API Generator Files
-            |-- Repositories - Contains all repositories
-            |-- Utils
-                |-- CommonAppUtils.php - Common Utils
-                |-- ResponseManager.php - Response Prepare manager
-        |-- Models - Contains all Models
-
 Credits
 --------
 
