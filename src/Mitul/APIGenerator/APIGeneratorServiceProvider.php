@@ -31,6 +31,11 @@ class APIGeneratorServiceProvider extends ServiceProvider
 			return new APIGeneratorCommand();
 		});
 
+		$this->app->singleton(
+			'Illuminate\Contracts\Debug\ExceptionHandler',
+			'Mitul\APIGenerator\Exceptions\APIExceptionsHandler'
+		);
+
 		$this->commands('mitul.generate.api');
 	}
 
