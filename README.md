@@ -167,3 +167,5 @@ Credits
 --------
 
 This API Generator is created by [Mitul Golakiya](https://github.com/mitulgolakiya).
+
+**Bugs & Forks are welcomed :)**
