@@ -12,7 +12,7 @@ class TemplatesHelper
 {
 	public function getTemplate($template)
 	{
-		$path = app_path('Libraries/Mitul/Generators/Templates/' . $template . '.txt');
+		$path = base_path('vendor/mitulgolakiya/laravel-api-generator/src/Mitul/APIGenerator/Templates/' . $template . '.txt');
 
 		$fileData = file_get_contents($path);
 
