@@ -31,7 +31,7 @@ Steps to Get Started
 
         composer update
     
-3. add the ServiceProvider to the providers array in config/app.php
+3. Add the ServiceProvider to the providers array in config/app.php
 
         'Mitul\APIGenerator\APIGeneratorServiceProvider'
 
@@ -39,7 +39,7 @@ Steps to Get Started
 
         php artisan vendor:publish --provider='Mitul\APIGenerator\APIGeneratorServiceProvider'
 
-5. Fire the artisan command
+5. Fire the artisan command to generate API for Model,
 
         php artisan mitul.generator:api ModelName
         
@@ -118,26 +118,24 @@ If you want to add more types, skip the migration at last and add fields to your
  
 **Success**
 
-```
-{
-"flag":true,
-"message":"success message",
-"data":{}
-}
-```
+
+        {
+            "flag":true,
+            "message":"success message",
+            "data":{}
+        }
+
 
 data can be anything as per response.
 
 **Failure**
 
-```
-{
-"flag":false,
-"message":"failure message",
-"code": 0
-"data":{}
-}
-```
+        {
+            "flag":false,
+            "message":"failure message",
+            "code": 0
+            "data":{}
+        }
 
 data will be optional. And code will be error code.
 
@@ -145,24 +143,23 @@ data will be optional. And code will be error code.
 Directory Structure
 --------------------
 
-```
-app
-|-- Http
-    |-- Controllers
-        |-- AppBaseController.php - Base controller for all controllers
-|-- Libraries - Custom Library Folder
-    |-- Constants
-        |-- Constants.php - All Constants goes here
-    |-- Exceptions
-        |-- AppValidationException.php - Validation failed exception
-        |-- RecordNotFoundException.php - Record not found exception
-    |-- Mitul - API Generator Files
-    |-- Repositories - Contains all repositories
-    |-- Utils
-        |-- CommonAppUtils.php - Common Utils
-        |-- ResponseManager.php - Response Prepare manager
-|-- Models - Contains all Models
-```
+
+        app
+        |-- Http
+            |-- Controllers
+                |-- AppBaseController.php - Base controller for all controllers
+        |-- Libraries - Custom Library Folder
+            |-- Constants
+                |-- Constants.php - All Constants goes here
+            |-- Exceptions
+                |-- AppValidationException.php - Validation failed exception
+                |-- RecordNotFoundException.php - Record not found exception
+            |-- Mitul - API Generator Files
+            |-- Repositories - Contains all repositories
+            |-- Utils
+                |-- CommonAppUtils.php - Common Utils
+                |-- ResponseManager.php - Response Prepare manager
+        |-- Models - Contains all Models
 
 Credits
 --------
