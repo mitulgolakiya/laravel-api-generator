@@ -1,9 +1,10 @@
-Laravel API Generator
+Laravel API Generator (Laravel5)
 =======================
 
-I am fan of creating APIs. Laravel provides really good and handy commands to setup your all required files like Controller, Model, Migration etc.
+I am fan of creating APIs. I have worked on so many projects of creating APIs. Laravel provides really good and handy commands to setup your all required files like Controller, Model, Migration etc.
 
-But we need to generate it step by step. so it was little bit time consuming for me to create those all things to setup basic CRUD api for one model and repeat the same steps again for the new model.
+But the problem that I was facing was, while starting any new project, I have to setup too many things step by step for creating basic CRUD API. Like create migration, model, controller, repository etc.
+So it was little bit time consuming for me to create those all things to setup basic CRUD api for one model and repeat the same steps again for the another model.
 
 So I have created one command where you just need to add fields as we are adding when creating migration and all rest things are created automatically and placed in our configured folders with given namespaces as well.
 
