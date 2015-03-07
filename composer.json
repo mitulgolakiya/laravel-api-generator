@@ -1,0 +1,12 @@
+{
+    "name": "mitulgolakiya/laravel-api-generator",
+    "description": "API Generator from just one command with including Controller, Repository, Model, Migrations, routes.php update",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mitul Golakiya",
+            "email": "me@mitul.me"
+        }
+    ],
+    "require": {}
+}
