@@ -21,9 +21,11 @@ Here is the full documentation.
 Steps to Get Started
 ----------------------
 
-1. Require this package with composer using the following command:
+1. Add this package to your composer.json:
   
-        composer require mitulgolakiya/laravel-api-generator
+        "require-dev": {
+            "mitulgolakiya/laravel-api-generator": "dev-master"
+        }
   
 2. Run composer update
 
