@@ -23,7 +23,7 @@ Steps to Get Started
 
 1. Add this package to your composer.json:
   
-        "require-dev": {
+        "require": {
             "mitulgolakiya/laravel-api-generator": "dev-master"
         }
   
