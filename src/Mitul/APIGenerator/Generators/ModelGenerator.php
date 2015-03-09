@@ -52,25 +52,16 @@ class ModelGenerator implements GeneratorProvider
 
 		$templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
 
-		$primaryKey = "";
 		$fillables = [];
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			if($field['isPrimary'])
-				$primaryKey = $field['fieldName'];
-			elseif($field['fieldType'] != 'defaultTimestamps')
-				$fillables[] = '"' . $field['fieldName'] . '"';
+			$fillables[] = '"' . $field['fieldName'] . '"';
 		}
 
-		if(!empty($primaryKey))
-			$templateData = str_replace('$PRIMARY_KEY$', "public \$primaryKey = \"" . $primaryKey . "\";", $templateData);
-		else
-			$templateData = str_replace('$PRIMARY_KEY$', "", $templateData);
+		$templateData = str_replace('$FIELDS$', implode(",\n\t\t", $fillables), $templateData);
 
-		$templateData = str_replace('$FIELDS$', implode(",\n", $fillables), $templateData);
-
-		$templateData = str_replace('$RULES$', implode(",\n", $this->generateRules()), $templateData);
+		$templateData = str_replace('$RULES$', implode(",\n\t\t", $this->generateRules()), $templateData);
 
 		return $templateData;
 	}

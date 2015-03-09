@@ -53,12 +53,14 @@ class MigrationGenerator implements GeneratorProvider
 
 	private function generateFieldsStr()
 	{
-		$fieldsStr = "";
+		$fieldsStr = "\$table->increments('id');\n";
 
 		foreach($this->commandData->inputFields as $field)
 		{
 			$fieldsStr .= SchemaCreator::createField($field);
 		}
+
+		$fieldsStr .= "\t\t\t\$table->timestamps();\n";
 
 		return $fieldsStr;
 	}

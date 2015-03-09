@@ -99,49 +99,50 @@ class APIGeneratorCommand extends Command
 	{
 		$fields = [];
 
-		$this->info("Specify fields for the model (skip timestamp fields, will ask for it later)");
-		$this->info("Currently Supported Types: boolean, int, float, string, text, timestamp, datetime");
-
-		$isPrimaryTaken = false;
+		$this->info("Specify fields for the model (skip id & timestamp fields, will be added automatically)");
+		$this->info("Left blank to finish");
 
 		while(true)
 		{
-			$fieldName = $this->ask("Field Name:");
-			$fieldType = $this->askWithCompletion('Field Type:', ['boolean', 'int', 'float', 'string', 'text', 'timestamp, datetime']);
+			$fieldInputStr = $this->ask("Field:");
 
-			if(!$isPrimaryTaken)
+			if(empty($fieldInputStr))
+				break;
+
+			$fieldInputs = explode(":", $fieldInputStr);
+
+			if(sizeof($fieldInputs) < 2)
 			{
-				$isPrimary = $this->confirm("Is primary Key? [y|N]", false);
-				$isPrimaryTaken = $isPrimary;
+				$this->error("Invalid Input. Try again");
+				continue;
 			}
-			else
-				$isPrimary = false;
 
-			if(in_array($fieldType, ['int', 'string']))
-				$validations = $this->ask("Enter validations: ");
-			else
-				$validations = "";
+			$fieldName = $fieldInputs[0];
+
+			$fieldTypeOptions = explode(",", $fieldInputs[1]);
+			$fieldType = $fieldTypeOptions[0];
+			$fieldTypeParams = [];
+			if(sizeof($fieldTypeOptions) > 1)
+			{
+				for($i = 1; $i < sizeof($fieldTypeOptions); $i++)
+					$fieldTypeParams[] = $fieldTypeOptions[$i];
+			}
+
+			$fieldOptions = [];
+			if(sizeof($fieldInputs) > 2)
+				$fieldOptions[] = $fieldInputs[2];
+
+			$validations = $this->ask("Enter validations: ");
 
 			$field = [
-				'fieldName'   => $fieldName,
-				'fieldType'   => $fieldType,
-				'isPrimary'   => $isPrimary,
-				'validations' => $validations
+				'fieldName'       => $fieldName,
+				'fieldType'       => $fieldType,
+				'fieldTypeParams' => $fieldTypeParams,
+				'fieldOptions'    => $fieldOptions,
+				'validations'     => $validations
 			];
 
 			$fields[] = $field;
-
-			if(!$this->confirm("Do you want to add more fields ? [Y|n]", true))
-				break;
-		}
-
-		if($this->confirm("Do you want to add timestamps? [Y|n]", true))
-		{
-			$fields[] = [
-				'fieldName' => 'Timestamps',
-				'fieldType' => 'defaultTimestamps',
-				'isPrimary' => false
-			];
 		}
 
 		return $fields;

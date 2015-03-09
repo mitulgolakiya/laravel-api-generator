@@ -101,20 +101,23 @@ Config file (```config/generator.php```) contains path for all generated files
 ```namespace_controller``` - Namespace of Controller<br>
 
 
-### Supported Fields
+### Field Input
 
- * boolean
- * int
- * float
- * string
- * text
- * timestamp
- * datetime
- * Default Timestamps (```created_at``` & ```updated_at```)
- 
-If you want to add more types, skip the migration at last and add fields to your migration file manually, and then run migration command. 
+Here is the input for the fields by which you can specify Input.
 
-### Response Structure
+        fieldName:fieldType,options:fieldOptions
+        
+e.g.,
+
+        email:string:unique
+        email:string:unique,default('me@mitul.me')
+        title:string,100
+        price:flat,8,4
+
+Parameters will be in the same sequence as ```Blueprint``` class function for all types.
+Option will be printed as it is given in input except unique & primary.
+
+### API Response Structure
  
 **Remember: This response structure is based on the most of my API response structure, you can change it to your API response after file generation in controller.**
  

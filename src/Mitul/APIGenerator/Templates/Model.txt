@@ -7,7 +7,9 @@ class $MODEL_NAME$ extends Model
 
 	public $table = "$TABLE_NAME$";
 
-	$PRIMARY_KEY$
+	public $primaryKey = "id";
+
+	public $timestamps = true;
 
 	public $fillable = [
 	    $FIELDS$
