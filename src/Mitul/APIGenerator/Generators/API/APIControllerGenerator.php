@@ -5,13 +5,14 @@
  * Time: 6:00 PM
  */
 
-namespace Mitul\APIGenerator\Generators;
+namespace Mitul\APIGenerator\Generators\API;
 
 
 use Config;
 use Mitul\APIGenerator\CommandData;
+use Mitul\APIGenerator\Generators\GeneratorProvider;
 
-class ControllerGenerator implements GeneratorProvider
+class APIControllerGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
@@ -29,7 +30,7 @@ class ControllerGenerator implements GeneratorProvider
 
 	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Controller");
+		$templateData = $this->commandData->templatesHelper->getTemplate("Controller", "API");
 
 		$templateData = $this->fillTemplate($templateData);
 

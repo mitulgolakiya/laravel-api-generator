@@ -19,6 +19,10 @@ return [
 
 	'path_controller' => app_path('HTTP/Controllers/'),
 
+	'path_views' => base_path('resources/views'),
+
+	'path_request' => app_path('Http/Requests/'),
+
 	'path_routes' => app_path('HTTP/routes.php'),
 
 
@@ -36,5 +40,7 @@ return [
 	'namespace_repository' => 'App\Libraries\Repositories',
 
 	'namespace_controller' => 'App\Http\Controllers',
+
+	'namespace_request' => 'App\Http\Requests',
 
 ];

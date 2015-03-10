@@ -1,17 +1,18 @@
 <?php
 /**
  * User: Mitul
- * Date: 16/02/15
- * Time: 1:48 PM
+ * Date: 14/02/15
+ * Time: 6:00 PM
  */
 
-namespace Mitul\APIGenerator\Generators;
+namespace Mitul\APIGenerator\Generators\Scaffold;
 
 
 use Config;
 use Mitul\APIGenerator\CommandData;
+use Mitul\APIGenerator\Generators\GeneratorProvider;
 
-class RepositoryGenerator implements GeneratorProvider
+class RepoViewControllerGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
@@ -23,25 +24,22 @@ class RepositoryGenerator implements GeneratorProvider
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_repository', app_path('/Libraries/Repositories/'));
-		$this->namespace = Config::get('generator.namespace_repository', 'App\Libraries\Repositories');
+		$this->path = Config::get('generator.path_controller', app_path('HTTP/Controllers/'));
+		$this->namespace = Config::get('generator.namespace_controller', 'App\Http\Controllers');
 	}
 
-	function generate()
+	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Repository");
+		$templateData = $this->commandData->templatesHelper->getTemplate("ControllerRepo", "Scaffold");
 
 		$templateData = $this->fillTemplate($templateData);
 
-		$fileName = $this->commandData->modelName . "Repository.php";
-
-		if(!file_exists($this->path))
-			mkdir($this->path, 0777, true);
+		$fileName = $this->commandData->modelName . "Controller.php";
 
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->comment("\nRepository created: ");
+		$this->commandData->commandObj->comment("\nController created: ");
 		$this->commandData->commandObj->info($fileName);
 	}
 
@@ -54,8 +52,8 @@ class RepositoryGenerator implements GeneratorProvider
 		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);
 
 		$templateData = str_replace('$MODEL_NAME_CAMEL$', $this->commandData->modelNameCamel, $templateData);
+		$templateData = str_replace('$MODEL_NAME_PLURAL_CAMEL$', $this->commandData->modelNamePluralCamel, $templateData);
 
 		return $templateData;
 	}
-
 }

@@ -1,0 +1,20 @@
+@extends('app')
+
+@section('content')
+<div class="container">
+
+    @if($errors->any())
+        <ul class="alert alert-danger">
+            @foreach($errors->all() as $error)
+                <li>{!! $error !!}</li>
+            @endforeach
+        </ul>
+    @endif
+
+    {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
+
+        @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+
+    {!! Form::close() !!}
+</div>
+@endsection

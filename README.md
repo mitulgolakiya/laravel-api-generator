@@ -1,4 +1,4 @@
-Laravel API Generator (Laravel5)
+Laravel API/Scaffold Generator (Laravel5)
 =======================
 [![Total Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/downloads.svg)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator)
 
@@ -10,11 +10,17 @@ So it was little bit time consuming for me to create those all things to setup b
 So I have created one command where you just need to add fields as we are adding when creating migration and all rest things are created automatically and placed in our configured folders with given namespaces as well.
 
 This command Generator generates following things:
-  - Migration File
-  - Model
-  - Repository (optional)
-  - Controller
-  - updates routes.php
+  * Migration File
+  * Model
+  * Repository (optional)
+  * Controller
+  * View
+    * index.blade.php
+    * show.blade.php
+    * create.blade.php
+    * edit.blade.php
+    * fields.blade.php
+  * updates routes.php
 
 And your simple CURD API is ready in less than 1 minute.
 
@@ -41,14 +47,18 @@ Steps to Get Started
 
         php artisan vendor:publish --provider='Mitul\APIGenerator\APIGeneratorServiceProvider'
 
-5. Fire the artisan command to generate API for Model,
+5. Fire the artisan command to generate API for Model, or to generate scaffold with views for web applications
 
         php artisan mitul.generator:api ModelName
+        php artisan mitul.generator:scaffold ModelName
         
     e.g.
     
         php artisan mitul.generator:api Project
         php artisan mitul.generator:api Post
+ 
+        php artisan mitul.generator:scaffold Project
+        php artisan mitul.generator:scaffold Post
  
 6. Enter the fields with options<br><br>
 
@@ -143,6 +153,18 @@ data can be anything as per response.
         }
 
 data will be optional. And code will be error code.
+
+### Generated Views
+
+While generating scaffold, all views are created with basic CRUD functionality. (**currently delete is not working**)
+
+Views will be created in ```resources/views/modelName``` folder,
+
+        index.blade.php - Main Index file for listing records
+        create.blade.php - To insert a new record
+        edit.blade.php - To edit a record
+        fields.blade.php - Common file of all model fields, which will be used create and edit record
+        show.blade.php - To display a record
 
 Credits
 --------

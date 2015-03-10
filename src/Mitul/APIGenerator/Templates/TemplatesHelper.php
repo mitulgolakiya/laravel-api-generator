@@ -10,9 +10,9 @@ namespace Mitul\APIGenerator\Templates;
 
 class TemplatesHelper
 {
-	public function getTemplate($template)
+	public function getTemplate($template, $type = "Common")
 	{
-		$path = base_path('vendor/mitulgolakiya/laravel-api-generator/src/Mitul/APIGenerator/Templates/' . $template . '.txt');
+		$path = base_path('vendor/mitulgolakiya/laravel-api-generator/src/Mitul/APIGenerator/Templates/' . $type . '/' . $template . '.txt');
 
 		$fileData = file_get_contents($path);
 

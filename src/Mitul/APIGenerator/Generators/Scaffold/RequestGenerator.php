@@ -5,13 +5,14 @@
  * Time: 6:00 PM
  */
 
-namespace Mitul\APIGenerator\Generators;
+namespace Mitul\APIGenerator\Generators\Scaffold;
 
 
 use Config;
 use Mitul\APIGenerator\CommandData;
+use Mitul\APIGenerator\Generators\GeneratorProvider;
 
-class RepoControllerGenerator implements GeneratorProvider
+class RequestGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
@@ -23,22 +24,22 @@ class RepoControllerGenerator implements GeneratorProvider
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_controller', app_path('HTTP/Controllers/'));
-		$this->namespace = Config::get('generator.namespace_controller', 'App\Http\Controllers');
+		$this->path = Config::get('generator.path_request', app_path('HTTP/Requests/'));
+		$this->namespace = Config::get('generator.namespace_request', 'App\Http\Requests');
 	}
 
 	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("ControllerRepo");
+		$templateData = $this->commandData->templatesHelper->getTemplate("Request", "Scaffold");
 
 		$templateData = $this->fillTemplate($templateData);
 
-		$fileName = $this->commandData->modelName . "Controller.php";
+		$fileName = "Create".$this->commandData->modelName . "Request.php";
 
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->comment("\nController created: ");
+		$this->commandData->commandObj->comment("\nRequest created: ");
 		$this->commandData->commandObj->info($fileName);
 	}
 

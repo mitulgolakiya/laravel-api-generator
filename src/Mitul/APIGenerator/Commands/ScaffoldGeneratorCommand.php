@@ -4,15 +4,17 @@ namespace Mitul\APIGenerator\Commands;
 
 use Illuminate\Console\Command;
 use Mitul\APIGenerator\CommandData;
-use Mitul\APIGenerator\Generators\API\APIControllerGenerator;
-use Mitul\APIGenerator\Generators\API\RepoAPIControllerGenerator;
 use Mitul\APIGenerator\Generators\Common\MigrationGenerator;
 use Mitul\APIGenerator\Generators\Common\ModelGenerator;
 use Mitul\APIGenerator\Generators\Common\RepositoryGenerator;
+use Mitul\APIGenerator\Generators\Common\RequestGenerator;
 use Mitul\APIGenerator\Generators\Common\RoutesGenerator;
+use Mitul\APIGenerator\Generators\Scaffold\RepoViewControllerGenerator;
+use Mitul\APIGenerator\Generators\Scaffold\ViewControllerGenerator;
+use Mitul\APIGenerator\Generators\Scaffold\ViewGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 
-class APIGeneratorCommand extends Command
+class ScaffoldGeneratorCommand extends Command
 {
 
 	/**
@@ -20,14 +22,14 @@ class APIGeneratorCommand extends Command
 	 *
 	 * @var string
 	 */
-	protected $name = 'mitul.generator:api';
+	protected $name = 'mitul.generator:view';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Create a full CRUD API for given model';
+	protected $description = 'Create a full CRUD for given model with initial views';
 
 
 	public $commandData;
@@ -62,19 +64,25 @@ class APIGeneratorCommand extends Command
 		$modelGenerator = new ModelGenerator($this->commandData);
 		$modelGenerator->generate();
 
+		$requestGenerator = new RequestGenerator($this->commandData);
+		$requestGenerator->generate();
+
 		if($followRepoPattern)
 		{
 			$repositoryGenerator = new RepositoryGenerator($this->commandData);
 			$repositoryGenerator->generate();
 
-			$repoControllerGenerator = new RepoAPIControllerGenerator($this->commandData);
+			$repoControllerGenerator = new RepoViewControllerGenerator($this->commandData);
 			$repoControllerGenerator->generate();
 		}
 		else
 		{
-			$controllerGenerator = new APIControllerGenerator($this->commandData);
+			$controllerGenerator = new ViewControllerGenerator($this->commandData);
 			$controllerGenerator->generate();
 		}
+
+		$viewsGenerator = new ViewGenerator($this->commandData);
+		$viewsGenerator->generate();
 
 		$routeGenerator = new RoutesGenerator($this->commandData);
 		$routeGenerator->generate();

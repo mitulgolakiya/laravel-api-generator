@@ -5,10 +5,11 @@
  * Time: 5:35 PM
  */
 
-namespace Mitul\APIGenerator\Generators;
+namespace Mitul\APIGenerator\Generators\Common;
 
 use Config;
 use Mitul\APIGenerator\CommandData;
+use Mitul\APIGenerator\Generators\GeneratorProvider;
 
 class ModelGenerator implements GeneratorProvider
 {
@@ -28,7 +29,7 @@ class ModelGenerator implements GeneratorProvider
 
 	function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Model");
+		$templateData = $this->commandData->templatesHelper->getTemplate("Model", "Common");
 
 		$templateData = $this->fillTemplate($templateData);
 

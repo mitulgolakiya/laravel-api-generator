@@ -5,11 +5,12 @@
  * Time: 4:34 PM
  */
 
-namespace Mitul\APIGenerator\Generators;
+namespace Mitul\APIGenerator\Generators\Common;
 
 
 use Config;
 use Mitul\APIGenerator\CommandData;
+use Mitul\APIGenerator\Generators\GeneratorProvider;
 use Mitul\Generators\SchemaCreator;
 
 class MigrationGenerator implements GeneratorProvider
@@ -27,7 +28,7 @@ class MigrationGenerator implements GeneratorProvider
 
 	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Migration");
+		$templateData = $this->commandData->templatesHelper->getTemplate("Migration", "Common");
 
 		$templateData = $this->fillTemplate($templateData);
 

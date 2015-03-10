@@ -5,11 +5,12 @@
  * Time: 6:06 PM
  */
 
-namespace Mitul\APIGenerator\Generators;
+namespace Mitul\APIGenerator\Generators\Common;
 
 
 use Config;
 use Mitul\APIGenerator\CommandData;
+use Mitul\APIGenerator\Generators\GeneratorProvider;
 
 class RoutesGenerator implements GeneratorProvider
 {
