@@ -123,7 +123,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		$$MODEL_NAME_CAMEL$->delete();
 
-		return Response::json(ResponseManager::makeResult($id->toArray(), "$MODEL_NAME$ deleted successfully."));
+		return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
 	}
 
 }
