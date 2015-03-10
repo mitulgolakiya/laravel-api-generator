@@ -11,7 +11,7 @@ namespace Mitul\Generator\Generators\Common;
 use Config;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\GeneratorProvider;
-use Mitul\Generators\SchemaCreator;
+use Mitul\Generator\SchemaCreator;
 
 class MigrationGenerator implements GeneratorProvider
 {

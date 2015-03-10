@@ -5,7 +5,7 @@
  * Time: 5:04 PM
  */
 
-namespace Mitul\Generators;
+namespace Mitul\Generator;
 
 
 class SchemaCreator
