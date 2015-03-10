@@ -2,12 +2,10 @@
 
 use App\Http\Requests;
 use App\Http\Requests\Create$MODEL_NAME$Request;
-use Flash;
-use Mitul\Controller\AppBaseController;
-use Mitul\Generator\Exceptions\AppValidationException;
-use Mitul\Generator\Exceptions\RecordNotFoundException;
 use App\Libraries\Repositories\$MODEL_NAME$Repository;
+use Mitul\Controller\AppBaseController;
 use Response;
+use Flash;
 
 class $MODEL_NAME$Controller extends AppBaseController
 {
@@ -48,7 +46,6 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 * @param Create$MODEL_NAME$Request $request
 	 *
 	 * @return Response
-	 * @throws AppValidationException
 	 */
 	public function store(Create$MODEL_NAME$Request $request)
 	{
@@ -67,7 +64,6 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 * @param  int $id
 	 *
 	 * @return Response
-	 * @throws RecordNotFoundException
 	 */
 	public function show($id)
 	{
@@ -108,7 +104,6 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 * @param Create$MODEL_NAME$Request $request
 	 *
 	 * @return Response
-	 * @throws RecordNotFoundException
 	 */
 	public function update($id, Create$MODEL_NAME$Request $request)
 	{
@@ -133,7 +128,6 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 * @param  int $id
 	 *
 	 * @return Response
-	 * @throws RecordNotFoundException
 	 */
 	public function destroy($id)
 	{

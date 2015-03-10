@@ -3,10 +3,9 @@
 use App\Http\Requests;
 use App\Http\Requests\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
-use Flash;
 use Mitul\Controller\AppBaseController;
-use Mitul\Generator\Exceptions\AppValidationException;
-use Mitul\Generator\Exceptions\RecordNotFoundException;
+use Response;
+use Flash;
 
 class $MODEL_NAME$Controller extends AppBaseController
 {

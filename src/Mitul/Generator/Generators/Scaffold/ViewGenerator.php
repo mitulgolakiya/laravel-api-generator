@@ -41,7 +41,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateFields()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("field.blade", "Views");
+		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("field.blade", "Scaffold");
 
 		$fieldsStr = "";
 
@@ -52,7 +52,7 @@ class ViewGenerator implements GeneratorProvider
 			$fieldsStr .= $singleFieldStr."\n\n";
 		}
 
-		$templateData = $this->commandData->templatesHelper->getTemplate("fields.blade", "Views");
+		$templateData = $this->commandData->templatesHelper->getTemplate("fields.blade", "Scaffold");
 
 		$templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
 
@@ -66,7 +66,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateIndex()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("index.blade", "Views");
+		$templateData = $this->commandData->templatesHelper->getTemplate("index.blade", "Scaffold");
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -102,7 +102,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateShow()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", "Views");
+		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", "Scaffold");
 
 		$fileName = "show.blade.php";
 
@@ -114,7 +114,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateCreate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("create.blade", "Views");
+		$templateData = $this->commandData->templatesHelper->getTemplate("create.blade", "Scaffold");
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -128,7 +128,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateEdit()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("edit.blade", "Views");
+		$templateData = $this->commandData->templatesHelper->getTemplate("edit.blade", "Scaffold");
 
 		$templateData = $this->fillTemplate($templateData);
 
