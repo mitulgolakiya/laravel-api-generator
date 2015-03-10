@@ -1,4 +1,4 @@
-Laravel API/Scaffold Generator (Laravel5)
+Laravel API/Scaffold/CRUD Generator (Laravel5)
 =======================
 [![Total Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/downloads.svg)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator)
 
