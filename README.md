@@ -60,7 +60,7 @@ Steps to Get Started
         php artisan mitul.generator:scaffold Project
         php artisan mitul.generator:scaffold Post
  
-6. Enter the fields with options<br><br>
+6. Enter the fields with options<br>
 
 7. And You are ready to go. :)
 
@@ -77,21 +77,24 @@ Screenshots
 (http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RZ1VMcXlsM1Z2MDg)
 
 ### Migration File
-![Image of Generated Files]
+![Image of Migration File]
 (http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RMWtnN1RxUzdmTUE)
 
 ### Model File
-![Image of Generated Files]
+![Image of Model File]
 (http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RRUJfdHE4MVRaeXM)
 
 ### Repository File
-![Image of Generated Files]
+![Image of Repository File]
 (http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7ROUdNVTVORm5nQ1E)
 
 ### Controller File
-![Image of Generated Files]
+![Image of Controller File]
 (http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RREVacVlOZDhxNDQ)
 
+### View Files
+![Image of View Files]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RQW5FOXExOFhEbms)
 
 Documentation
 --------------
