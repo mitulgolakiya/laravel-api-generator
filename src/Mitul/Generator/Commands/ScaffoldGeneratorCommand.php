@@ -22,7 +22,7 @@ class ScaffoldGeneratorCommand extends Command
 	 *
 	 * @var string
 	 */
-	protected $name = 'mitul.generator:view';
+	protected $name = 'mitul.generator:scaffold';
 
 	/**
 	 * The console command description.
