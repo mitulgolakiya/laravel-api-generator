@@ -65,37 +65,6 @@ Steps to Get Started
 7. And You are ready to go. :)
 
 
-Screenshots
-------------
-
-### Command Execution
-![Image of Command Execution]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RbTRvTEswQ0tfOEU)
-
-### Generated Files & routes.php
-![Image of Generated Files]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RZ1VMcXlsM1Z2MDg)
-
-### Migration File
-![Image of Migration File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RMWtnN1RxUzdmTUE)
-
-### Model File
-![Image of Model File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RRUJfdHE4MVRaeXM)
-
-### Repository File
-![Image of Repository File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7ROUdNVTVORm5nQ1E)
-
-### Controller File
-![Image of Controller File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RREVacVlOZDhxNDQ)
-
-### View Files
-![Image of View Files]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RQW5FOXExOFhEbms)
-
 Documentation
 --------------
 
@@ -107,12 +76,14 @@ Config file (```config/generator.php```) contains path for all generated files
 ```path_model``` - Path where Model file to ge generated<br>
 ```path_repository``` - Path where Repository file to ge generated<br>
 ```path_controller``` - Path where Controller file to ge generated<br>
+```path_views``` - Path where views will be created<br>
+```path_request``` -  Path where request file will be created<br>
 ```path_routes``` - Path of routes.php (if you are using any custom routes file)<br>
 
 ```namespace_model``` - Namespace of Model<br>
 ```namespace_repository``` - Namespace of Repository<br>
 ```namespace_controller``` - Namespace of Controller<br>
-
+```namespace_request``` - Namespace for Request<br>
 
 ### Field Input
 
@@ -135,7 +106,6 @@ Option will be printed as it is given in input except unique & primary.
 **Remember: This response structure is based on the most of my API response structure, you can change it to your API response after file generation in controller.**
  
 **Success**
-
 
         {
             "flag":true,
@@ -175,3 +145,34 @@ Credits
 This API Generator is created by [Mitul Golakiya](https://github.com/mitulgolakiya).
 
 **Bugs & Forks are welcomed :)**
+
+Screenshots
+------------
+
+### Command Execution
+![Image of Command Execution]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RbTRvTEswQ0tfOEU)
+
+### Generated Files & routes.php
+![Image of Generated Files]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RZ1VMcXlsM1Z2MDg)
+
+### Migration File
+![Image of Migration File]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RMWtnN1RxUzdmTUE)
+
+### Model File
+![Image of Model File]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RRUJfdHE4MVRaeXM)
+
+### Repository File
+![Image of Repository File]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7ROUdNVTVORm5nQ1E)
+
+### Controller File
+![Image of Controller File]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RREVacVlOZDhxNDQ)
+
+### View Files
+![Image of View Files]
+(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RQW5FOXExOFhEbms)
