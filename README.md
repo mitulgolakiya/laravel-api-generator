@@ -39,8 +39,13 @@ Steps to Get Started
 
         composer update
     
-3. Add the ServiceProvider to the providers array in config/app.php
+3. Add the ServiceProviders to the providers array in config/app.php.
+As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.
+so we need to add those ServiceProviders as well.
 
+        'Illuminate\View\ViewServiceProvider',
+        'Illuminate\Html\HtmlServiceProvider',
+        'Laracasts\Flash\FlashServiceProvider'
         'Mitul\Generator\GeneratorServiceProvider'
 
 4. Publish generator.php
