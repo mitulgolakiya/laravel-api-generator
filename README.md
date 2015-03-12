@@ -39,8 +39,8 @@ Steps to Get Started
 
         composer update
     
-3. Add the ServiceProviders to the providers array in config/app.php.
-As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.
+3. Add the ServiceProviders to the providers array in config/app.php.<br>
+As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
 so we need to add those ServiceProviders as well.
 
         'Illuminate\View\ViewServiceProvider',
