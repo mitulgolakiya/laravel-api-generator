@@ -1,7 +1,7 @@
 {
     "name": "mitulgolakiya/laravel-api-generator",
     "description": "Laravel API/Scaffold/CRUD Generator from just one command with including Controller, Repository, Model, Migrations, routes.php update.",
-    "keywords": ["laravel", "api", "model", "generator", "scaffold", "CRUD"],
+    "keywords": ["laravel", "api", "model", "migration","scaffold", "CRUD",  "generator"],
     "license": "MIT",
     "authors": [
         {
