@@ -45,7 +45,7 @@ so we need to add those ServiceProviders as well.
 
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider'
+        'Laracasts\Flash\FlashServiceProvider',
         'Mitul\Generator\GeneratorServiceProvider'
         
 Also for convenience, add these facades in alias array in ```config/app.php```.
@@ -150,13 +150,6 @@ Views will be created in ```resources/views/modelName``` folder,
         fields.blade.php - Common file of all model fields, which will be used create and edit record
         show.blade.php - To display a record
 
-Credits
---------
-
-This API Generator is created by [Mitul Golakiya](https://github.com/mitulgolakiya).
-
-**Bugs & Forks are welcomed :)**
-
 Screenshots
 ------------
 
@@ -187,3 +180,11 @@ Screenshots
 ### View Files
 ![Image of View Files]
 (http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RQW5FOXExOFhEbms)
+
+
+Credits
+--------
+
+This API Generator is created by [Mitul Golakiya](https://github.com/mitulgolakiya).
+
+**Bugs & Forks are welcomed :)**
