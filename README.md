@@ -2,14 +2,11 @@ Laravel API/Scaffold/CRUD Generator (Laravel5)
 =======================
 [![Total Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/downloads.svg)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator)
 
-I am fan of creating APIs. I have worked on so many projects of creating APIs. Laravel provides really good and handy commands to setup your all required files like Controller, Model, Migration etc.
+I enjoy creating API's and I have worked on many projects that required them. But the problem I always faced was setting up all the boilerplate code. For example each end point needs a migration, model, controller, repository, and on and on. I wanted a way to streamline this process and that is how this package was born. 
 
-But the problem that I was facing was, while starting any new project, I have to setup too many things step by step for creating basic CRUD API. Like create migration, model, controller, repository etc.
-So it was little bit time consuming for me to create those all things to setup basic CRUD api for one model and repeat the same steps again for the another model.
+This API generator allows you to use artisan commands to automatically generate all these files saving you time. Not only does it auto generate the files but it will set the namespaces. 
 
-So I have created one command where you just need to add fields as we are adding when creating migration and all rest things are created automatically and placed in our configured folders with given namespaces as well.
-
-This command Generator generates following things:
+The artisan command can generate the following items:
   * Migration File
   * Model
   * Repository (optional)
@@ -20,9 +17,9 @@ This command Generator generates following things:
     * create.blade.php
     * edit.blade.php
     * fields.blade.php
-  * updates routes.php
+  * adjusts routes.php
 
-And your simple CURD API is ready in less than 1 minute.
+And your simple CRUD API is ready in mere seconds.
 
 Here is the full documentation.
 
@@ -73,7 +70,7 @@ Also for convenience, add these facades in alias array in ```config/app.php```.
  
 6. Enter the fields with options<br>
 
-7. And You are ready to go. :)
+7. And you are ready to go. :)
 
 
 Documentation
