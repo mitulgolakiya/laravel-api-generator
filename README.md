@@ -53,7 +53,7 @@ Also for convenience, add these facades in alias array in ```config/app.php```.
 
 4. Publish generator.php
 
-        php artisan vendor:publish --provider='Mitul\Generator\GeneratorServiceProvider'
+        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
 
 5. Fire the artisan command to generate API for Model, or to generate scaffold with views for web applications
 
