@@ -36,7 +36,7 @@ class ModelGenerator implements GeneratorProvider
 		$fileName = $this->commandData->modelName . ".php";
 
 		if(!file_exists($this->path))
-			mkdir($this->path, 0777, true);
+			mkdir($this->path, 0755, true);
 
 		$path = $this->path . $fileName;
 
