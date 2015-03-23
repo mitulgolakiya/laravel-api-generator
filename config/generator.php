@@ -63,5 +63,4 @@ return [
 
 	// Class name of extended class
 	'model_extend_class' => 'Model',
-
 ];
