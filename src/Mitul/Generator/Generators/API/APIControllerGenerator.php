@@ -24,7 +24,7 @@ class APIControllerGenerator implements GeneratorProvider
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_controller', app_path('HTTP/Controllers/'));
+		$this->path = Config::get('generator.path_controller', app_path('Http/Controllers/'));
 		$this->namespace = Config::get('generator_namespace.controller', 'App\Http\Controllers');
 	}
 
