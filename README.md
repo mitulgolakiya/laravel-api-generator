@@ -93,6 +93,9 @@ Config file (```config/generator.php```) contains path for all generated files
 ```namespace_controller``` - Namespace of Controller<br>
 ```namespace_request``` - Namespace for Request<br>
 
+```model_extend``` - Use custom Model extend<br>
+```model_extend_namespace``` - Namespace of custom extended model<br>
+```model_extend_class``` - Class name to extend<br>
 ### Field Input
 
 Here is the input for the fields by which you can specify Input.
