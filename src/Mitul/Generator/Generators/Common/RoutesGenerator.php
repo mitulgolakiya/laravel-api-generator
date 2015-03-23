@@ -22,7 +22,7 @@ class RoutesGenerator implements GeneratorProvider
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
-		$this->path = Config::get('path_routes', app_path('Http/routes.php'));
+		$this->path = Config::get('generator.path_routes', app_path('Http/routes.php'));
 	}
 
 	public function generate()
