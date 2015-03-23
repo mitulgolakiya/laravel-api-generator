@@ -17,13 +17,13 @@ return [
 
 	'path_repository' => app_path('Libraries/Repositories/'),
 
-	'path_controller' => app_path('HTTP/Controllers/'),
+	'path_controller' => app_path('Http/Controllers/'),
 
 	'path_views' => base_path('resources/views'),
 
 	'path_request' => app_path('Http/Requests/'),
 
-	'path_routes' => app_path('HTTP/routes.php'),
+	'path_routes' => app_path('Http/routes.php'),
 
 
 	/*
