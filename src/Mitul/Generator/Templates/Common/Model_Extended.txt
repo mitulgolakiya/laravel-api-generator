@@ -1,0 +1,22 @@
+<?php namespace $NAMESPACE$;
+
+use $MODEL_EXTEND_NAMESPACE$;
+
+class $MODEL_NAME$ extends $MODEL_EXTEND_CLASS$
+{
+
+	public $table = "$TABLE_NAME$";
+
+	public $primaryKey = "id";
+
+	public $timestamps = true;
+
+	public $fillable = [
+	    $FIELDS$
+	];
+
+	public static $rules = [
+	    $RULES$
+	];
+
+}
