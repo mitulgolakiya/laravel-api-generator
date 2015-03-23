@@ -56,7 +56,7 @@ return [
 	// if false will use Eloquent model
 	'model_extend' => false,
 
-	// name space of extended model
+	// Namespace of extended model
 	// eg. Illuminate\Database\Eloquent\Model
 	// eg. Illuminate\Database\Eloquent\Model as Model
 	'model_extend_namespace' => 'Illuminate\Database\Eloquent\Model',
