@@ -137,7 +137,7 @@ data will be optional. And code will be error code.
 
 ### Generated Views
 
-While generating scaffold, all views are created with basic CRUD functionality. (**currently delete is not working**)
+While generating scaffold, all views are created with basic CRUD functionality.
 
 Views will be created in ```resources/views/modelName``` folder,
 

@@ -84,7 +84,7 @@ class ScaffoldGeneratorCommand extends Command
 		$viewsGenerator = new ViewGenerator($this->commandData);
 		$viewsGenerator->generate();
 
-		$routeGenerator = new RoutesGenerator($this->commandData);
+		$routeGenerator = new RoutesGenerator($this->commandData, true);
 		$routeGenerator->generate();
 
 		if($this->confirm("\nDo you want to migrate database? [y|N]", false))

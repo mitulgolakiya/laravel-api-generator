@@ -8,7 +8,7 @@
 
         <div class="row">
             <h1 class="pull-left">$MODEL_NAME_PLURAL$</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="$MODEL_NAME_PLURAL_CAMEL$/create">Add New</a>
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}">Add New</a>
         </div>
 
         <div class="row">
@@ -25,8 +25,8 @@
                         <tr>
                             $FIELD_BODY$
                             <td>
-                                <a href="$MODEL_NAME_PLURAL_CAMEL$/{!! $$MODEL_NAME_CAMEL$->id !!}/edit"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="#"><i class="glyphicon glyphicon-remove"></i></a>
+                                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.delete', [$$MODEL_NAME_CAMEL$->id]) !!}"><i class="glyphicon glyphicon-remove"></i></a>
                             </td>
                         </tr>
                     @endforeach
