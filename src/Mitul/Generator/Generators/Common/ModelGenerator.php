@@ -20,16 +20,25 @@ class ModelGenerator implements GeneratorProvider
 
 	private $namespace;
 
+	private $customModelExtend;
+
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_model', app_path('/'));
 		$this->namespace = Config::get('generator.namespace_model', 'App');
+		$this->customModelExtend = Config::get('generator.model_extend', false);
 	}
 
 	function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Model", "Common");
+		$templateName = "Model";
+
+		if($this->customModelExtend){
+			$templateName = "Model_Extended";
+		}
+
+		$templateData = $this->commandData->templatesHelper->getTemplate($templateName, "Common");
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -52,6 +61,20 @@ class ModelGenerator implements GeneratorProvider
 		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
 
 		$templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
+
+		if($this->customModelExtend){
+			$templateData = str_replace(
+				'$MODEL_EXTEND_NAMESPACE$',
+				Config::get('generator.model_extend_namespace', 'Illuminate\Database\Eloquent\Model'),
+				$templateData
+			);
+
+			$templateData = str_replace(
+				'$MODEL_EXTEND_CLASS$',
+				Config::get('generator.model_extend_class', 'Model'),
+				$templateData
+			);
+		}
 
 		$fillables = [];
 
