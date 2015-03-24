@@ -19,6 +19,8 @@ return [
 
 	'path_controller' => app_path('Http/Controllers/'),
 
+	'path_api_controller' => app_path('Http/Controllers/API'),
+
 	'path_views' => base_path('resources/views'),
 
 	'path_request' => app_path('Http/Requests/'),
@@ -63,4 +65,18 @@ return [
 
 	// Class name of extended class
 	'model_extend_class' => 'Model',
+
+	/*
+	|--------------------------------------------------------------------------
+	| API prefix for routes when Scaffold and API generated to gather
+	|--------------------------------------------------------------------------
+	|
+	| Configuration api prefix.
+	| By default api will be prefix with
+	|
+	*/
+
+	'api_prefix'	=>   'api'
+
+
 ];
