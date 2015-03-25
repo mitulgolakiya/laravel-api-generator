@@ -33,9 +33,10 @@ class RoutesGenerator implements GeneratorProvider
 	{
 		$this->commandData = $commandData;
 		$this->isScaffold = $isScaffold;
+		$this->isScaffoldAPI = $isScaffoldAPI;
 		$this->path = Config::get('generator.path_routes', app_path('Http/routes.php'));
 		$this->apiPrefix = Config::get('generator.api_prefix', 'api');
-		$this->apiNamespace = Config::get('generator.path_api_controller', 'api');
+		$this->apiNamespace = Config::get('generator.namespace_api_controller', 'API');
 	}
 
 	public function generate()
@@ -48,7 +49,7 @@ class RoutesGenerator implements GeneratorProvider
 		{
 			$routeContents .= "\n\nRoute::group(['prefix' => '". $this->apiPrefix  ."','namespace' => '". $this->apiNamespace ."'],function(){";
 			$routeContents .= "\n\n\t\tRoute::resource('" . $this->commandData->modelNamePluralCamel . "', '" . $this->commandData->modelName . "Controller');";
-			$routeContents .= "\n\n})";
+			$routeContents .= "\n\n});";
 		}
 
 		if($this->isScaffold)
