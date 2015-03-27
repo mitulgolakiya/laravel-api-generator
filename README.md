@@ -42,7 +42,7 @@ Upgrade Guide from 1.0 to 1.1
 
         php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
 
-6. Replace your custom paths again in ```generator.php```.
+6. Replace your custom paths again in ```config/generator.php```.
 
 7. Enjoy Upgrade :)
 
