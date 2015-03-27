@@ -20,10 +20,13 @@ class ViewGenerator implements GeneratorProvider
 
 	private $path;
 
+	private $viewsPath;
+
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_views', base_path('resources/views')) . '/' . $this->commandData->modelNamePluralCamel . '/';
+		$this->viewsPath = "Scaffold/Views";
 	}
 
 	public function generate()
@@ -41,7 +44,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateFields()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("field.blade", "Scaffold");
+		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("field.blade", $this->viewsPath);
 
 		$fieldsStr = "";
 
@@ -49,10 +52,10 @@ class ViewGenerator implements GeneratorProvider
 		{
 			$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title($field['fieldName']), $fieldTemplate);
 			$singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
-			$fieldsStr .= $singleFieldStr."\n\n";
+			$fieldsStr .= $singleFieldStr . "\n\n";
 		}
 
-		$templateData = $this->commandData->templatesHelper->getTemplate("fields.blade", "Scaffold");
+		$templateData = $this->commandData->templatesHelper->getTemplate("fields.blade", $this->viewsPath);
 
 		$templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
 
@@ -66,7 +69,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateIndex()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("index.blade", "Scaffold");
+		$templateData = $this->commandData->templatesHelper->getTemplate("index.blade", $this->viewsPath);
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -87,7 +90,7 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$tableBodyFields .= "<td>{!! $" . $this->commandData->modelNameCamel . "->". $field['fieldName'] . " !!}</td>\n\t\t\t\t\t";
+			$tableBodyFields .= "<td>{!! $" . $this->commandData->modelNameCamel . "->" . $field['fieldName'] . " !!}</td>\n\t\t\t\t\t";
 		}
 
 		$tableBodyFields = trim($tableBodyFields);
@@ -102,7 +105,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateShow()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", "Scaffold");
+		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", $this->viewsPath);
 
 		$fileName = "show.blade.php";
 
@@ -114,7 +117,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateCreate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("create.blade", "Scaffold");
+		$templateData = $this->commandData->templatesHelper->getTemplate("create.blade", $this->viewsPath);
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -128,7 +131,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateEdit()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("edit.blade", "Scaffold");
+		$templateData = $this->commandData->templatesHelper->getTemplate("edit.blade", $this->viewsPath);
 
 		$templateData = $this->fillTemplate($templateData);
 

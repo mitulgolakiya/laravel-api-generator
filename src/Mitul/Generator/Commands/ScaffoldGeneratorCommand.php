@@ -31,7 +31,11 @@ class ScaffoldGeneratorCommand extends Command
 	 */
 	protected $description = 'Create a full CRUD for given model with initial views';
 
-
+	/**
+	 * The command Data
+	 *
+	 * @var CommandData
+	 */
 	public $commandData;
 
 	/**
@@ -42,7 +46,7 @@ class ScaffoldGeneratorCommand extends Command
 	{
 		parent::__construct();
 
-		$this->commandData = new CommandData($this);
+		$this->commandData = new CommandData($this, CommandData::$COMMAND_TYPE_SCAFFOLD);
 	}
 
 	/**
@@ -54,7 +58,7 @@ class ScaffoldGeneratorCommand extends Command
 	{
 		$this->commandData->modelName = $this->argument('model');
 		$this->commandData->initVariables();
-		$this->commandData->inputFields = $this->getInputFields();
+		$this->commandData->inputFields = $this->commandData->getInputFields();
 
 		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (y|N)", false);
 
@@ -84,7 +88,7 @@ class ScaffoldGeneratorCommand extends Command
 		$viewsGenerator = new ViewGenerator($this->commandData);
 		$viewsGenerator->generate();
 
-		$routeGenerator = new RoutesGenerator($this->commandData, true);
+		$routeGenerator = new RoutesGenerator($this->commandData);
 		$routeGenerator->generate();
 
 		if($this->confirm("\nDo you want to migrate database? [y|N]", false))
@@ -101,58 +105,5 @@ class ScaffoldGeneratorCommand extends Command
 		return [
 			['model', InputArgument::REQUIRED, 'Singular Model name']
 		];
-	}
-
-	private function getInputFields()
-	{
-		$fields = [];
-
-		$this->info("Specify fields for the model (skip id & timestamp fields, will be added automatically)");
-		$this->info("Left blank to finish");
-
-		while(true)
-		{
-			$fieldInputStr = $this->ask("Field:");
-
-			if(empty($fieldInputStr))
-				break;
-
-			$fieldInputs = explode(":", $fieldInputStr);
-
-			if(sizeof($fieldInputs) < 2)
-			{
-				$this->error("Invalid Input. Try again");
-				continue;
-			}
-
-			$fieldName = $fieldInputs[0];
-
-			$fieldTypeOptions = explode(",", $fieldInputs[1]);
-			$fieldType = $fieldTypeOptions[0];
-			$fieldTypeParams = [];
-			if(sizeof($fieldTypeOptions) > 1)
-			{
-				for($i = 1; $i < sizeof($fieldTypeOptions); $i++)
-					$fieldTypeParams[] = $fieldTypeOptions[$i];
-			}
-
-			$fieldOptions = [];
-			if(sizeof($fieldInputs) > 2)
-				$fieldOptions[] = $fieldInputs[2];
-
-			$validations = $this->ask("Enter validations: ");
-
-			$field = [
-				'fieldName'       => $fieldName,
-				'fieldType'       => $fieldType,
-				'fieldTypeParams' => $fieldTypeParams,
-				'fieldOptions'    => $fieldOptions,
-				'validations'     => $validations
-			];
-
-			$fields[] = $field;
-		}
-
-		return $fields;
 	}
 }

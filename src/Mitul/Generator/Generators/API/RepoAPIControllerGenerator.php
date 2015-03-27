@@ -23,22 +23,12 @@ class RepoAPIControllerGenerator implements GeneratorProvider
 
 	private $isScaffoldAPI = false;
 
-
-	function __construct($commandData,$isScaffoldAPI = false)
+	function __construct($commandData, $isScaffoldAPI = false)
 	{
-
-		$this->isScaffoldAPI = $isScaffoldAPI;
-
 		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_controller', app_path('Http/Controllers/'));
-		$this->namespace = Config::get('generator.namespace_controller', 'App\Http\Controllers');
-
-		// overwrite path and namespace if API controller generated along with scaffold controller
-		if($this->isScaffoldAPI)
-		{
-			$this->path = Config::get('generator.path_api_controller', app_path('Http/Controllers/API'));
-			$this->namespace .= "\\" . Config::get('generator.namespace_api_controller', 'API');
-		}
+		$this->path = Config::get('generator.path_api_controller', app_path('Http/Controllers/API/'));
+		$this->namespace = Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API');
+		$this->isScaffoldAPI = $isScaffoldAPI;
 	}
 
 	public function generate()
@@ -47,12 +37,15 @@ class RepoAPIControllerGenerator implements GeneratorProvider
 
 		$templateData = $this->fillTemplate($templateData);
 
-		$fileName = $this->commandData->modelName . "Controller.php";
+		$fileName = $this->commandData->modelName . "APIController.php";
+
+		if(!file_exists($this->path))
+			mkdir($this->path, 0755, true);
 
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->comment("\nController created: ");
+		$this->commandData->commandObj->comment("\nAPI Controller created: ");
 		$this->commandData->commandObj->info($fileName);
 	}
 

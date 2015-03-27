@@ -29,7 +29,7 @@ Steps to Get Started
 1. Add this package to your composer.json:
   
         "require": {
-            "mitulgolakiya/laravel-api-generator": "~1.0"
+            "mitulgolakiya/laravel-api-generator": "~1.1"
         }
   
 2. Run composer update
@@ -55,11 +55,11 @@ Also for convenience, add these facades in alias array in ```config/app.php```.
 
         php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
 
-5. Fire the artisan command to generate API or to generate scaffold with views for web applications or both.
+5. Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
 
         php artisan mitul.generator:api ModelName
         php artisan mitul.generator:scaffold ModelName
-        php artisan mitul.generator:scaffoldAPI ModelName
+        php artisan mitul.generator:scaffold_api ModelName
         
     e.g.
     
@@ -68,9 +68,9 @@ Also for convenience, add these facades in alias array in ```config/app.php```.
  
         php artisan mitul.generator:scaffold Project
         php artisan mitul.generator:scaffold Post
-        
-        php artisan mitul.generator:scaffoldAPI Project
-        php artisan mitul.generator:scaffoldAPI Post
+ 
+        php artisan mitul.generator:scaffold_api Project
+        php artisan mitul.generator:scaffold_api Post
  
 6. Enter the fields with options<br>
 
@@ -84,11 +84,11 @@ Documentation
 
 Config file (```config/generator.php```) contains path for all generated files
 
-```path_migration``` - Path where Migration file to be generated<br>
-```path_model``` - Path where Model file to be generated<br>
-```path_repository``` - Path where Repository file to be generated<br>
-```path_controller``` - Path where Controller file to be generated<br>
-```path_api_controller``` - Path where API Controller file to be generated in case of scaffoldAPI(folder must me created)<br> 
+```path_migration``` - Path where Migration file to ge generated<br>
+```path_model``` - Path where Model file to ge generated<br>
+```path_repository``` - Path where Repository file to ge generated<br>
+```path_controller``` - Path where Controller file to ge generated<br>
+```path_api_controller``` - Path where API Controller file to ge generated<br>
 ```path_views``` - Path where views will be created<br>
 ```path_request``` -  Path where request file will be created<br>
 ```path_routes``` - Path of routes.php (if you are using any custom routes file)<br>
@@ -96,16 +96,14 @@ Config file (```config/generator.php```) contains path for all generated files
 ```namespace_model``` - Namespace of Model<br>
 ```namespace_repository``` - Namespace of Repository<br>
 ```namespace_controller``` - Namespace of Controller<br>
-```namespace_api_controller``` - Namespace of API Controller in case of scaffoldAPI(path is relative to ```namespace_controller```)<br>
+```namespace_api_controller``` - Namespace of API Controller<br>
 ```namespace_request``` - Namespace for Request<br>
-
 
 ```model_extend``` - Use custom Model extend<br>
 ```model_extend_namespace``` - Namespace of custom extended model<br>
 ```model_extend_class``` - Class name to extend<br>
 
-
-```api_prefix``` - prefix url for apis in case of scaffoldAPI
+```api_prefix``` - API Prefix
 
 ### Field Input
 
@@ -160,14 +158,6 @@ Views will be created in ```resources/views/modelName``` folder,
         edit.blade.php - To edit a record
         fields.blade.php - Common file of all model fields, which will be used create and edit record
         show.blade.php - To display a record
-        
-While generating scaffold with APIs, repository will be generated, Controllers for view will be generated in Controller folder and Controller for API will be generated in specified in API Controller folder.
-
-
-url for api is generated with api_prefix value i.e
-
-        if api_prefix is api then url is like htttp://example.com/api/model 
-        
 
 Screenshots
 ------------

@@ -34,7 +34,8 @@ class ModelGenerator implements GeneratorProvider
 	{
 		$templateName = "Model";
 
-		if($this->customModelExtend){
+		if($this->customModelExtend)
+		{
 			$templateName = "Model_Extended";
 		}
 
@@ -62,7 +63,8 @@ class ModelGenerator implements GeneratorProvider
 
 		$templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
 
-		if($this->customModelExtend){
+		if($this->customModelExtend)
+		{
 			$templateData = str_replace(
 				'$MODEL_EXTEND_NAMESPACE$',
 				Config::get('generator.model_extend_namespace', 'Illuminate\Database\Eloquent\Model'),

@@ -9,7 +9,7 @@ use Mitul\Generator\Exceptions\RecordNotFoundException;
 use Mitul\Generator\Utils\ResponseManager;
 use Response;
 
-class $MODEL_NAME$Controller extends AppBaseController
+class $MODEL_NAME$APIController extends AppBaseController
 {
 
 	/**
@@ -58,6 +58,8 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 * Display the specified $MODEL_NAME$.
 	 *
 	 * @param  int  $id
+	 * @param Request $request
+	 *
 	 * @return Response
 	 * @throws RecordNotFoundException
 	 */

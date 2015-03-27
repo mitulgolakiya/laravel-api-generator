@@ -24,8 +24,8 @@ class APIControllerGenerator implements GeneratorProvider
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_controller', app_path('Http/Controllers/'));
-		$this->namespace = Config::get('generator_namespace.controller', 'App\Http\Controllers');
+		$this->path = Config::get('generator.path_api_controller', app_path('Http/Controllers/API/'));
+		$this->namespace = Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API');
 	}
 
 	public function generate()
@@ -34,7 +34,10 @@ class APIControllerGenerator implements GeneratorProvider
 
 		$templateData = $this->fillTemplate($templateData);
 
-		$fileName = $this->commandData->modelName . "Controller.php";
+		$fileName = $this->commandData->modelName . "APIController.php";
+
+		if(!file_exists($this->path))
+			mkdir($this->path, 0755, true);
 
 		$path = $this->path . $fileName;
 

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Libraries\Repositories\$MODEL_NAME$Repository;
 use Response;
 
-class $MODEL_NAME$Controller extends AppBaseController
+class $MODEL_NAME$APIController extends AppBaseController
 {
 
 	/** @var  $MODEL_NAME$Repository */

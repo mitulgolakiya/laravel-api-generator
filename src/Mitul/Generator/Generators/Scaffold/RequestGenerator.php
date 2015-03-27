@@ -34,7 +34,7 @@ class RequestGenerator implements GeneratorProvider
 
 		$templateData = $this->fillTemplate($templateData);
 
-		$fileName = "Create".$this->commandData->modelName . "Request.php";
+		$fileName = "Create" . $this->commandData->modelName . "Request.php";
 
 		$path = $this->path . $fileName;
 
