@@ -23,7 +23,7 @@ And your simple CRUD API is ready in mere seconds.
 
 Here is the full documentation.
 
-Upgrade Guide from 1.0 to 1.1
+Upgrade Guide from 1.0 to 1.1.0
 -----------------------------
 
 1. Take a backup of your ```config/generator.php```
@@ -33,7 +33,7 @@ Upgrade Guide from 1.0 to 1.1
 3. Change version in composer.json
 
         "require": {
-            "mitulgolakiya/laravel-api-generator": "~1.1"
+            "mitulgolakiya/laravel-api-generator": "~1.1.*"
         }
 
 4. Run composer update.
