@@ -21,14 +21,11 @@ class RepoAPIControllerGenerator implements GeneratorProvider
 
 	private $namespace;
 
-	private $isScaffoldAPI = false;
-
-	function __construct($commandData, $isScaffoldAPI = false)
+	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_api_controller', app_path('Http/Controllers/API/'));
 		$this->namespace = Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API');
-		$this->isScaffoldAPI = $isScaffoldAPI;
 	}
 
 	public function generate()

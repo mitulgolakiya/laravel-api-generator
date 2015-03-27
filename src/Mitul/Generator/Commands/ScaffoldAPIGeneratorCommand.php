@@ -74,7 +74,7 @@ class ScaffoldAPIGeneratorCommand extends Command
 		$repositoryGenerator = new RepositoryGenerator($this->commandData);
 		$repositoryGenerator->generate();
 
-		$repoControllerGenerator = new RepoAPIControllerGenerator($this->commandData, true);
+		$repoControllerGenerator = new RepoAPIControllerGenerator($this->commandData);
 		$repoControllerGenerator->generate();
 
 		$viewsGenerator = new ViewGenerator($this->commandData);
