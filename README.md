@@ -33,7 +33,7 @@ Upgrade Guide from 1.0 to 1.1.0
 3. Change version in composer.json
 
         "require": {
-            "mitulgolakiya/laravel-api-generator": "~1.1.*"
+            "mitulgolakiya/laravel-api-generator": "1.1.*"
         }
 
 4. Run composer update.
