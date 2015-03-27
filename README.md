@@ -23,6 +23,29 @@ And your simple CRUD API is ready in mere seconds.
 
 Here is the full documentation.
 
+Upgrade Guide from 1.0 to 1.1.0
+-----------------------------
+
+1. Take a backup of your ```config/generator.php```
+
+2. Delete your ```config/generator.php```
+
+3. Change version in composer.json
+
+        "require": {
+            "mitulgolakiya/laravel-api-generator": "~1.1.*"
+        }
+
+4. Run composer update.
+
+5. Run publish command again.
+
+        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
+
+6. Replace your custom paths again in ```config/generator.php```.
+
+7. Enjoy Upgrade :)
+
 Steps to Get Started
 ----------------------
 
@@ -51,7 +74,7 @@ Also for convenience, add these facades in alias array in ```config/app.php```.
 		'HTML'  => 'Illuminate\Html\HtmlFacade',
 		'Flash' => 'Laracasts\Flash\Flash'
 
-4. Publish generator.php
+4. Publish ```generator.php```
 
         php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
 
