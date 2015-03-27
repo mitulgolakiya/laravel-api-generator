@@ -22,11 +22,21 @@ class RoutesGenerator implements GeneratorProvider
 	/** @var bool */
 	private $isScaffold = false;
 
-	function __construct($commandData, $isScaffold = false)
+	/** @var bool */
+	private $isScaffoldAPI = false;
+
+	private $apiPrefix = 'api';
+
+	private $apiNamespace;
+
+	function __construct($commandData, $isScaffold = false , $isScaffoldAPI = false)
 	{
 		$this->commandData = $commandData;
 		$this->isScaffold = $isScaffold;
+		$this->isScaffoldAPI = $isScaffoldAPI;
 		$this->path = Config::get('generator.path_routes', app_path('Http/routes.php'));
+		$this->apiPrefix = Config::get('generator.api_prefix', 'api');
+		$this->apiNamespace = Config::get('generator.namespace_api_controller', 'API');
 	}
 
 	public function generate()
@@ -34,6 +44,13 @@ class RoutesGenerator implements GeneratorProvider
 		$routeContents = $this->commandData->fileHelper->getFileContents($this->path);
 
 		$routeContents .= "\n\nRoute::resource('" . $this->commandData->modelNamePluralCamel . "', '" . $this->commandData->modelName . "Controller');";
+
+		if($this->isScaffoldAPI)
+		{
+			$routeContents .= "\n\nRoute::group(['prefix' => '". $this->apiPrefix  ."','namespace' => '". $this->apiNamespace ."'],function(){";
+			$routeContents .= "\n\n\t\tRoute::resource('" . $this->commandData->modelNamePluralCamel . "', '" . $this->commandData->modelName . "Controller');";
+			$routeContents .= "\n\n});";
+		}
 
 		if($this->isScaffold)
 		{

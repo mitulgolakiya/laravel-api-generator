@@ -5,7 +5,7 @@ namespace Mitul\Generator;
 use Illuminate\Support\ServiceProvider;
 use Mitul\Generator\Commands\APIGeneratorCommand;
 use Mitul\Generator\Commands\ScaffoldGeneratorCommand;
-
+use Mitul\Generator\Commands\ScaffoldAPIGeneratorCommand;
 class GeneratorServiceProvider extends ServiceProvider
 {
 
@@ -37,12 +37,17 @@ class GeneratorServiceProvider extends ServiceProvider
 			return new ScaffoldGeneratorCommand();
 		});
 
+		$this->app->singleton('mitul.generator.scaffoldAPI', function ($app)
+		{
+			return new ScaffoldAPIGeneratorCommand();
+		});
+
 		$this->app->singleton(
 			'Illuminate\Contracts\Debug\ExceptionHandler',
 			'Mitul\Generator\Exceptions\APIExceptionsHandler'
 		);
 
-		$this->commands(['mitul.generator.api', 'mitul.generator.scaffold']);
+		$this->commands(['mitul.generator.api', 'mitul.generator.scaffold' , 'mitul.generator.scaffoldAPI' ]);
 	}
 
 }

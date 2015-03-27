@@ -19,11 +19,16 @@ return [
 
 	'path_controller' => app_path('Http/Controllers/'),
 
+	// specify API path in case you want to generate API`s controller along with Scaffold controller
+	'path_api_controller' => app_path('Http/Controllers/API/'),
+
 	'path_views' => base_path('resources/views'),
 
 	'path_request' => app_path('Http/Requests/'),
 
 	'path_routes' => app_path('Http/routes.php'),
+
+
 
 
 	/*
@@ -40,6 +45,10 @@ return [
 	'namespace_repository' => 'App\Libraries\Repositories',
 
 	'namespace_controller' => 'App\Http\Controllers',
+
+	// specify API namespace in case you want to generate API`s controller along with Scaffold controller
+	// this path is relative to namespace_controller
+	'namespace_api_controller' => 'API',
 
 	'namespace_request' => 'App\Http\Requests',
 
@@ -63,4 +72,19 @@ return [
 
 	// Class name of extended class
 	'model_extend_class' => 'Model',
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| API folder name and prefix for routes when Scaffold and API generated to gather
+	|--------------------------------------------------------------------------
+	|
+	| Configuration api prefix and api folder name.
+	| By default api will be prefix with
+	|
+	*/
+
+	// this will generate api prefix when you are creating scaffold with API
+	'api_prefix'	=>   'api',
+
 ];
