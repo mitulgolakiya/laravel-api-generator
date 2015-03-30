@@ -21,11 +21,14 @@ class RepoAPIControllerGenerator implements GeneratorProvider
 
 	private $namespace;
 
+	private $repoNamespace;
+
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_api_controller', app_path('Http/Controllers/API/'));
 		$this->namespace = Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API');
+		$this->repoNamespace = Config::get('generator.namespace_repository', 'App\Libraries\Repositories');
 	}
 
 	public function generate()
@@ -50,6 +53,8 @@ class RepoAPIControllerGenerator implements GeneratorProvider
 	{
 		$templateData = str_replace('$NAMESPACE$', $this->namespace, $templateData);
 		$templateData = str_replace('$MODEL_NAMESPACE$', $this->commandData->modelNamespace, $templateData);
+
+		$templateData = str_replace('$REPO_NAMESPACE$', $this->repoNamespace, $templateData);
 
 		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
 		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);

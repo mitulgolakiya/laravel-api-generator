@@ -1,7 +1,7 @@
 <?php namespace $NAMESPACE$;
 
 use App\Http\Requests;
-use App\Http\Requests\Create$MODEL_NAME$Request;
+use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
 use Mitul\Controller\AppBaseController;
 use Response;

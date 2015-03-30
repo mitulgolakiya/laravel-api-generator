@@ -7,7 +7,7 @@ use Mitul\Generator\Exceptions\RecordNotFoundException;
 use Mitul\Generator\Utils\ResponseManager;
 use $MODEL_NAMESPACE$;
 use Illuminate\Http\Request;
-use App\Libraries\Repositories\$MODEL_NAME$Repository;
+use $REPO_NAMESPACE$\$MODEL_NAME$Repository;
 use Response;
 
 class $MODEL_NAME$APIController extends AppBaseController

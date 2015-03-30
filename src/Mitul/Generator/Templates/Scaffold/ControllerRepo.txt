@@ -1,8 +1,8 @@
 <?php namespace $NAMESPACE$;
 
 use App\Http\Requests;
-use App\Http\Requests\Create$MODEL_NAME$Request;
-use App\Libraries\Repositories\$MODEL_NAME$Repository;
+use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
+use $REPO_NAMESPACE$\$MODEL_NAME$Repository;
 use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
