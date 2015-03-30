@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers;
+<?php namespace $NAMESPACE$;
 
 use App\Http\Requests;
 use App\Http\Requests\Create$MODEL_NAME$Request;
