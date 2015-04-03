@@ -137,7 +137,7 @@ Here is the input for the fields by which you can specify Input.
 e.g.,
 
         email:string:unique
-        email:string:unique,default('me@mitul.me')
+        email:string:default('me@mitul.me')
         title:string,100
         price:flat,8,4
 
