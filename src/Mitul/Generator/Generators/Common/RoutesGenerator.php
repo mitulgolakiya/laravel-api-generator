@@ -64,9 +64,7 @@ class RoutesGenerator implements GeneratorProvider
 
 	private function generateAPIRoutes()
 	{
-		$apiNamespacePostfix = substr($this->apiNamespace, strlen('App\Http\Controllers\\'));
-
-		return "\n\nRoute::resource('" . $this->apiPrefix . "/" . $this->commandData->modelNamePluralCamel . "', '" . $apiNamespacePostfix . "\\" . $this->commandData->modelName . "APIController');";
+		return "\n\nRoute::resource('" . $this->apiPrefix . "/" . $this->commandData->modelNamePluralCamel . "', 'API\\" . $this->commandData->modelName . "APIController');";
 	}
 
 	private function generateScaffoldRoutes()
