@@ -37,6 +37,9 @@ class CommandData
 	/** @var TemplatesHelper */
 	public $templatesHelper;
 
+	/** @var  bool */
+	public $useSoftDelete;
+
 	public static $COMMAND_TYPE_API = 'api';
 	public static $COMMAND_TYPE_SCAFFOLD = 'scaffold';
 	public static $COMMAND_TYPE_SCAFFOLD_API = 'scaffold_api';

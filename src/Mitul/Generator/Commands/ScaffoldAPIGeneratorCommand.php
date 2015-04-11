@@ -1,13 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: anand.patel
+ * User: Mitul
  * Date: 3/24/2015
  * Time: 2:44 PM
  */
 namespace Mitul\Generator\Commands;
 
-use Illuminate\Console\Command;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\API\RepoAPIControllerGenerator;
 use Mitul\Generator\Generators\Common\MigrationGenerator;
@@ -19,7 +17,7 @@ use Mitul\Generator\Generators\Scaffold\RepoViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ScaffoldAPIGeneratorCommand extends Command
+class ScaffoldAPIGeneratorCommand extends BaseCommand
 {
 	/**
 	 * The console command name.
@@ -33,13 +31,6 @@ class ScaffoldAPIGeneratorCommand extends Command
 	 * @var string
 	 */
 	protected $description = 'Create a full CRUD for given model with initial views and APIs';
-
-	/**
-	 * The command Data
-	 *
-	 * @var CommandData
-	 */
-	public $commandData;
 
 	/**
 	 * Create a new command instance.
@@ -58,9 +49,7 @@ class ScaffoldAPIGeneratorCommand extends Command
 	 */
 	public function handle()
 	{
-		$this->commandData->modelName = $this->argument('model');
-		$this->commandData->initVariables();
-		$this->commandData->inputFields = $this->commandData->getInputFields();
+		parent::handle();
 
 		$migrationGenerator = new MigrationGenerator($this->commandData);
 		$migrationGenerator->generate();
@@ -97,8 +86,17 @@ class ScaffoldAPIGeneratorCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return [
-			['model', InputArgument::REQUIRED, 'Singular Model name']
-		];
+		return array_merge(parent::getArguments(),[]);
+	}
+
+	/**
+	 * Get the console command options.
+	 *
+	 * @return array
+	 */
+	public function getOptions()
+	{
+		return array_merge(parent::getOptions(),[]);
+
 	}
 }

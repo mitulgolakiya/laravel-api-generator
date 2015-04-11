@@ -2,7 +2,6 @@
 
 namespace Mitul\Generator\Commands;
 
-use Illuminate\Console\Command;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\Common\MigrationGenerator;
 use Mitul\Generator\Generators\Common\ModelGenerator;
@@ -12,9 +11,8 @@ use Mitul\Generator\Generators\Common\RoutesGenerator;
 use Mitul\Generator\Generators\Scaffold\RepoViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewGenerator;
-use Symfony\Component\Console\Input\InputArgument;
 
-class ScaffoldGeneratorCommand extends Command
+class ScaffoldGeneratorCommand extends BaseCommand
 {
 
 	/**
@@ -30,13 +28,6 @@ class ScaffoldGeneratorCommand extends Command
 	 * @var string
 	 */
 	protected $description = 'Create a full CRUD for given model with initial views';
-
-	/**
-	 * The command Data
-	 *
-	 * @var CommandData
-	 */
-	public $commandData;
 
 	/**
 	 * Create a new command instance.
@@ -56,9 +47,7 @@ class ScaffoldGeneratorCommand extends Command
 	 */
 	public function handle()
 	{
-		$this->commandData->modelName = $this->argument('model');
-		$this->commandData->initVariables();
-		$this->commandData->inputFields = $this->commandData->getInputFields();
+		parent::handle();
 
 		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (y|N)", false);
 
@@ -102,8 +91,16 @@ class ScaffoldGeneratorCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return [
-			['model', InputArgument::REQUIRED, 'Singular Model name']
-		];
+		return array_merge(parent::getArguments());
+	}
+
+	/**
+	 * Get the console command options.
+	 *
+	 * @return array
+	 */
+	public function getOptions()
+	{
+		return array_merge(parent::getOptions(),[]);
 	}
 }

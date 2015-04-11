@@ -61,7 +61,10 @@ class MigrationGenerator implements GeneratorProvider
 			$fieldsStr .= SchemaCreator::createField($field);
 		}
 
-		$fieldsStr .= "\t\t\t\$table->timestamps();\n";
+		$fieldsStr .= "\t\t\t\$table->timestamps();";
+
+		if($this->commandData->useSoftDelete)
+			$fieldsStr .= "\n\t\t\t\$table->softDeletes();";
 
 		return $fieldsStr;
 	}
