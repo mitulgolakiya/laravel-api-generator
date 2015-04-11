@@ -61,6 +61,19 @@ class ModelGenerator implements GeneratorProvider
 
 		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
 
+		if($this->commandData->useSoftDelete)
+		{
+			$templateData = str_replace('$SOFT_DELETE_IMPORT$', "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n", $templateData);
+			$templateData = str_replace('$SOFT_DELETE$', "use SoftDeletes;\n", $templateData);
+			$templateData = str_replace('$SOFT_DELETE_DATES$', "\n\tprotected \$dates = ['deleted_at'];\n", $templateData);
+		}
+		else
+		{
+			$templateData = str_replace('$SOFT_DELETE_IMPORT$', "", $templateData);
+			$templateData = str_replace('$SOFT_DELETE$', "", $templateData);
+			$templateData = str_replace('$SOFT_DELETE_DATES$', "", $templateData);
+		}
+
 		$templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
 
 		if($this->customModelExtend)

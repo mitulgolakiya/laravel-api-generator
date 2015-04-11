@@ -60,15 +60,15 @@ Steps to Get Started
         composer update
     
 3. Add the ServiceProviders to the providers array in ```config/app.php```.<br>
-As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
-so we need to add those ServiceProviders as well.
+   As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
+   so we need to add those ServiceProviders as well.
 
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'Mitul\Generator\GeneratorServiceProvider'
         
-Also for convenience, add these facades in alias array in ```config/app.php```.
+   Also for convenience, add these facades in alias array in ```config/app.php```.
 
 		'Form'  => 'Illuminate\Html\FormFacade',
 		'HTML'  => 'Illuminate\Html\HtmlFacade',
@@ -95,9 +95,17 @@ Also for convenience, add these facades in alias array in ```config/app.php```.
         php artisan mitul.generator:scaffold_api Project
         php artisan mitul.generator:scaffold_api Post
  
-6. Enter the fields with options<br>
+6. If you want to use SoftDelete trait with your models then you can specify softDelete option.
+ 
+        php artisan mitul.generator:api ModelName --softDelete
+        
+    e.g.
+    
+        php artisan mitul.generator:api Post --softDelete
+        
+7. Enter the fields with options<br>
 
-7. And you are ready to go. :)
+8. And you are ready to go. :)
 
 
 Documentation

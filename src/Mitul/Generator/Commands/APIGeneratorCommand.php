@@ -2,7 +2,6 @@
 
 namespace Mitul\Generator\Commands;
 
-use Illuminate\Console\Command;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\API\APIControllerGenerator;
 use Mitul\Generator\Generators\API\RepoAPIControllerGenerator;
@@ -12,7 +11,7 @@ use Mitul\Generator\Generators\Common\RepositoryGenerator;
 use Mitul\Generator\Generators\Common\RoutesGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 
-class APIGeneratorCommand extends Command
+class APIGeneratorCommand extends BaseCommand
 {
 
 	/**
@@ -28,13 +27,6 @@ class APIGeneratorCommand extends Command
 	 * @var string
 	 */
 	protected $description = 'Create a full CRUD API for given model';
-
-	/**
-	 * The command Data
-	 *
-	 * @var CommandData
-	 */
-	public $commandData;
 
 	/**
 	 * Create a new command instance.
@@ -54,9 +46,7 @@ class APIGeneratorCommand extends Command
 	 */
 	public function handle()
 	{
-		$this->commandData->modelName = $this->argument('model');
-		$this->commandData->initVariables();
-		$this->commandData->inputFields = $this->commandData->getInputFields();
+		parent::handle();
 
 		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (y|N)", false);
 
@@ -94,8 +84,17 @@ class APIGeneratorCommand extends Command
 	 */
 	protected function getArguments()
 	{
-		return [
-			['model', InputArgument::REQUIRED, 'Singular Model name']
-		];
+		return array_merge(parent::getArguments(),[]);
+	}
+
+	/**
+	 * Get the console command options.
+	 *
+	 * @return array
+	 */
+	public function getOptions()
+	{
+		return array_merge(parent::getOptions(),[]);
+
 	}
 }
