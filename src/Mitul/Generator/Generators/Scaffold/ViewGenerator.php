@@ -50,7 +50,7 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title($field['fieldName']), $fieldTemplate);
+			$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
 			$singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
 			$fieldsStr .= $singleFieldStr . "\n\n";
 		}
@@ -79,7 +79,7 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$headerFields .= "<th>" . Str::title($field['fieldName']) . "</th>\n\t\t\t";
+			$headerFields .= "<th>" . Str::title(str_replace("_", " ", $field['fieldName'])) . "</th>\n\t\t\t";
 		}
 
 		$headerFields = trim($headerFields);
