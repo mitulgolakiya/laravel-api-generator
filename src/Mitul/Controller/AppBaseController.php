@@ -1,7 +1,9 @@
 <?php namespace Mitul\Controller;
 
 use App\Http\Controllers\Controller;
-use Mitul\Generator\Exceptions\AppValidationException;
+use Illuminate\Http\Exception\HttpResponseException;
+use Mitul\Generator\Utils\ResponseManager;
+use Response;
 
 class AppBaseController extends Controller
 {
@@ -10,6 +12,22 @@ class AppBaseController extends Controller
 		$validator = $this->getValidationFactory()->make($request->all(), $rules);
 
 		if($validator->fails())
-			throw new AppValidationException("Validation failed", ERROR_CODE_VALIDATION_FAILED, $validator->errors()->getMessages());
+		{
+			$msg = "";
+
+			foreach($validator->errors()->getMessages() as $field => $errorMsg)
+			{
+				$msg .= $errorMsg[0] . ". ";
+			}
+
+			$msg = substr($msg, 0, strlen($msg) - 1);
+
+			throw new HttpResponseException(Response::json(ResponseManager::makeError(ERROR_CODE_VALIDATION_FAILED, $msg)));
+		}
+	}
+
+	public function throwRecordNotFoundException($message, $code = 0)
+	{
+		throw new HttpResponseException(Response::json(ResponseManager::makeError($code, $message)));
 	}
 }
