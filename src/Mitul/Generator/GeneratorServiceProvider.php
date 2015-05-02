@@ -46,6 +46,11 @@ class GeneratorServiceProvider extends ServiceProvider
 			return new ScaffoldAPIGeneratorCommand();
 		});
 
+		$this->app->singleton(
+			'Illuminate\Contracts\Debug\ExceptionHandler',
+			'Mitul\Generator\Exceptions\APIExceptionsHandler'
+		);
+
 		$this->commands(['mitul.generator.api', 'mitul.generator.scaffold', 'mitul.generator.scaffold_api']);
 	}
 
