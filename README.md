@@ -46,28 +46,7 @@ So we removed all extra Exception files. so you need to remove those things from
 
 5. Enjoy Upgrade :)
 
-Upgrade Guide from 1.0 to 1.1 or 1.2
--------------------------------------
-
-1. Take a backup of your ```config/generator.php```
-
-2. Delete your ```config/generator.php```
-
-3. Change version in composer.json
-
-        "require": {
-            "mitulgolakiya/laravel-api-generator": "1.2.*"
-        }
-
-4. Run composer update.
-
-5. Run publish command again.
-
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
-
-6. Replace your custom paths again in ```config/generator.php```.
-
-7. Enjoy Upgrade :)
+[Upgrade Guide for older versions](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/Upgrade_Guide.md).
 
 Steps to Get Started
 ---------------------
