@@ -54,7 +54,7 @@ Steps to Get Started
 1. Add this package to your composer.json:
   
         "require": {
-            "mitulgolakiya/laravel-api-generator": "1.2.*"
+            "mitulgolakiya/laravel-api-generator": "1.3.*"
         }
   
 2. Run composer update
