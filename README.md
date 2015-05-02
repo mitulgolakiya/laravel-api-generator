@@ -39,7 +39,7 @@ So we removed all extra Exception files. so you need to remove those things from
         use Mitul\Generator\Exceptions\AppValidationException;
         use Mitul\Generator\Exceptions\RecordNotFoundException;
 
-4. Remove throw statement from PHPDoc Blocks
+4. Remove throw statement from PHPDoc Blocks of functions
 
         @throws AppValidationException
         @throws RecordNotFoundException
