@@ -4,6 +4,8 @@ use App\Http\Requests;
 use $MODEL_NAMESPACE$;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
+use Mitul\Generator\Exceptions\AppValidationException;
+use Mitul\Generator\Exceptions\RecordNotFoundException;
 use Mitul\Generator\Utils\ResponseManager;
 use Response;
 
@@ -38,6 +40,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 * @param Request $request
 	 *
 	 * @return Response
+	 * @throws AppValidationException
 	 */
 	public function store(Request $request)
 	{
@@ -58,6 +61,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 * @param Request $request
 	 *
 	 * @return Response
+	 * @throws RecordNotFoundException
 	 */
 	public function show($id)
 	{
@@ -65,7 +69,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
-			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+			throw new RecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ retrieved successfully."));
 	}
@@ -86,6 +90,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 *
 	 * @param  int  $id
 	 * @return Response
+	 * @throws RecordNotFoundException
 	 */
 	public function update($id, Request $request)
 	{
@@ -93,7 +98,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
-			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+			throw new RecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
 
 		$input = $request->all();
 
@@ -108,6 +113,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 *
 	 * @param  int  $id
 	 * @return Response
+	 * @throws RecordNotFoundException
 	 */
 	public function destroy($id)
 	{
@@ -115,7 +121,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
-			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+			throw new RecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
 
 		$$MODEL_NAME_CAMEL$->delete();
 
