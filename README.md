@@ -26,7 +26,8 @@ Here is the full documentation.
 Upgrade Guide from 1.2 to 1.3
 -------------------------------------
 
-We are no longer using our own ExceptionHandler to send API fail responses and using Laravel's own ```HttpResponseException``` to overcome ```App\Exceptions\Handler``` overwrite problem.
+We are no longer using our own ```APIExceptionsHandler``` to send API fail responses and using Laravel's own ```HttpResponseException``` to overcome ```App\Exceptions\Handler``` overwrite problem.
+
 So we removed all extra Exception files. so you need to remove those things from your API Controllers.
 
 1. In all your API Controllers and find ```throw new RecordNotFoundException```.
