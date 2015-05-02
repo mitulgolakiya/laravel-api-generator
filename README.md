@@ -34,7 +34,17 @@ So we removed all extra Exception files. so you need to remove those things from
 
 2. Replace it with ```$this->throwRecordNotFoundException```.
 
-3. Enjoy Upgrade :)
+3. Remove use statements
+
+        use Mitul\Generator\Exceptions\AppValidationException;
+        use Mitul\Generator\Exceptions\RecordNotFoundException;
+
+4. Remove throw statement from PHPDoc Blocks
+
+        @throws AppValidationException
+        @throws RecordNotFoundException
+
+5. Enjoy Upgrade :)
 
 Upgrade Guide from 1.0 to 1.1 or 1.2
 -------------------------------------
