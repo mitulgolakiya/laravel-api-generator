@@ -24,7 +24,6 @@ class SchemaCreator
 
 		$fieldStr .= ")";
 
-<<<<<<< HEAD
 		if(count($field['fieldInputs']) > 1)
 		{
             array_shift($field['fieldInputs']);
@@ -49,19 +48,6 @@ class SchemaCreator
 				else
 
 					$fieldStr .= "->" . $option."()";
-
-=======
-		if(!empty($field['fieldOptions']))
-		{
-			foreach($field['fieldOptions'] as $option)
-			{
-				if($option == 'primary')
-					$fieldStr .= "->primary()";
-				elseif($option == 'unique')
-					$fieldStr .= "->unique()";
-				else
-					$fieldStr .= "->" . $option;
->>>>>>> origin/1.3
 			}
 		}
 
