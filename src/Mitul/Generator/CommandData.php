@@ -73,7 +73,9 @@ class CommandData
 			$fieldInputStr = $this->commandObj->ask("Field:");
 
 			if(empty($fieldInputStr))
-				break;
+
+                break;
+
 
 			$fieldInputs = explode(":", $fieldInputStr);
 
@@ -102,10 +104,12 @@ class CommandData
 
 			$field = [
 				'fieldName'       => $fieldName,
+                'fieldInputs'     => $fieldInputs,
 				'fieldType'       => $fieldType,
 				'fieldTypeParams' => $fieldTypeParams,
 				'fieldOptions'    => $fieldOptions,
-				'validations'     => $validations
+				'validations'     => $validations,
+
 			];
 
 			$fields[] = $field;
