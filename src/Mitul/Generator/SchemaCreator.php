@@ -24,6 +24,33 @@ class SchemaCreator
 
 		$fieldStr .= ")";
 
+<<<<<<< HEAD
+		if(count($field['fieldInputs']) > 1)
+		{
+            array_shift($field['fieldInputs']);
+			foreach($field['fieldInputs'] as $option)
+			{
+				if(strstr($option,',')){
+                    $params = explode(',',$option);
+                    $fieldStr .= "->".$params[0]."(";
+                    array_shift($params);
+                    foreach($params as $param)
+                    {
+                        if(is_numeric($param)){
+                            $fieldStr .= $param. ", " ;
+                        }
+                        else{
+                            $fieldStr .= "'".$param."', " ;
+                        }
+                    }
+                    $fieldStr = substr($fieldStr, 0, -2);
+                    $fieldStr .= ")";
+                }
+				else
+
+					$fieldStr .= "->" . $option."()";
+
+=======
 		if(!empty($field['fieldOptions']))
 		{
 			foreach($field['fieldOptions'] as $option)
@@ -34,6 +61,7 @@ class SchemaCreator
 					$fieldStr .= "->unique()";
 				else
 					$fieldStr .= "->" . $option;
+>>>>>>> origin/1.3
 			}
 		}
 
