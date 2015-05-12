@@ -73,9 +73,7 @@ class CommandData
 			$fieldInputStr = $this->commandObj->ask("Field:");
 
 			if(empty($fieldInputStr))
-
-                break;
-
+				break;
 
 			$fieldInputs = explode(":", $fieldInputStr);
 
@@ -87,28 +85,12 @@ class CommandData
 
 			$fieldName = $fieldInputs[0];
 
-			$fieldTypeOptions = explode(",", $fieldInputs[1]);
-			$fieldType = $fieldTypeOptions[0];
-			$fieldTypeParams = [];
-			if(sizeof($fieldTypeOptions) > 1)
-			{
-				for($i = 1; $i < sizeof($fieldTypeOptions); $i++)
-					$fieldTypeParams[] = $fieldTypeOptions[$i];
-			}
-
-			$fieldOptions = [];
-			if(sizeof($fieldInputs) > 2)
-				$fieldOptions[] = $fieldInputs[2];
-
 			$validations = $this->commandObj->ask("Enter validations: ");
 
 			$field = [
-				'fieldName'       => $fieldName,
-                'fieldInputs'     => $fieldInputs,
-				'fieldType'       => $fieldType,
-				'fieldTypeParams' => $fieldTypeParams,
-				'fieldOptions'    => $fieldOptions,
-				'validations'     => $validations,
+				'fieldName'   => $fieldName,
+				'fieldInput'  => $fieldInputStr,
+				'validations' => $validations,
 
 			];
 

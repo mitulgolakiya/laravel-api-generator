@@ -58,7 +58,7 @@ class MigrationGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$fieldsStr .= SchemaCreator::createField($field);
+			$fieldsStr .= SchemaCreator::createField($field['fieldInput']);
 		}
 
 		$fieldsStr .= "\t\t\t\$table->timestamps();";
