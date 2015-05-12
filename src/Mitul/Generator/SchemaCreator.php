@@ -24,16 +24,30 @@ class SchemaCreator
 
 		$fieldStr .= ")";
 
-		if(!empty($field['fieldOptions']))
+		if(count($field['fieldInputs']) > 1)
 		{
-			foreach($field['fieldOptions'] as $option)
+            array_shift($field['fieldInputs']);
+			foreach($field['fieldInputs'] as $option)
 			{
-				if($option == 'primary')
-					$fieldStr .= "->primary()";
-				elseif($option == 'unique')
-					$fieldStr .= "->unique()";
+				if(strstr($option,',')){
+                    $params = explode(',',$option);
+                    $fieldStr .= "->".$params[0]."(";
+                    array_shift($params);
+                    foreach($params as $param)
+                    {
+                        if(is_numeric($param)){
+                            $fieldStr .= $param. ", " ;
+                        }
+                        else{
+                            $fieldStr .= "'".$param."', " ;
+                        }
+                    }
+                    $fieldStr = substr($fieldStr, 0, -2);
+                    $fieldStr .= ")";
+                }
 				else
-					$fieldStr .= "->" . $option;
+
+					$fieldStr .= "->" . $option."()";
 			}
 		}
 
