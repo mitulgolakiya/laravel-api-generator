@@ -11,21 +11,21 @@ return [
 	|
 	*/
 
-	'path_migration' => base_path('database/migrations/'),
+	'path_migration'           => base_path('database/migrations/'),
 
-	'path_model' => app_path('Models/'),
+	'path_model'               => app_path('Models/'),
 
-	'path_repository' => app_path('Libraries/Repositories/'),
+	'path_repository'          => app_path('Libraries/Repositories/'),
 
-	'path_controller' => app_path('Http/Controllers/'),
+	'path_controller'          => app_path('Http/Controllers/'),
 
-	'path_api_controller' => app_path('Http/Controllers/API/'),
+	'path_api_controller'      => app_path('Http/Controllers/API/'),
 
-	'path_views' => base_path('resources/views'),
+	'path_views'               => base_path('resources/views'),
 
-	'path_request' => app_path('Http/Requests/'),
+	'path_request'             => app_path('Http/Requests/'),
 
-	'path_routes' => app_path('Http/routes.php'),
+	'path_routes'              => app_path('Http/routes.php'),
 
 
 	/*
@@ -37,15 +37,15 @@ return [
 	|
 	*/
 
-	'namespace_model' => 'App\Models',
+	'namespace_model'          => 'App\Models',
 
-	'namespace_repository' => 'App\Libraries\Repositories',
+	'namespace_repository'     => 'App\Libraries\Repositories',
 
-	'namespace_controller' => 'App\Http\Controllers',
+	'namespace_controller'     => 'App\Http\Controllers',
 
 	'namespace_api_controller' => 'App\Http\Controllers\API',
 
-	'namespace_request' => 'App\Http\Requests',
+	'namespace_request'        => 'App\Http\Requests',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -63,11 +63,11 @@ return [
 	|
 	*/
 
-	'model_extend' => false,
+	'model_extend'             => false,
 
-	'model_extend_namespace' => 'Illuminate\Database\Eloquent\Model',
+	'model_extend_namespace'   => 'Illuminate\Database\Eloquent\Model',
 
-	'model_extend_class' => 'Model',
+	'model_extend_class'       => 'Model',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,5 +78,5 @@ return [
 	|
 	*/
 
-	'api_prefix'	=>   'api',
+	'api_prefix'               => 'api',
 ];

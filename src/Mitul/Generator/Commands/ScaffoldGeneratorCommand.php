@@ -101,6 +101,6 @@ class ScaffoldGeneratorCommand extends BaseCommand
 	 */
 	public function getOptions()
 	{
-		return array_merge(parent::getOptions(),[]);
+		return array_merge(parent::getOptions(), []);
 	}
 }

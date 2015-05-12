@@ -86,7 +86,7 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
 	 */
 	protected function getArguments()
 	{
-		return array_merge(parent::getArguments(),[]);
+		return array_merge(parent::getArguments(), []);
 	}
 
 	/**
@@ -96,7 +96,7 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
 	 */
 	public function getOptions()
 	{
-		return array_merge(parent::getOptions(),[]);
+		return array_merge(parent::getOptions(), []);
 
 	}
 }

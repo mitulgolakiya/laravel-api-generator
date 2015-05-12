@@ -12,11 +12,21 @@ class SchemaCreator
 {
 	public static function createField($field)
 	{
-		$fieldStr = "\t\t\t\$table->" . $field['fieldType'] . "('" . $field['fieldName'] . "'";
+		$fieldInputs = explode(':', $field);
 
-		if(!empty($field['fieldTypeParams']))
+		$fieldName = array_shift($fieldInputs);
+
+		$fieldTypeInputs = array_shift($fieldInputs);
+
+		$fieldTypeInputs = explode(",", $fieldTypeInputs);
+
+		$fieldType = array_shift($fieldTypeInputs);
+
+		$fieldStr = "\t\t\t\$table->" . $fieldType . "('" . $fieldName . "'";
+
+		if(sizeof($fieldTypeInputs) > 0)
 		{
-			foreach($field['fieldTypeParams'] as $param)
+			foreach($fieldTypeInputs as $param)
 			{
 				$fieldStr .= ", " . $param;
 			}
@@ -24,31 +34,27 @@ class SchemaCreator
 
 		$fieldStr .= ")";
 
-		if(count($field['fieldInputs']) > 1)
+		if(sizeof($fieldInputs) > 0)
 		{
-            array_shift($field['fieldInputs']);
-			foreach($field['fieldInputs'] as $option)
-			{
-				if(strstr($option,',')){
-                    $params = explode(',',$option);
-                    $fieldStr .= "->".$params[0]."(";
-                    array_shift($params);
-                    foreach($params as $param)
-                    {
-                        if(is_numeric($param)){
-                            $fieldStr .= $param. ", " ;
-                        }
-                        else{
-                            $fieldStr .= "'".$param."', " ;
-                        }
-                    }
-                    $fieldStr = substr($fieldStr, 0, -2);
-                    $fieldStr .= ")";
-                }
-				else
+			$optionInputs = array_shift($fieldInputs);
 
-					$fieldStr .= "->" . $option."()";
+			$optionInputs = explode(",", $optionInputs);
+
+			$option = array_shift($optionInputs);
+
+			$fieldStr .= '->' . $option . '(';
+
+			if(sizeof($optionInputs) > 0)
+			{
+				foreach($optionInputs as $param)
+				{
+					$fieldStr .= "'" . $param . "', ";
+				}
+
+				$fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
 			}
+
+			$fieldStr .= ")";
 		}
 
 		if(!empty($fieldStr))
