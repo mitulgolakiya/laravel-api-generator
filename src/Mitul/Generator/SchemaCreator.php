@@ -34,30 +34,28 @@ class SchemaCreator
 
 		$fieldStr .= ")";
 
-		if(sizeof($fieldInputs) > 0)
-		{
-			$optionInputs = array_shift($fieldInputs);
+        if(sizeof($fieldInputs) > 0)
+        {
+            foreach($fieldInputs as $input) {
 
-			$optionInputs = explode(",", $optionInputs);
+                $optionsInput = explode(",", $input);
 
-			$option = array_shift($optionInputs);
+                $fieldStr .= '->' . $optionsInput[0] . '(';
+                unset($optionsInput[0]);
 
-			$fieldStr .= '->' . $option . '(';
+                if (sizeof($optionsInput) > 0) {
 
-			if(sizeof($optionInputs) > 0)
-			{
-				foreach($optionInputs as $param)
-				{
-					$fieldStr .= "'" . $param . "', ";
-				}
+                    foreach ($optionsInput as $param) {
+                        $fieldStr .= "'" . $param . "', ";
+                    }
+                    $fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
+                }
 
-				$fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
-			}
+                $fieldStr .= ")";
+            }
+        }
 
-			$fieldStr .= ")";
-		}
-
-		if(!empty($fieldStr))
+        if(!empty($fieldStr))
 			$fieldStr .= ";\n";
 
 		return $fieldStr;
