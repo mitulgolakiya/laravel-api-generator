@@ -1,6 +1,6 @@
 <?php namespace Mitul\Controller;
 
-use App\Http\Controllers\Controller as Controller;
+use $$BASE_NAMESPACE$$ as Controller;
 use Illuminate\Http\Exception\HttpResponseException;
 use Mitul\Generator\Utils\ResponseManager;
 use Response;

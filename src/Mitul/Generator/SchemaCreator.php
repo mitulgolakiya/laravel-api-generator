@@ -12,11 +12,21 @@ class SchemaCreator
 {
 	public static function createField($field)
 	{
-		$fieldStr = "\t\t\t\$table->" . $field['fieldType'] . "('" . $field['fieldName'] . "'";
+		$fieldInputs = explode(':', $field);
 
-		if(!empty($field['fieldTypeParams']))
+		$fieldName = array_shift($fieldInputs);
+
+		$fieldTypeInputs = array_shift($fieldInputs);
+
+		$fieldTypeInputs = explode(",", $fieldTypeInputs);
+
+		$fieldType = array_shift($fieldTypeInputs);
+
+		$fieldStr = "\t\t\t\$table->" . $fieldType . "('" . $fieldName . "'";
+
+		if(sizeof($fieldTypeInputs) > 0)
 		{
-			foreach($field['fieldTypeParams'] as $param)
+			foreach($fieldTypeInputs as $param)
 			{
 				$fieldStr .= ", " . $param;
 			}
@@ -24,20 +34,31 @@ class SchemaCreator
 
 		$fieldStr .= ")";
 
-		if(!empty($field['fieldOptions']))
+		if(sizeof($fieldInputs) > 0)
 		{
-			foreach($field['fieldOptions'] as $option)
+			foreach($fieldInputs as $input)
 			{
-				if($option == 'primary')
-					$fieldStr .= "->primary()";
-				elseif($option == 'unique')
-					$fieldStr .= "->unique()";
-				else
-					$fieldStr .= "->" . $option;
+				$input = explode(",", $input);
+
+				$option = array_shift($input);
+
+				$fieldStr .= '->' . $option . '(';
+
+				if(sizeof($input) > 0)
+				{
+					foreach($input as $param)
+					{
+						$fieldStr .= "'" . $param . "', ";
+					}
+
+					$fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
+				}
+
+				$fieldStr .= ")";
 			}
 		}
 
-		if(!empty($fieldStr))
+        if(!empty($fieldStr))
 			$fieldStr .= ";\n";
 
 		return $fieldStr;

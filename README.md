@@ -23,28 +23,30 @@ And your simple CRUD API is ready in mere seconds.
 
 Here is the full documentation.
 
-Upgrade Guide from 1.0 to 1.1 or 1.2
+Upgrade Guide from 1.2 to 1.3
 -------------------------------------
 
-1. Take a backup of your ```config/generator.php```
+We are no longer using our own ```APIExceptionsHandler``` to send API fail responses and using Laravel's own ```HttpResponseException``` to overcome ```App\Exceptions\Handler``` overwrite problem.
 
-2. Delete your ```config/generator.php```
+So we removed all extra Exception files. so you need to remove those things from your API Controllers.
 
-3. Change version in composer.json
+1. In all your API Controllers and find ```throw new RecordNotFoundException```.
 
-        "require": {
-            "mitulgolakiya/laravel-api-generator": "1.2.*"
-        }
+2. Replace it with ```$this->throwRecordNotFoundException```.
 
-4. Run composer update.
+3. Remove use statements
 
-5. Run publish command again.
+        use Mitul\Generator\Exceptions\AppValidationException;
+        use Mitul\Generator\Exceptions\RecordNotFoundException;
 
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
+4. Remove throw statement from PHPDoc Blocks of functions
 
-6. Replace your custom paths again in ```config/generator.php```.
+        @throws AppValidationException
+        @throws RecordNotFoundException
 
-7. Enjoy Upgrade :)
+5. Enjoy Upgrade :)
+
+[Upgrade Guide for older versions](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/Upgrade_Guide.md).
 
 Steps to Get Started
 ---------------------
@@ -52,7 +54,7 @@ Steps to Get Started
 1. Add this package to your composer.json:
   
         "require": {
-            "mitulgolakiya/laravel-api-generator": "1.2.*"
+            "mitulgolakiya/laravel-api-generator": "1.3.*"
         }
   
 2. Run composer update
@@ -189,6 +191,19 @@ Views will be created in ```resources/views/modelName``` folder,
         edit.blade.php - To edit a record
         fields.blade.php - Common file of all model fields, which will be used create and edit record
         show.blade.php - To display a record
+        
+### Using with Custom Application namespace
+
+Sometimes, we are using different namespace rather than default ```App``` namespace.
+
+Generator's ```AppBaseController``` is extending Laravel's ```App\Http\Controllers\Controller```. so while using diff namespace, we need to publish it with custom namespace.
+
+You need to give a full path of default Controller with your namespace as input. For e.g.,
+
+        php artisan mitul.generator.publish:base_controller "MyApp\Http\Controllers\Controller"
+             
+It will generate AppBaseController again with extending custom namespace controller.
+
 
 Screenshots
 ------------

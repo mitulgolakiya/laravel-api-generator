@@ -4,6 +4,7 @@ namespace Mitul\Generator;
 
 use Illuminate\Support\ServiceProvider;
 use Mitul\Generator\Commands\APIGeneratorCommand;
+use Mitul\Generator\Commands\PublishBaseControllerCommand;
 use Mitul\Generator\Commands\ScaffoldAPIGeneratorCommand;
 use Mitul\Generator\Commands\ScaffoldGeneratorCommand;
 
@@ -20,7 +21,7 @@ class GeneratorServiceProvider extends ServiceProvider
 		$configPath = __DIR__ . '/../../../config/generator.php';
 		$this->publishes([$configPath => config_path('generator.php')], 'config');
 		$this->publishes([
-			__DIR__.'/../../../views' => base_path('resources/views'),
+			__DIR__ . '/../../../views' => base_path('resources/views'),
 		]);
 	}
 
@@ -46,7 +47,11 @@ class GeneratorServiceProvider extends ServiceProvider
 			return new ScaffoldAPIGeneratorCommand();
 		});
 
-		$this->commands(['mitul.generator.api', 'mitul.generator.scaffold', 'mitul.generator.scaffold_api']);
-	}
+		$this->app->singleton('mitul.generator.publish.base_controller', function ($app)
+		{
+			return new PublishBaseControllerCommand();
+		});
 
+		$this->commands(['mitul.generator.api', 'mitul.generator.scaffold', 'mitul.generator.scaffold_api', 'mitul.generator.publish.base_controller']);
+	}
 }

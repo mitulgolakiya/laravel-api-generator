@@ -84,7 +84,7 @@ class APIGeneratorCommand extends BaseCommand
 	 */
 	protected function getArguments()
 	{
-		return array_merge(parent::getArguments(),[]);
+		return array_merge(parent::getArguments(), []);
 	}
 
 	/**
@@ -94,7 +94,7 @@ class APIGeneratorCommand extends BaseCommand
 	 */
 	public function getOptions()
 	{
-		return array_merge(parent::getOptions(),[]);
+		return array_merge(parent::getOptions(), []);
 
 	}
 }
