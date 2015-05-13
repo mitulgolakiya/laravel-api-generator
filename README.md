@@ -191,6 +191,19 @@ Views will be created in ```resources/views/modelName``` folder,
         edit.blade.php - To edit a record
         fields.blade.php - Common file of all model fields, which will be used create and edit record
         show.blade.php - To display a record
+        
+### Using with Custom Application namespace
+
+Sometimes, we are using different namespace rather than default ```App``` namespace.
+
+Generator's ```AppBaseController``` is extending Laravel's ```App\Http\Controllers\Controller```. so while using diff namespace, we need to publish it with custom namespace.
+
+You need to give a full path of default Controller with your namespace as input. For e.g.,
+
+        php artisan mitul.generator.publish:base_controller "MyApp\Http\Controllers\Controller"
+             
+It will generate AppBaseController again with extending custom namespace controller.
+
 
 Screenshots
 ------------
