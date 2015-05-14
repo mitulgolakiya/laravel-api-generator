@@ -1,6 +1,0 @@
-<!--- $FIELD_NAME_TITLE$ Field --->
-<td>
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::text('$FIELD_NAME$', $attributes['$FIELD_NAME$'], ['class' => 'form-control']) !!}
-</div>
-</td>
