@@ -52,6 +52,7 @@ class ViewControllerGenerator implements GeneratorProvider
 		$templateData = str_replace('$MODEL_NAMESPACE$', $this->commandData->modelNamespace, $templateData);
 
 		$templateData = str_replace('$REQUEST_NAMESPACE$', $this->requestNamespace, $templateData);
+        $templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
 
 		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
 		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);
