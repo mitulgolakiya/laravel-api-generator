@@ -21,22 +21,6 @@
                     <th width="50px">Action</th>
                     </thead>
                     <tbody>
-                    <tr>
-
-                     <form method="GET" class="form-inline" id="search_form" action="{{route('$MODEL_NAME_PLURAL_CAMEL$.index')}}">
-
-                         $FIELDS$
-
-                        <td>
-                         <span onclick="return $('#search_form').submit()" class="btn btn-xs btn-primary">
-                           <i class="glyphicon glyphicon-search"></i>
-                         </span>
-                        </td>
-                     </form>
-
-
-
-                    </tr>
                     @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
                         <tr>
                             $FIELD_BODY$
@@ -50,6 +34,6 @@
                 </table>
             @endif
         </div>
-        {!! $$MODEL_NAME_PLURAL_CAMEL$->render() !!}
+
     </div>
 @endsection
