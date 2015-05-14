@@ -1,5 +1,5 @@
 {
-    "name": "mitulgolakiya/laravel-api-generator",
+    "name": "yekz/laravel-api-generator",
     "description": "Laravel API/Scaffold/CRUD Generator from just one command with including Controller, Repository, Model, Migrations, routes.php update.",
     "keywords": [
         "laravel",
