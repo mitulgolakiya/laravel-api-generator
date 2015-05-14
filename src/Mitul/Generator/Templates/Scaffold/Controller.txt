@@ -4,8 +4,8 @@ use App\Http\Requests;
 use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
 use Mitul\Controller\AppBaseController;
-use Response;
-use Flash;
+
+use Flash, Response;
 
 class $MODEL_NAME$Controller extends AppBaseController
 {

@@ -5,6 +5,7 @@ use $MODEL_NAMESPACE$;
 use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Mitul\Generator\Utils\ResponseManager;
+
 use Response;
 
 class $MODEL_NAME$APIController extends AppBaseController
@@ -17,7 +18,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 */
 	public function index()
 	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
+		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::paginate(20);
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME_PLURAL$ retrieved successfully."));
 	}

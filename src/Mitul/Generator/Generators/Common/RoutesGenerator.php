@@ -71,13 +71,12 @@ class RoutesGenerator implements GeneratorProvider
 
 	private function generateScaffoldRoutes()
 	{
-		$routes = "\n\nRoute::resource('" . $this->commandData->modelNamePluralCamel . "', '" . $this->commandData->modelName . "Controller');";
 
-		$deleteRoutes = $this->commandData->templatesHelper->getTemplate("routes", "Scaffold");
+		$routes = $this->commandData->templatesHelper->getTemplate("routes", "Scaffold");
 
-		$deleteRoutes = $this->fillTemplate($deleteRoutes);
+		$routes = $this->fillTemplate($routes);
 
-		return $routes . "\n\n" . $deleteRoutes;
+		return $routes;
 	}
 
 }

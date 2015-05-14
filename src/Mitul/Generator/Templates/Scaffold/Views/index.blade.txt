@@ -2,38 +2,56 @@
 
 @section('content')
 
-    <div class="container">
+<div class="row">
 
-        @include('flash::message')
+    @include('flash::message')
 
-        <div class="row">
-            <h1 class="pull-left">$MODEL_NAME_PLURAL$</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}">Add New</a>
+    <div class="block">
+        <div class="block-title">
+            <div class="block-options pull-right">
+                <div class="btn-group btn-group-sm">
+                    <div class="block-options pull-right">
+                        <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title="" data-original-title="New"><i class="hi hi-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+            <h2>
+                $MODEL_NAME_PLURAL$
+            </h2>
         </div>
 
-        <div class="row">
+        <div class="block-content-full">
             @if($$MODEL_NAME_PLURAL_CAMEL$->isEmpty())
                 <div class="well text-center">No $MODEL_NAME_PLURAL$ found.</div>
             @else
-                <table class="table">
-                    <thead>
-                    $FIELD_HEADERS$
-                    <th width="50px">Action</th>
-                    </thead>
-                    <tbody>
-                    @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
-                        <tr>
-                            $FIELD_BODY$
-                            <td>
-                                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.delete', [$$MODEL_NAME_CAMEL$->id]) !!}" onclick="return confirm('Are you sure wants to delete this $MODEL_NAME$?')"><i class="glyphicon glyphicon-remove"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover table-vcenter">
+                        <thead>
+                            $FIELD_HEADERS$
+                            <th class="text-right">Action</th>
+                        </thead>
+                        <tbody>
+                            @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
+                                <tr>
+                                    $FIELD_BODY$
+                                    <td class="text-right">
+                                    <div class="btn-group btn-group-xs">
+                                            <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.show', [$$MODEL_NAME_CAMEL$->id]) !!}" data-toggle="tooltip" data-original-title="View" class="btn btn-default"><i class="hi hi-eye-open"></i></a>
+                                            <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}" data-toggle="tooltip" data-original-title="Edit" class="btn btn-default"><i class="gi gi-edit"></i></a>
+                                            <a href="#" onclick="X.Info.confirm('Are you sure wants to delete this GmailError?', function(){window.location.href='{!! route('$MODEL_NAME_PLURAL_CAMEL$.delete', [$$MODEL_NAME_CAMEL$->id]) !!}'})" data-toggle="tooltip" data-original-title="Delete" class="btn btn-default"><i class="gi gi-remove text-danger"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @endif
         </div>
-
+        <div class="col-md-12">
+            <span class="pull-right">{!! $MODEL_NAME_PLURAL_CAMEL$->render() !!}</span>
+        </div>
     </div>
+</div>
+
 @endsection
