@@ -77,6 +77,19 @@ class ViewGenerator implements GeneratorProvider
 
 		$headerFields = "";
 
+        $fieldTemplate = $this->commandData->templatesHelper->getTemplate("searchField.blade", $this->viewsPath);
+
+        $fieldsStr = "";
+
+        foreach($this->commandData->inputFields as $field)
+        {
+            $singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
+            $singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
+            $fieldsStr .= $singleFieldStr . "\n\n";
+        }
+
+        $templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
+
 		foreach($this->commandData->inputFields as $field)
 		{
 			$headerFields .= "<th>" . Str::title(str_replace("_", " ", $field['fieldName'])) . "</th>\n\t\t\t";
