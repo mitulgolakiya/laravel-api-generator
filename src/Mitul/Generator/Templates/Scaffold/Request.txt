@@ -6,6 +6,15 @@ use $MODEL_NAMESPACE$;
 class Create$MODEL_NAME$Request extends Request {
 
 	/**
+	 * unique:table,column,except,idColumn
+     * The field under validation must be unique on a given database table.
+     * If the column option is not specified, the field name will be used.
+     *
+	 * @var $model
+	 */
+	protected $model = '$MODEL_NAMESPACE$';
+
+	/**
 	 * Determine if the user is authorized to make this request.
 	 *
 	 * @return bool

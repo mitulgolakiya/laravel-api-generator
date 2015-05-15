@@ -12,8 +12,7 @@ class SchemaCreator
 {
 	public static function createField($field)
 	{
-		$fieldInputs = explode(':', $field);
-
+		$fieldInputs = explode(' ', $field);
 		$fieldName = array_shift($fieldInputs);
 
 		$fieldTypeInputs = array_shift($fieldInputs);
@@ -36,25 +35,30 @@ class SchemaCreator
 
 		if(sizeof($fieldInputs) > 0)
 		{
+			$fieldInputs = explode('|', array_shift($fieldInputs));
 			foreach($fieldInputs as $input)
 			{
-				$input = explode(",", $input);
+				if (strpos($input, '(') && strpos($input, ')')) {
+					$fieldStr .= '->' . $input;
+				} else {
+					$input = explode(":", $input);
 
-				$option = array_shift($input);
+					$option = array_shift($input);
 
-				$fieldStr .= '->' . $option . '(';
+					$fieldStr .= '->' . $option . '(';
 
-				if(sizeof($input) > 0)
-				{
-					foreach($input as $param)
+					if(sizeof($input) > 0)
 					{
-						$fieldStr .= "'" . $param . "', ";
+						foreach($input as $param)
+						{
+							$fieldStr .= "'" . $param . "', ";
+						}
+
+						$fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
 					}
 
-					$fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
+					$fieldStr .= ")";
 				}
-
-				$fieldStr .= ")";
 			}
 		}
 

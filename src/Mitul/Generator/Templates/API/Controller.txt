@@ -3,12 +3,12 @@
 use App\Http\Requests;
 use $MODEL_NAMESPACE$;
 use Illuminate\Http\Request;
-use Mitul\Controller\AppBaseController;
+use App\Http\Controllers\Controller;
 use Mitul\Generator\Utils\ResponseManager;
 
 use Response;
 
-class $MODEL_NAME$APIController extends AppBaseController
+class $MODEL_NAME$APIController extends Controller
 {
 
 	/**

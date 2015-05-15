@@ -9,6 +9,9 @@
     <div class="block">
         <div class="block-title">
             <div class="block-options pull-right">
+
+                @include('public.component.search')
+
                 <div class="btn-group btn-group-sm">
                     <div class="block-options pull-right">
                         <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}" class="btn btn-alt btn-sm btn-success" data-toggle="tooltip" title="" data-original-title="New"><i class="hi hi-plus"></i></a>
@@ -34,7 +37,7 @@
                         <tbody>
                             @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
                                 <tr>
-                                    <td class='text-left'>{{ $test->id }}</td>
+                                    <td class='text-left'>{{ $$MODEL_NAME_CAMEL$->id }}</td>
                                     $FIELD_BODY$
                                     <td class="text-right">
                                     <div class="btn-group btn-group-xs">

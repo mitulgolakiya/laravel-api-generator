@@ -1,9 +1,9 @@
 <?php namespace $NAMESPACE$;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 $SOFT_DELETE_IMPORT$
 
-class $MODEL_NAME$ extends Model
+class $MODEL_NAME$ extends BaseModel
 {
 
 	/**
@@ -11,7 +11,7 @@ class $MODEL_NAME$ extends Model
      *
      * @var string
      */
-    protected $connection = 'gmail';
+    protected $connection = '';
 
     /**
      * The database table used by the model.
@@ -43,34 +43,21 @@ class $MODEL_NAME$ extends Model
 	protected $hidden = [
 	];
 
-	protected static $rules = [
+    /**
+     * Validate rules for Create$MODEL_NAME$Request
+     *
+     * @var array
+     */
+	public static $rules = [
 	    $RULES$
 	];
 
+    /**
+     * Searchable columns for View:public.component.search
+     *
+     * @var array
+     */
     protected $searchable = [
     ];
-
-    public function scopeGetSearchable()
-    {
-        return array_merge($this->searchable, $this->fillable);
-    }
-
-    public function scopeSearch($query, $searchConditions)
-    {
-        extract($searchConditions);
-
-        if ($searchKey && isset($searchColumn) && $searchColumn != '') {
-            $query->where($this->table.'.'.$searchColumn, $searchType, $searchKey);
-        }
-
-        if ($searchDaterangeStart) {
-            $query->where($this->table.'.create_time', '>=', $searchDaterangeStart);
-        }
-        if ($searchDaterangeEnd) {
-            $query->where($this->table.'.create_time', '<=', $searchDaterangeEnd);
-        }
-
-        return $query;
-    }
 
 }

@@ -8,7 +8,7 @@
             <div class="block-title">
                 <div class="block-options pull-right">
                 </div>
-                <h2>Error #{{ $$MODEL_NAME_CAMEL->id$ }}</h2>
+                <h2>Error #{{ $$MODEL_NAME_CAMEL$->id }}</h2>
             </div>
 
             {{ d($$MODEL_NAME_CAMEL$) }}

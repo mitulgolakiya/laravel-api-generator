@@ -77,7 +77,7 @@ class CommandData
 				$field = explode(' ', $value);
 				$fields[] = [
 					'fieldName'   => $field[0],
-					'fieldInput'  => $field[1],
+					'fieldInput'  => $value,
 					'validations' => isset($field[2]) ? $field[2] : '',
 				];
 			}

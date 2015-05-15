@@ -8,7 +8,7 @@
             <div class="block-title">
                 <div class="block-options pull-right">
                 </div>
-                <h2>Edit $MODEL_NAME_CAMEL$</h2>
+                <h2>Edit $MODEL_NAME_CAMEL$ #{{ $$MODEL_NAME_CAMEL$->id }}</h2>
             </div>
 
             @include('common.errors')
