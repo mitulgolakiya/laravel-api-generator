@@ -21,7 +21,7 @@ class SchemaCreator
 
 		$fieldType = array_shift($fieldTypeInputs);
 
-		$fieldStr = "\t\t\t\$table->" . $fieldType . "('" . $fieldName . "'";
+		$fieldStr = "\t\t\t\t\$table->" . $fieldType . "('" . $fieldName . "'";
 
 		if(sizeof($fieldTypeInputs) > 0)
 		{
