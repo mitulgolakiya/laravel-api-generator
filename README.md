@@ -50,6 +50,14 @@ Do you want to migrate database? [y|N]
 ```php
 # 修改数据库配置
 protected $connection = '';
+protected $table = '';
+
+# 如果表不是 laravel 自动维护 create_up,update_at 字段的话，改为
+public $timestamps =  false;
+# 同时，没有时间字段的话，修改 view.YOUR_MODEL.index.blade.php
+@include('public.component.search')
+#为
+@include('public.component.search', ['disableDate' => true])
 
 # 自动生成的 rules 有些是不支持的，比如 default，如果出错在这里清理一下
 public static $rules = [
@@ -63,7 +71,7 @@ protected $searchable = [
 ];
 ```
 
-## 在项目根目录创建 model.txt
+## 在项目根目录创建 `model.txt`
 
 空格分为三栏
 
@@ -81,3 +89,13 @@ error_display_color string,100
 remarks string,1000
 handler string,100
 ```
+
+## 出现问题
+
+`model.txt` 很可能有写错的地方，生成完后发现有问题的话就改吧改吧再生成一次
+
+## 最后
+
+打开 `app\Http\Composers\SidebarComposer.php`
+
+然后 把确认无误的 `model.txt` 备份一份到 `database\define` 吧！

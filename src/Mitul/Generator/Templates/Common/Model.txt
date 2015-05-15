@@ -2,9 +2,9 @@
 
 use App\Models\BaseModel;
 $SOFT_DELETE_IMPORT$
-
 class $MODEL_NAME$ extends BaseModel
 {
+    $SOFT_DELETE$
 
 	/**
      * The connection name for the model.
@@ -18,13 +18,11 @@ class $MODEL_NAME$ extends BaseModel
      *
      * @var string
      */
-    protected $table = 'errors';
+    protected $table = '';
 
 	public $primaryKey = "id";
 
 	public $timestamps = true;
-
-    $SOFT_DELETE$
 
     /**
      * The attributes that are mass assignable.
