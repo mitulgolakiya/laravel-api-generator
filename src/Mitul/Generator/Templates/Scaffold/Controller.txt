@@ -3,12 +3,12 @@
 use App\Http\Requests;
 use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
-use Mitul\Controller\AppBaseController;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 
 use Flash, Response;
 
-class $MODEL_NAME$Controller extends AppBaseController
+class $MODEL_NAME$Controller extends Controller
 {
 
 	/**
@@ -20,7 +20,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	{
 		return view('$MODEL_NAME_PLURAL_CAMEL$.index', array_merge($request->getInputs(), [
 			'searchables' => $MODEL_NAME$::getSearchable(),
-			'$MODEL_NAME_PLURAL_CAMEL$' => $MODEL_NAME$::search($request->getInputs())->orderBy->('id', 'desc')->paginate(20),
+			'$MODEL_NAME_PLURAL_CAMEL$' => $MODEL_NAME$::search($request->getInputs())->orderBy('id', 'desc')->paginate(20),
 		]));
 	}
 
