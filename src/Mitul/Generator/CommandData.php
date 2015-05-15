@@ -60,7 +60,7 @@ class CommandData
 	public function initVariables()
 	{
 		$this->modelNamePlural = Str::plural($this->modelName);
-		$this->tableName = strtolower(Str::snake($this->modelNamePlural));
+		$this->modelNameSnack = strtolower(Str::snake($this->modelNamePlural));
 		$this->modelNameCamel = Str::camel($this->modelName);
 		$this->modelNamePluralCamel = Str::camel($this->modelNamePlural);
 		$this->modelNamespace = Config::get('generator.namespace_model', 'App') . "\\" . $this->modelName;

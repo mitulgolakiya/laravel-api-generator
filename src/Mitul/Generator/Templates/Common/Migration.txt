@@ -28,7 +28,10 @@ class Create$MODEL_NAME_PLURAL$Table extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('$TABLE_NAME$');
+		/**
+		 * Danger !!!
+		 */
+		// Schema::drop('static_dispatch_rules');
 	}
 
 }

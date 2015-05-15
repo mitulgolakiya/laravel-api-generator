@@ -32,7 +32,7 @@ class MigrationGenerator implements GeneratorProvider
 
 		$templateData = $this->fillTemplate($templateData);
 
-		$fileName = date('Y_m_d_His') . "_" . "create_" . $this->commandData->tableName . "_table.php";
+		$fileName = date('Y_m_d_His') . "_" . "create_" . $this->commandData->modelNameSnack . "_table.php";
 
 		$path = $this->path . $fileName;
 
