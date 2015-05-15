@@ -25,6 +25,7 @@ class BaseCommand extends Command
 	{
 		$this->commandData->modelName = $this->argument('model');
 		$this->commandData->useSoftDelete = $this->option('softDelete');
+        $this->commandData->useSearch = $this->option('search');
 		$this->commandData->initVariables();
 		$this->commandData->inputFields = $this->commandData->getInputFields();
 	}
@@ -49,7 +50,8 @@ class BaseCommand extends Command
 	public function getOptions()
 	{
 		return [
-			['softDelete', null, InputOption::VALUE_NONE, 'Use Soft Delete trait']
+			['softDelete', null, InputOption::VALUE_NONE, 'Use Soft Delete trait'],
+            ['search', null, InputOption::VALUE_NONE, 'add search functionality to index']
 		];
 	}
 }

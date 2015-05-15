@@ -33,7 +33,7 @@ class $MODEL_NAME$Controller extends AppBaseController
             }
         };
 
-        $$MODEL_NAME_PLURAL_CAMEL$ = $query->paginate(10);
+        $$MODEL_NAME_PLURAL_CAMEL$ = $query->get();
 
         return view('$MODEL_NAME_PLURAL_CAMEL$.index')
             ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$)
