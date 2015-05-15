@@ -1,14 +1,26 @@
 @extends('app')
 
 @section('content')
-<div class="container">
 
-    @include('common.errors')
+<div class="row">
+    <div class="col-sm-6 col-lg-6 col-md-offset-3">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                </div>
+                <h2>Create $MODEL_NAME_CAMEL$</h2>
+            </div>
 
-    {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
+            @include('common.errors')
 
-        @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+            {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store', 'method' => 'post', 'class' => 'form-horizontal form-bordered']) !!}
 
-    {!! Form::close() !!}
+                @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+
+            {!! Form::close() !!}
+        </div>
+    </div>
 </div>
+
 @endsection
+

@@ -5,18 +5,45 @@ use $MODEL_EXTEND_NAMESPACE$;
 class $MODEL_NAME$ extends $MODEL_EXTEND_CLASS$
 {
 
-	public $table = "$TABLE_NAME$";
+	/**
+     * The connection name for the model.
+     *
+     * @var string
+     */
+    protected $connection = 'gmail';
 
-	public $primaryKey = "id";
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'errors';
 
-	public $timestamps = true;
+    protected $primaryKey = "id";
 
-	public $fillable = [
-	    $FIELDS$
-	];
+    protected $timestamps = true;
 
-	public static $rules = [
-	    $RULES$
-	];
+    $SOFT_DELETE$
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        $FIELDS$
+    ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+    ];
+
+    protected static $rules = [
+        $RULES$
+    ];
 
 }

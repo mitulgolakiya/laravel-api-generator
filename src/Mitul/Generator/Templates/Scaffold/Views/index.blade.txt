@@ -27,12 +27,14 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover table-vcenter">
                         <thead>
+                            <th class='text-left'>ID</th>
                             $FIELD_HEADERS$
                             <th class="text-right">Action</th>
                         </thead>
                         <tbody>
                             @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
                                 <tr>
+                                    <td class='text-left'>{{ $test->id }}</td>
                                     $FIELD_BODY$
                                     <td class="text-right">
                                     <div class="btn-group btn-group-xs">
@@ -49,7 +51,7 @@
             @endif
         </div>
         <div class="col-md-12">
-            <span class="pull-right">{!! $MODEL_NAME_PLURAL_CAMEL$->render() !!}</span>
+            <span class="pull-right">{!! $$MODEL_NAME_PLURAL_CAMEL$->render() !!}</span>
         </div>
     </div>
 </div>

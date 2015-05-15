@@ -79,7 +79,7 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$headerFields .= "<th>" . Str::title(str_replace("_", " ", $field['fieldName'])) . "</th>\n\t\t\t";
+			$headerFields .= "<th>" . Str::title(str_replace("_", " ", $field['fieldName'])) . "</th>\n\t\t\t\t\t\t\t";
 		}
 
 		$headerFields = trim($headerFields);
@@ -90,7 +90,7 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$tableBodyFields .= "<td>{!! $" . $this->commandData->modelNameCamel . "->" . $field['fieldName'] . " !!}</td>\n\t\t\t\t\t";
+			$tableBodyFields .= "<td>{{ $" . $this->commandData->modelNameCamel . "->" . $field['fieldName'] . " }}</td>\n\t\t\t\t\t\t\t\t\t";
 		}
 
 		$tableBodyFields = trim($tableBodyFields);
@@ -105,13 +105,15 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateShow()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", $this->viewsPath);
+		$templateData = $this->commandData->templatesHelper->getTemplate("show.blade", $this->viewsPath);
+
+		$templateData = $this->fillTemplate($templateData);
 
 		$fileName = "show.blade.php";
 
 		$path = $this->path . $fileName;
 
-		$this->commandData->fileHelper->writeFile($path, $fieldTemplate);
+		$this->commandData->fileHelper->writeFile($path, $templateData);
 		$this->commandData->commandObj->info("show.blade.php created");
 	}
 

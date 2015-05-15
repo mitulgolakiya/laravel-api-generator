@@ -2,21 +2,75 @@
 
 use Illuminate\Database\Eloquent\Model;
 $SOFT_DELETE_IMPORT$
+
 class $MODEL_NAME$ extends Model
 {
-    $SOFT_DELETE$
-	public $table = "$TABLE_NAME$";
+
+	/**
+     * The connection name for the model.
+     *
+     * @var string
+     */
+    protected $connection = 'gmail';
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'errors';
 
 	public $primaryKey = "id";
-    $SOFT_DELETE_DATES$
+
 	public $timestamps = true;
 
-	public $fillable = [
+    $SOFT_DELETE$
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+	protected $fillable = [
 	    $FIELDS$
 	];
 
-	public static $rules = [
+	/**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+	protected $hidden = [
+	];
+
+	protected static $rules = [
 	    $RULES$
 	];
+
+    protected $searchable = [
+    ];
+
+    public function scopeGetSearchable()
+    {
+        return array_merge($this->searchable, $this->fillable);
+    }
+
+    public function scopeSearch($query, $searchConditions)
+    {
+        extract($searchConditions);
+
+        if ($searchKey && isset($searchColumn) && $searchColumn != '') {
+            $query->where($this->table.'.'.$searchColumn, $searchType, $searchKey);
+        }
+
+        if ($searchDaterangeStart) {
+            $query->where($this->table.'.create_time', '>=', $searchDaterangeStart);
+        }
+        if ($searchDaterangeEnd) {
+            $query->where($this->table.'.create_time', '<=', $searchDaterangeEnd);
+        }
+
+        return $query;
+    }
 
 }

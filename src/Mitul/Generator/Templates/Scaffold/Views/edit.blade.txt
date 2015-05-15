@@ -1,14 +1,25 @@
 @extends('app')
 
 @section('content')
-<div class="container">
 
-    @include('common.errors')
+<div class="row">
+    <div class="col-sm-6 col-lg-6 col-md-offset-3">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                </div>
+                <h2>Edit $MODEL_NAME_CAMEL$</h2>
+            </div>
 
-    {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch']) !!}
+            @include('common.errors')
 
-        @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+            {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch', 'class' => 'form-horizontal form-bordered']) !!}
 
-    {!! Form::close() !!}
+                @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
+
+            {!! Form::close() !!}
+        </div>
+    </div>
 </div>
+
 @endsection

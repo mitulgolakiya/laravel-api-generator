@@ -1,6 +1,21 @@
 @extends('app')
 
 @section('content')
-<div class="container">
+
+<div class="row">
+    <div class="col-sm-6 col-lg-6 col-md-offset-3">
+        <div class="block">
+            <div class="block-title">
+                <div class="block-options pull-right">
+                </div>
+                <h2>Error #{{ $$MODEL_NAME_CAMEL->id$ }}</h2>
+            </div>
+
+            {{ d($$MODEL_NAME_CAMEL$) }}
+
+        </div>
+    </div>
+
 </div>
+
 @endsection

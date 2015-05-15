@@ -1,7 +1,4 @@
-<?php
-
-namespace $NAMESPACE$;
-
+<?php namespace $NAMESPACE$;
 
 use $MODEL_NAMESPACE$;
 

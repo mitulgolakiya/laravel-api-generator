@@ -1,5 +1,7 @@
 $FIELDS$
 <!--- Submit Field --->
-<div class="form-group col-sm-12">
-    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+<div class="form-group form-actions">
+    <div class="col-md-9 col-md-offset-3">
+        {!! Form::submit('Save', ['class' => 'btn btn-sm btn-primary']) !!}
+    </div>
 </div>

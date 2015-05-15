@@ -65,38 +65,28 @@ class CommandData
 	{
 		$fields = [];
 
-		$this->commandObj->info("Specify fields for the model (skip id & timestamp fields, will be added automatically)");
-		$this->commandObj->info("Left blank to finish");
+		$this->commandObj->info("Specify [fields describtion file name] for the model (skip id & timestamp fields, will be added automatically)");
+		$this->commandObj->info("Doc: http://laravel.com/docs/5.0/schema");
 
-		while(true)
-		{
-			$fieldInputStr = $this->commandObj->ask("Field:");
+		$fieldInputStr = $this->commandObj->ask("File(Default:model.txt):");
+		$fieldInputStr = $fieldInputStr ? $fieldInputStr : 'model.txt';
+		$lines = file($fieldInputStr, FILE_IGNORE_NEW_LINES);
 
-			if(empty($fieldInputStr))
-				break;
-
-			$fieldInputs = explode(":", $fieldInputStr);
-
-			if(sizeof($fieldInputs) < 2)
-			{
-				$this->commandObj->error("Invalid Input. Try again");
-				continue;
+		if (count($lines)) {
+			foreach ($lines as $key => $value) {
+				$field = explode(' ', $value);
+				$fields[] = [
+					'fieldName'   => $field[0],
+					'fieldInput'  => $field[1],
+					'validations' => isset($field[2]) ? $field[2] : '',
+				];
 			}
+			d($fields);
+			return $fields;
+		} else {
+			$this->commandObj->error($fieldInputStr . '有问题！');
 
-			$fieldName = $fieldInputs[0];
-
-			$validations = $this->commandObj->ask("Enter validations: ");
-
-			$field = [
-				'fieldName'   => $fieldName,
-				'fieldInput'  => $fieldInputStr,
-				'validations' => $validations,
-
-			];
-
-			$fields[] = $field;
+			exit();
 		}
-
-		return $fields;
 	}
 }

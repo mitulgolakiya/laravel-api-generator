@@ -4,6 +4,7 @@ use App\Http\Requests;
 use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
 use Mitul\Controller\AppBaseController;
+use App\Http\Requests\SearchRequest;
 
 use Flash, Response;
 
@@ -15,11 +16,12 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(SearchRequest $request)
 	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
-
-		return view('$MODEL_NAME_PLURAL_CAMEL$.index')->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$);
+		return view('$MODEL_NAME_PLURAL_CAMEL$.index', array_merge($request->getInputs(), [
+			'searchables' => $MODEL_NAME$::getSearchable(),
+			'$MODEL_NAME_PLURAL_CAMEL$' => $MODEL_NAME$::paginate(20),
+		]));
 	}
 
 	/**
@@ -67,7 +69,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		return view('$MODEL_NAME_PLURAL_CAMEL$.show')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+		return view('$MODEL_NAME_PLURAL_CAMEL$.show', [
+			'$MODEL_NAME_CAMEL$' => $$MODEL_NAME_CAMEL$,
+		]);
 	}
 
 	/**
@@ -86,7 +90,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		return view('$MODEL_NAME_PLURAL_CAMEL$.edit')->with('$MODEL_NAME_CAMEL$', $$MODEL_NAME_CAMEL$);
+		return view('$MODEL_NAME_PLURAL_CAMEL$.edit', [
+			'$MODEL_NAME_CAMEL$' => $$MODEL_NAME_CAMEL$,
+		]);
 	}
 
 	/**
