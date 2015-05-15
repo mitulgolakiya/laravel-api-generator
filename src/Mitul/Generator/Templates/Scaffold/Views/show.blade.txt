@@ -11,7 +11,7 @@
                 <h2>Error #{{ $$MODEL_NAME_CAMEL$->id }}</h2>
             </div>
 
-            {{ d($$MODEL_NAME_CAMEL$) }}
+            {{ d($$MODEL_NAME_CAMEL$->toArray()) }}
 
         </div>
     </div>

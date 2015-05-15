@@ -1,28 +1,27 @@
 <?php namespace $NAMESPACE$;
 
-use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 $SOFT_DELETE_IMPORT$
-class $MODEL_NAME$ extends BaseModel
+class $MODEL_NAME$ extends Model
 {
     $SOFT_DELETE$
-
 	/**
      * The connection name for the model.
      *
      * @var string
      */
-    protected $connection = '';
+    protected $connection = '$MODEL_CONNECTION$';
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = '';
+    protected $table = '$MODEL_TABLE_NAME$';
 
 	public $primaryKey = "id";
 
-	public $timestamps = true;
+	public $timestamps = '$MODEL_TIMESTAMPS$';
 
     /**
      * The attributes that are mass assignable.

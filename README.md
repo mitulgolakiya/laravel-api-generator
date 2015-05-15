@@ -32,15 +32,25 @@ File(Default:model.txt):
 
 # 然后会输出一些信息
 
-#然后有两个问题：
+#然后有几个问题(直接空格就是 N)：
 
-Do you want to generate repository ? (y|N)
-Do you want to migrate database? [y|N]
+# 数据库连接
+DB_CONNECTION: gmail
+# 表名称
+DB_TABLE_NAME: blacklist
+# laravel 可以自动维护这两个字段，所以新库就用这个功能，旧库一般没有
+Does table has created_at and updated_at columns ? (Y|N)
+# 是否启用 laravel softDelete 功能，同理，旧库一般没有
+# 但是建议在数据库添加 deleted_at(timestamp) 字段，这样删除就安全了，但是要注意是否会影响其它应用
+Do you want to use softDelete (need a deleted_at column at table, no need set in model.txt)? (Y|N) y
+# 列表页搜索组件是否启用日期范围选择器，如果都没有时间相关字段，就不启用了
+Do you want to use dateranger plugin with search? (Y|N)
 
-# 通常都输入 n 回车。
-# repository 是对 model 又一层封装，咱们暂时不需要
+# repository 是对 model 又一层封装，咱们暂时不需要，直接回车
+Do you want to generate repository ? (Y|N)
 # migrate 是数据库迁移，如果是已经存在的库，不需要
 # 如果是新的库，就选 y，也就是说，不需要到 mysql 创建数据库，能够根据 model.txt 自动创建
+Do you want to migrate database? [Y|N]
 
 ```
 

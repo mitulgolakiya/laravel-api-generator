@@ -1,29 +1,27 @@
 <?php namespace $NAMESPACE$;
 
 use $MODEL_EXTEND_NAMESPACE$;
-
+$SOFT_DELETE_IMPORT$
 class $MODEL_NAME$ extends $MODEL_EXTEND_CLASS$
 {
-
-	/**
+    $SOFT_DELETE$
+    /**
      * The connection name for the model.
      *
      * @var string
      */
-    protected $connection = 'gmail';
+    protected $connection = '$MODEL_CONNECTION$';
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'errors';
+    protected $table = '$MODEL_TABLE_NAME$';
 
-    protected $primaryKey = "id";
+    public $primaryKey = "id";
 
-    protected $timestamps = true;
-
-    $SOFT_DELETE$
+    public $timestamps = '$MODEL_TIMESTAMPS$';
 
     /**
      * The attributes that are mass assignable.
@@ -42,8 +40,21 @@ class $MODEL_NAME$ extends $MODEL_EXTEND_CLASS$
     protected $hidden = [
     ];
 
-    protected static $rules = [
+    /**
+     * Validate rules for Create$MODEL_NAME$Request
+     *
+     * @var array
+     */
+    public static $rules = [
         $RULES$
+    ];
+
+    /**
+     * Searchable columns for View:public.component.search
+     *
+     * @var array
+     */
+    protected $searchable = [
     ];
 
 }

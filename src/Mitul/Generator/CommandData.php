@@ -21,6 +21,11 @@ class CommandData
 	public $modelNameCamel;
 	public $modelNamePluralCamel;
 	public $modelNamespace;
+	public $modelConnection;
+	public $modelTableName;
+	public $modelTimestamps;
+
+	public $viewDateranger;
 
 	public $tableName;
 	public $inputFields;
@@ -59,6 +64,21 @@ class CommandData
 		$this->modelNameCamel = Str::camel($this->modelName);
 		$this->modelNamePluralCamel = Str::camel($this->modelNamePlural);
 		$this->modelNamespace = Config::get('generator.namespace_model', 'App') . "\\" . $this->modelName;
+
+		$this->modelConnection = $this->commandObj->ask("DB_CONNECTION:");
+		if (empty($this->modelConnection)) {
+			$this->commandObj->error("我死了！");
+			exit();
+		}
+		$this->tableName = $this->modelTableName = $this->commandObj->ask("DB_TABLE_NAME:");
+		if (empty($this->modelTableName)) {
+			$this->commandObj->error("我死了！");
+			exit();
+		}
+		$this->modelTimestamps = $this->commandObj->confirm("Does table has created_at and updated_at columns ? (Y|N)", false);
+		$useSoftDelete = $this->commandObj->confirm("Do you want to use softDelete (need a deleted_at column at table, no need set in model.txt)? (Y|N)", false);
+		$this->useSoftDelete = $useSoftDelete ? 'true' : 'false';
+		$this->viewDateranger = $this->commandObj->confirm("Do you want to use dateranger plugin with search? (Y|N)", false);
 	}
 
 	public function getInputFields()
@@ -76,8 +96,9 @@ class CommandData
 			foreach ($lines as $key => $value) {
 				$field = explode(' ', $value);
 				$fields[] = [
-					'fieldName'   => $field[0],
 					'fieldInput'  => $value,
+					'fieldName'   => $field[0],
+					'filedType'   => $field[1],
 					'validations' => isset($field[2]) ? $field[2] : '',
 				];
 			}

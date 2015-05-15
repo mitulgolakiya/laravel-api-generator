@@ -13,10 +13,12 @@ class Create$MODEL_NAME_PLURAL$Table extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('$TABLE_NAME$', function(Blueprint $table)
-		{
-			$FIELDS$
-		});
+		if ( ! Schema::hasTable('$TABLE_NAME$'))
+			Schema::create('$TABLE_NAME$', function(Blueprint $table)
+			{
+				$FIELDS$
+			});
+		}
 	}
 
 	/**
@@ -26,10 +28,7 @@ class Create$MODEL_NAME_PLURAL$Table extends Migration
 	 */
 	public function down()
 	{
-		/**
-		 * Danger !!!
-		 */
-		// Schema::drop('$TABLE_NAME$');
+		Schema::drop('$TABLE_NAME$');
 	}
 
 }

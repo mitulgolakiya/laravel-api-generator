@@ -91,6 +91,22 @@ class ModelGenerator implements GeneratorProvider
 			);
 		}
 
+		$templateData = str_replace('$MODEL_CONNECTION$', $this->commandData->modelConnection, $templateData);
+		$templateData = str_replace('$MODEL_TABLE_NAME$', $this->commandData->modelTableName, $templateData);
+		$templateData = str_replace('$MODEL_CONNECTION$', $this->commandData->modelTimestamps, $templateData);
+
+		$templateData = str_replace(
+			'$MODEL_TABLE_NAME$',
+			Config::get('generator.model_table_name', ''),
+			$templateData
+		);
+
+		$templateData = str_replace(
+			'$MODEL_TIMESTAMPS$',
+			Config::get('generator.model_timestamps', false),
+			$templateData
+		);
+
 		$fillables = [];
 
 		foreach($this->commandData->inputFields as $field)

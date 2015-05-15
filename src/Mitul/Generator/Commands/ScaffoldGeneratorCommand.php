@@ -49,7 +49,7 @@ class ScaffoldGeneratorCommand extends BaseCommand
 	{
 		parent::handle();
 
-		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (y|N)", false);
+		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (Y|N)", false);
 
 		$migrationGenerator = new MigrationGenerator($this->commandData);
 		$migrationGenerator->generate();
@@ -80,7 +80,7 @@ class ScaffoldGeneratorCommand extends BaseCommand
 		$routeGenerator = new RoutesGenerator($this->commandData);
 		$routeGenerator->generate();
 
-		if($this->confirm("\nDo you want to migrate database? [y|N]", false))
+		if($this->confirm("\nDo you want to migrate database? [Y|N]", false))
 			$this->call('migrate');
 	}
 

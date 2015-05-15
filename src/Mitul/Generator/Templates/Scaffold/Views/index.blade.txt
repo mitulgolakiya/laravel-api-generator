@@ -10,7 +10,7 @@
         <div class="block-title">
             <div class="block-options pull-right">
 
-                @include('public.component.search')
+                @include('public.component.search'$VIEW_USE_DATERANGER$)
 
                 <div class="btn-group btn-group-sm">
                     <div class="block-options pull-right">

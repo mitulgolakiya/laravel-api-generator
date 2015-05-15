@@ -93,6 +93,10 @@ class ViewGenerator implements GeneratorProvider
 			$tableBodyFields .= "<td>{{ $" . $this->commandData->modelNameCamel . "->" . $field['fieldName'] . " }}</td>\n\t\t\t\t\t\t\t\t\t";
 		}
 
+		if ( ! $this->commandData->viewDateranger) {
+			$templateData = str_replace('$VIEW_USE_DATERANGER$', ", ['disableDate' => true]", $templateData);
+		}
+
 		$tableBodyFields = trim($tableBodyFields);
 
 		$templateData = str_replace('$FIELD_BODY$', $tableBodyFields, $templateData);
