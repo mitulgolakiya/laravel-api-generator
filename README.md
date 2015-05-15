@@ -1,4 +1,4 @@
-# Note: This is a customize version!
+# Note: This is a customized version!
 
 Laravel API/Scaffold/CRUD Generator (Laravel5)
 =======================
