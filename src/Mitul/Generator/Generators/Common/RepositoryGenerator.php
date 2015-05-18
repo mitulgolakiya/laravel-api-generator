@@ -55,6 +55,7 @@ class RepositoryGenerator implements GeneratorProvider
 		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);
 
 		$templateData = str_replace('$MODEL_NAME_CAMEL$', $this->commandData->modelNameCamel, $templateData);
+        $templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
 
 		return $templateData;
 	}

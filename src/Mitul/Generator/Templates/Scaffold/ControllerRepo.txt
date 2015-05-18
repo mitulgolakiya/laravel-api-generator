@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
+use Illuminate\Http\Request;
 use $REPO_NAMESPACE$\$MODEL_NAME$Repository;
 use Mitul\Controller\AppBaseController;
 use Response;
@@ -23,11 +24,19 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->all();
+	    $input = $request->all();
 
-		return view('$MODEL_NAME_PLURAL_CAMEL$.index')->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$);
+		$result = $this->$MODEL_NAME_CAMEL$Repository->search($input);
+
+		$$MODEL_NAME_PLURAL_CAMEL$ = $result[0];
+
+		$attributes = $result[1];
+
+		return view('$MODEL_NAME_PLURAL_CAMEL$.index')
+		    ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$)
+		    ->with('attributes', $attributes);;
 	}
 
 	/**
