@@ -3,8 +3,6 @@
 use App\Http\Requests;
 use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Schema;
 use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
@@ -17,8 +15,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request)
+	public function index()
 	{
+		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
 		$query = $MODEL_NAME$::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
@@ -39,7 +38,6 @@ class $MODEL_NAME$Controller extends AppBaseController
             ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$)
             ->with('attributes', $attributes);
 	}
-
 
 	/**
 	 * Show the form for creating a new $MODEL_NAME$.
@@ -159,5 +157,4 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
-
 }
