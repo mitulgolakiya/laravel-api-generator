@@ -71,6 +71,28 @@ class ViewGenerator implements GeneratorProvider
 	{
 		$templateData = $this->commandData->templatesHelper->getTemplate("index.blade", $this->viewsPath);
 
+        if($this->commandData->useSearch)
+        {
+            $searchLayout = $this->commandData->templatesHelper->getTemplate("search.blade", $this->viewsPath);
+            $templateData = str_replace('$SEARCH$', $searchLayout, $templateData);
+            $fieldTemplate = $this->commandData->templatesHelper->getTemplate("searchField.blade", $this->viewsPath);
+
+            $fieldsStr = "";
+
+            foreach($this->commandData->inputFields as $field)
+            {
+                $singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
+                $singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
+                $fieldsStr .= $singleFieldStr . "\n\n";
+            }
+
+            $templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
+        }
+        else
+        {
+            $templateData = str_replace('$SEARCH$', '', $templateData);
+        }
+
 		$templateData = $this->fillTemplate($templateData);
 
 		$fileName = "index.blade.php";

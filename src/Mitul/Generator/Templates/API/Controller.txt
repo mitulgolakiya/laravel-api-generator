@@ -15,9 +15,13 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
+	     $input = $request->all();
+
+         $result = $this->$MODEL_NAME_CAMEL$Repository->search($input);
+
+         $$MODEL_NAME_PLURAL_CAMEL$ = $result[0];
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME_PLURAL$ retrieved successfully."));
 	}

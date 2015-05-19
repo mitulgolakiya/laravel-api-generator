@@ -24,12 +24,34 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->all();
+	    $input = $request->all();
+
+		$result = $this->$MODEL_NAME_CAMEL$Repository->search($input);
+
+		$$MODEL_NAME_PLURAL_CAMEL$ = $result[0];
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME_PLURAL$ retrieved successfully."));
 	}
+
+	public function search($input)
+        {
+            $query = $MODEL_NAME$::query();
+
+            $columns = Schema::getColumnListing('$TABLE_NAME$');
+            $attributes = array();
+
+            foreach($columns as $attribute){
+                if(isset($input[$attribute]))
+                {
+                    $query->where($attribute, $input[$attribute]);
+                }
+            };
+
+            return $query->get();
+
+        }
 
 	/**
 	 * Show the form for creating a new $MODEL_NAME$.

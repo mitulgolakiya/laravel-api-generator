@@ -18,8 +18,25 @@ class $MODEL_NAME$Controller extends AppBaseController
 	public function index()
 	{
 		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
+		$query = $MODEL_NAME$::query();
+        $columns = Schema::getColumnListing('$TABLE_NAME$');
+        $attributes = array();
 
-		return view('$MODEL_NAME_PLURAL_CAMEL$.index')->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$);
+        foreach($columns as $attribute){
+            if($request[$attribute] == true)
+            {
+                $query->where($attribute, $request[$attribute]);
+                $attributes[$attribute] =  $request[$attribute];
+            }else{
+                $attributes[$attribute] =  null;
+            }
+        };
+
+        $$MODEL_NAME_PLURAL_CAMEL$ = $query->get();
+
+        return view('$MODEL_NAME_PLURAL_CAMEL$.index')
+            ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$)
+            ->with('attributes', $attributes);
 	}
 
 	/**
@@ -140,5 +157,4 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
-
 }
