@@ -216,7 +216,7 @@ It will generate AppBaseController again with extending custom namespace control
 
 ### Passing fields from file
 
-If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample (fields.json)[https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/samples/fields.json]
+If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample [fields.json](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/samples/fields.json)
 
 You have to pass option ```--fieldsFile=absolute_file_path_or_path_from_base_directory``` with command. e.g.
 
