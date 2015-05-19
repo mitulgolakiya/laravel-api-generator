@@ -5,7 +5,7 @@
  * Time: 4:54 PM
  */
 
-namespace Mitul\Generator\Templates;
+namespace Mitul\Generator;
 
 
 class TemplatesHelper
