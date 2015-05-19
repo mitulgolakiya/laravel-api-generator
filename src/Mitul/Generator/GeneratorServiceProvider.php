@@ -23,6 +23,9 @@ class GeneratorServiceProvider extends ServiceProvider
 		$this->publishes([
 			__DIR__ . '/../../../views' => base_path('resources/views'),
 		]);
+		$this->publishes([
+			__DIR__ . '/Templates' => base_path('resources/api-generator-templates'),
+		]);
 	}
 
 	/**
