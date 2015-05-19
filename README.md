@@ -214,6 +214,17 @@ It will generate AppBaseController again with extending custom namespace control
 
 3. Add the remaining files to git and make your magic!
 
+### Passing fields from file
+
+If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample (fields.json)[https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/samples/fields.json]
+
+You have to pass option ```--fieldsFile=absolute_file_path_or_path_from_base_directory``` with command. e.g.
+
+         php artisan mitul.generator:scaffold_api Post --fieldsFile="/Users/Mitul/laravel-api-generator/fields.json"
+         php artisan mitul.generator:scaffold_api Post --fieldsFile="fields.json"
+
+
+
 Screenshots
 ------------
 

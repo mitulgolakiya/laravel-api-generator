@@ -1,12 +1,13 @@
 <tr>
-    <form method="GET" class="form-inline" id="search_form" action="{{route('$MODEL_NAME_PLURAL_CAMEL$.index')}}">
+    {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.index', 'method' => 'get', class="form-inline" id="search_form" ]) !!}
 
-         $FIELDS$
+        $FIELDS$
 
         <td>
-         <span onclick="return $('#search_form').submit()" class="btn btn-xs btn-primary">
-           <i class="glyphicon glyphicon-search"></i>
-         </span>
+            <span onclick="return $('#search_form').submit()" class="btn btn-xs btn-primary">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
         </td>
-    </form>
+
+    {!! Form::close() !!}
 </tr>

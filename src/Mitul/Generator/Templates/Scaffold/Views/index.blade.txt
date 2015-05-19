@@ -21,9 +21,7 @@
                     <th width="50px">Action</th>
                     </thead>
                     <tbody>
-
                      $SEARCH$
-
                     @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
                         <tr>
                             $FIELD_BODY$
