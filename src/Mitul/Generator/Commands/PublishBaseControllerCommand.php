@@ -4,7 +4,7 @@ namespace Mitul\Generator\Commands;
 
 use Illuminate\Console\Command;
 use Mitul\Generator\File\FileHelper;
-use Mitul\Generator\Templates\TemplatesHelper;
+use Mitul\Generator\TemplatesHelper;
 use Symfony\Component\Console\Input\InputArgument;
 
 class PublishBaseControllerCommand extends Command

@@ -78,7 +78,7 @@ Steps to Get Started
 
 4. Publish ```generator.php```
 
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
+        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=config
 
 5. Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
 
@@ -204,6 +204,15 @@ You need to give a full path of default Controller with your namespace as input.
              
 It will generate AppBaseController again with extending custom namespace controller.
 
+### Customizing generated files
+
+1. Publish templates into ```/resources/api-generator-templates```
+
+        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=templates
+
+2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
+
+3. Add the remaining files to git and make your magic!
 
 Screenshots
 ------------
