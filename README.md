@@ -24,14 +24,6 @@ mitul.generator:scaffold_api              # Create a full CRUD for given model w
 # 执行第二个命令，后面带参数 ModelName 即 model 名，不一定要和数据库表名一样，比如邮件服务器的错误表，model 名是 GmailError，Laravel 的 model 通常后面不带 s
 php artisan mitul.generator:scaffold ModelName
 
-# 然后会让你输入定义 model 字段的文件，默认是项目根的 model.txt，你也可以输入自己的，不然直接留空回车
-
-# Specify [fields describtion file name] for the model (skip id & timestamp fields, will be added automatically)
-# Doc: http://laravel.com/docs/5.0/schema
-File(Default:model.txt):
-
-# 然后会输出一些信息
-
 #然后有几个问题(直接空格就是 N)：
 
 # 数据库连接
@@ -46,6 +38,14 @@ Do you want to use softDelete (need a deleted_at column at table, no need set in
 # 列表页搜索组件是否启用日期范围选择器，如果都没有时间相关字段，就不启用了
 Do you want to use dateranger plugin with search? (Y|N)
 
+# 然后会让你输入定义 model 字段的文件，默认是项目根的 model.txt，你也可以输入自己的，不然直接留空回车
+
+# Specify [fields describtion file name] for the model (skip id & timestamp fields, will be added automatically)
+# Doc: http://laravel.com/docs/5.0/schema
+File(Default:model.txt):
+
+# 然后会输出一些信息
+
 # repository 是对 model 又一层封装，咱们暂时不需要，直接回车
 Do you want to generate repository ? (Y|N)
 # migrate 是数据库迁移，如果是已经存在的库，不需要
@@ -55,20 +55,10 @@ Do you want to migrate database? [Y|N]
 ```
 
 ## 生成好了后
-1. 到生成的 model 文件
+
+到生成的 model 文件
 
 ```php
-# 修改数据库配置
-protected $connection = '';
-protected $table = '';
-
-# 如果表不是 laravel 自动维护 create_up,update_at 字段的话，改为
-public $timestamps =  false;
-# 同时，没有时间字段的话，修改 view.YOUR_MODEL.index.blade.php
-@include('public.component.search')
-#为
-@include('public.component.search', ['disableDate' => true])
-
 # 自动生成的 rules 有些是不支持的，比如 default，如果出错在这里清理一下
 public static $rules = [
     "type" => "required",
