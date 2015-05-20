@@ -1,7 +1,7 @@
-# Note: This is a customized version!
+## Note: This is a customized version!
 
 
-# 原始文档
+## 原始文档
 https://github.com/mitulgolakiya/laravel-api-generator
 
 # 使用
@@ -100,7 +100,7 @@ remarks string,1000
 handler string,100
 ```
 
-## 出现问题
+# 出现问题
 
 `model.txt` 很可能有写错的地方，生成完后发现有问题的话就改吧改吧再生成一次
 
@@ -109,3 +109,10 @@ handler string,100
 打开 `app\Http\Composers\SidebarComposer.php`
 
 然后 把确认无误的 `model.txt` 备份一份到 `database\define` 吧！
+
+# Todos
+
+- 读取数据库，自动生成 model.txt
+- 支持应用分组
+- view 模板
+- 表单字段类型
