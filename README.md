@@ -224,6 +224,14 @@ You have to pass option ```--fieldsFile=absolute_file_path_or_path_from_base_dir
          php artisan mitul.generator:scaffold_api Post --fieldsFile="fields.json"
 
 
+### Search in Views
+
+Include search functionality in view ```index.php```
+
+You have to pass option ```--search``` with command. e.g.
+
+         php artisan mitul.generator:scaffold_api Post --search"
+
 
 Screenshots
 ------------
