@@ -22,7 +22,7 @@
         "illuminate/html": "~5.0",
         "laracasts/flash": "~1.3",
         "bosnadev/repositories": "^0.8.0"
-    }
+    },
     "autoload": {
         "files": [
             "src/Mitul/Generator/Constants/Constants.php"
