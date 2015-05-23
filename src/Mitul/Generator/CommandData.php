@@ -76,9 +76,9 @@ class CommandData
 
 		while(true)
 		{
-			$fieldInputStr = $this->commandObj->ask("Field:");
+			$fieldInputStr = $this->commandObj->ask("Field:", false);
 
-			if(empty($fieldInputStr))
+			if(empty($fieldInputStr) || $fieldInputStr == false)
 				break;
 
 			if(!GeneratorUtils::validateFieldInput($fieldInputStr))
@@ -87,7 +87,9 @@ class CommandData
 				continue;
 			}
 
-			$validations = $this->commandObj->ask("Enter validations: ");
+			$validations = $this->commandObj->ask("Enter validations: ", false);
+
+      $validations = ($validations == false) ? '': $validations;
 
 			$fields[] = GeneratorUtils::processFieldInput($fieldInputStr, $validations);
 		}

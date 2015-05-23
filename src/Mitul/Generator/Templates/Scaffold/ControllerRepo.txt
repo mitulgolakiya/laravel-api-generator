@@ -60,9 +60,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function store(Create$MODEL_NAME$Request $request)
 	{
-        $input = $request->all();
+    $input = $request->all();
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->store($input);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
 
 		Flash::message('$MODEL_NAME$ saved successfully.');
 
@@ -78,7 +78,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
@@ -97,7 +97,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function edit($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
@@ -118,7 +118,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function update($id, Create$MODEL_NAME$Request $request)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
@@ -126,7 +126,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($$MODEL_NAME_CAMEL$, $request->all());
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->updateRich($request->all(), $id);
 
 		Flash::message('$MODEL_NAME$ updated successfully.');
 
@@ -142,7 +142,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
@@ -150,9 +150,9 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$->delete();
-
-		Flash::message('$MODEL_NAME$ deleted successfully.');
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->delete($id);
+		
+    Flash::message('$MODEL_NAME$ deleted successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
