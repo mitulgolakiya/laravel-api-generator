@@ -124,7 +124,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($request->all(), $id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->updateRich($request->all(), $id);
 
 		Flash::message('$MODEL_NAME$ updated successfully.');
 

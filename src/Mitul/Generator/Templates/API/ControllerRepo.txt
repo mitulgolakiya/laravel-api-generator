@@ -128,7 +128,7 @@ class $MODEL_NAME$APIController extends AppBaseController
     }
 		$input = $request->all();
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($input, $id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->updateRich($input, $id);
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ updated successfully."));
 	}
