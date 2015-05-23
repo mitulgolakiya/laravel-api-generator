@@ -7,6 +7,7 @@ use $MODEL_NAMESPACE$;
 use Illuminate\Http\Request;
 use $REPO_NAMESPACE$\$MODEL_NAME$Repository;
 use Response;
+use Schema;
 
 class $MODEL_NAME$APIController extends AppBaseController
 {
@@ -22,6 +23,8 @@ class $MODEL_NAME$APIController extends AppBaseController
 	/**
 	 * Display a listing of the $MODEL_NAME$.
 	 *
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
 	public function index(Request $request)
@@ -36,22 +39,22 @@ class $MODEL_NAME$APIController extends AppBaseController
 	}
 
 	public function search($input)
+    {
+        $query = $MODEL_NAME$::query();
+
+        $columns = Schema::getColumnListing('$TABLE_NAME$');
+        $attributes = array();
+
+        foreach($columns as $attribute)
         {
-            $query = $MODEL_NAME$::query();
-
-            $columns = Schema::getColumnListing('$TABLE_NAME$');
-            $attributes = array();
-
-            foreach($columns as $attribute){
-                if(isset($input[$attribute]))
-                {
-                    $query->where($attribute, $input[$attribute]);
-                }
-            };
-
-            return $query->get();
-
+            if(isset($input[$attribute]))
+            {
+                $query->where($attribute, $input[$attribute]);
+            }
         }
+
+        return $query->get();
+    }
 
 	/**
 	 * Show the form for creating a new $MODEL_NAME$.
@@ -150,5 +153,4 @@ class $MODEL_NAME$APIController extends AppBaseController
 
 		return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
 	}
-
 }

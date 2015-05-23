@@ -12,7 +12,7 @@ use Config;
 use Illuminate\Support\Str;
 use Mitul\Generator\Commands\APIGeneratorCommand;
 use Mitul\Generator\File\FileHelper;
-use Mitul\Generator\TemplatesHelper;
+use Mitul\Generator\Utils\GeneratorUtils;
 
 class CommandData
 {
@@ -40,8 +40,11 @@ class CommandData
 	/** @var  bool */
 	public $useSoftDelete;
 
-    /** @var  bool */
-    public $useSearch;
+	/** @var  bool */
+	public $useSearch;
+
+	/** @var  string */
+	public $fieldsFile;
 
 	public static $COMMAND_TYPE_API = 'api';
 	public static $COMMAND_TYPE_SCAFFOLD = 'scaffold';
@@ -78,40 +81,15 @@ class CommandData
 			if(empty($fieldInputStr))
 				break;
 
-			$fieldInputs = explode(":", $fieldInputStr);
-
-			if(sizeof($fieldInputs) < 2)
+			if(!GeneratorUtils::validateFieldInput($fieldInputStr))
 			{
 				$this->commandObj->error("Invalid Input. Try again");
 				continue;
 			}
 
-			$fieldName = $fieldInputs[0];
-
-			$fieldTypeOptions = explode(",", $fieldInputs[1]);
-			$fieldType = $fieldTypeOptions[0];
-			$fieldTypeParams = [];
-			if(sizeof($fieldTypeOptions) > 1)
-			{
-				for($i = 1; $i < sizeof($fieldTypeOptions); $i++)
-					$fieldTypeParams[] = $fieldTypeOptions[$i];
-			}
-
-			$fieldOptions = [];
-			if(sizeof($fieldInputs) > 2)
-				$fieldOptions[] = $fieldInputs[2];
-
 			$validations = $this->commandObj->ask("Enter validations: ");
 
-			$field = [
-				'fieldName'       => $fieldName,
-				'fieldType'       => $fieldType,
-				'fieldTypeParams' => $fieldTypeParams,
-				'fieldOptions'    => $fieldOptions,
-				'validations'     => $validations
-			];
-
-			$fields[] = $field;
+			$fields[] = GeneratorUtils::processFieldInput($fieldInputStr, $validations);
 		}
 
 		return $fields;

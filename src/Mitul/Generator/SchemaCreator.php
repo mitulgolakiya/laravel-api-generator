@@ -58,7 +58,7 @@ class SchemaCreator
 			}
 		}
 
-        if(!empty($fieldStr))
+		if(!empty($fieldStr))
 			$fieldStr .= ";\n";
 
 		return $fieldStr;
