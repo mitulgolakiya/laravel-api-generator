@@ -3,21 +3,24 @@
 use App\Http\Requests;
 use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
 use $MODEL_NAMESPACE$;
+use Illuminate\Http\Request;
 use Mitul\Controller\AppBaseController;
 use Response;
 use Flash;
+use Schema;
 
 class $MODEL_NAME$Controller extends AppBaseController
 {
 
 	/**
-	 * Display a listing of the $MODEL_NAME$.
+	 * Display a listing of the Post.
+	 *
+	 * @param Request $request
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$$MODEL_NAME_PLURAL_CAMEL$ = $MODEL_NAME$::all();
 		$query = $MODEL_NAME$::query();
         $columns = Schema::getColumnListing('$TABLE_NAME$');
         $attributes = array();
