@@ -72,9 +72,9 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 */
 	public function store(Request $request)
 	{
-		if(sizeof($MODEL_NAME$::$rules) > 0)
+		if(sizeof($MODEL_NAME$::$rules) > 0) {
             $this->validateRequest($request, $MODEL_NAME$::$rules);
-
+    }
         $input = $request->all();
 
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->store($input);
@@ -91,10 +91,11 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
-		if(empty($$MODEL_NAME_CAMEL$))
+		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+    }
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ retrieved successfully."));
 	}
@@ -120,14 +121,14 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 */
 	public function update($id, Request $request)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
-		if(empty($$MODEL_NAME_CAMEL$))
+		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
-
+    }
 		$input = $request->all();
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($$MODEL_NAME_CAMEL$, $input);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->update($input, $id);
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ updated successfully."));
 	}
@@ -143,12 +144,13 @@ class $MODEL_NAME$APIController extends AppBaseController
 	{
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
 
-		if(empty($$MODEL_NAME_CAMEL$))
+		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+    }
 
-		$$MODEL_NAME_CAMEL$->delete();
-
-		return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->delete($id);
+		
+    return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
 	}
 
 }
