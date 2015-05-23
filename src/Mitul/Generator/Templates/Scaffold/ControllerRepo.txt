@@ -22,6 +22,8 @@ class $MODEL_NAME$Controller extends AppBaseController
 	/**
 	 * Display a listing of the $MODEL_NAME$.
 	 *
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
 	public function index(Request $request)
