@@ -142,7 +142,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
