@@ -4,12 +4,10 @@ namespace Mitul\Generator\Commands;
 
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\API\APIControllerGenerator;
-use Mitul\Generator\Generators\API\RepoAPIControllerGenerator;
 use Mitul\Generator\Generators\Common\MigrationGenerator;
 use Mitul\Generator\Generators\Common\ModelGenerator;
 use Mitul\Generator\Generators\Common\RepositoryGenerator;
 use Mitul\Generator\Generators\Common\RoutesGenerator;
-use Symfony\Component\Console\Input\InputArgument;
 
 class APIGeneratorCommand extends BaseCommand
 {
@@ -48,27 +46,17 @@ class APIGeneratorCommand extends BaseCommand
 	{
 		parent::handle();
 
-		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (y|N)", false);
-
 		$migrationGenerator = new MigrationGenerator($this->commandData);
 		$migrationGenerator->generate();
 
 		$modelGenerator = new ModelGenerator($this->commandData);
 		$modelGenerator->generate();
 
-		if($followRepoPattern)
-		{
-			$repositoryGenerator = new RepositoryGenerator($this->commandData);
-			$repositoryGenerator->generate();
+		$repositoryGenerator = new RepositoryGenerator($this->commandData);
+		$repositoryGenerator->generate();
 
-			$repoControllerGenerator = new RepoAPIControllerGenerator($this->commandData);
-			$repoControllerGenerator->generate();
-		}
-		else
-		{
-			$controllerGenerator = new APIControllerGenerator($this->commandData);
-			$controllerGenerator->generate();
-		}
+		$repoControllerGenerator = new APIControllerGenerator($this->commandData);
+		$repoControllerGenerator->generate();
 
 		$routeGenerator = new RoutesGenerator($this->commandData);
 		$routeGenerator->generate();
@@ -95,6 +83,5 @@ class APIGeneratorCommand extends BaseCommand
 	public function getOptions()
 	{
 		return array_merge(parent::getOptions(), []);
-
 	}
 }

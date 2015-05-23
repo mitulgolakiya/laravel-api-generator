@@ -1,12 +1,6 @@
 <?php
-/**
- * User: Mitul
- * Date: 14/02/15
- * Time: 6:00 PM
- */
 
 namespace Mitul\Generator\Generators\Scaffold;
-
 
 use Config;
 use Illuminate\Support\Str;

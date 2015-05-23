@@ -9,7 +9,7 @@ This API generator allows you to use artisan commands to automatically generate 
 The artisan command can generate the following items:
   * Migration File
   * Model
-  * Repository (optional)
+  * Repository
   * Controller
   * View
     * index.blade.php

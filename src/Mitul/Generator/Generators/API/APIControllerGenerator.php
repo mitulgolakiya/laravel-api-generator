@@ -1,12 +1,6 @@
 <?php
-/**
- * User: Mitul
- * Date: 14/02/15
- * Time: 6:00 PM
- */
 
 namespace Mitul\Generator\Generators\API;
-
 
 use Config;
 use Mitul\Generator\CommandData;
@@ -21,16 +15,19 @@ class APIControllerGenerator implements GeneratorProvider
 
 	private $namespace;
 
+	private $repoNamespace;
+
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_api_controller', app_path('Http/Controllers/API/'));
 		$this->namespace = Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API');
+		$this->repoNamespace = Config::get('generator.namespace_repository', 'App\Libraries\Repositories');
 	}
 
 	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Controller", "API");
+		$templateData = $this->commandData->templatesHelper->getTemplate("ControllerRepo", "API");
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -42,7 +39,7 @@ class APIControllerGenerator implements GeneratorProvider
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->comment("\nController created: ");
+		$this->commandData->commandObj->comment("\nAPI Controller created: ");
 		$this->commandData->commandObj->info($fileName);
 	}
 
@@ -50,6 +47,8 @@ class APIControllerGenerator implements GeneratorProvider
 	{
 		$templateData = str_replace('$NAMESPACE$', $this->namespace, $templateData);
 		$templateData = str_replace('$MODEL_NAMESPACE$', $this->commandData->modelNamespace, $templateData);
+
+		$templateData = str_replace('$REPO_NAMESPACE$', $this->repoNamespace, $templateData);
 
 		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
 		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);
