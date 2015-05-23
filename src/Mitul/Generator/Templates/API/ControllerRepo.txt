@@ -77,7 +77,7 @@ class $MODEL_NAME$APIController extends AppBaseController
     }
         $input = $request->all();
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->store($input);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ saved successfully."));
 	}
