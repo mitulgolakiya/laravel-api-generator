@@ -76,7 +76,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
@@ -116,7 +116,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function update($id, Create$MODEL_NAME$Request $request)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
@@ -140,7 +140,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find$MODEL_NAME$ById($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
