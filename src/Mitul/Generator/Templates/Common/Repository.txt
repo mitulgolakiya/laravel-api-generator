@@ -17,7 +17,7 @@ class $MODEL_NAME$Repository extends Repository
     **/
     public function model()
     {
-      return $MODEL_NAMESPACE$;
+      return '$MODEL_NAMESPACE$';
     }
 
 	public function search($input)
