@@ -1,5 +1,5 @@
 <tr>
-    {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.index', 'method' => 'get', class="form-inline", id="search_form"]) !!}
+    {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.index', 'method' => 'get', 'class' => 'form-inline', 'id' => 'search_form']) !!}
 
         $FIELDS$
 
