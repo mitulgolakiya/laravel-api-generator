@@ -232,6 +232,17 @@ You have to pass option ```--search``` with command. e.g.
          php artisan mitul.generator:scaffold_api Post --search"
 
 
+### Dingo/API compatibility
+
+This package is can use [dingo/api](https://github.com/dingo/api) in beta-mode.
+
+Installation hint:
+
+1. ```php artisan vendor:publish --provider='Dingo\Api\Provider\LaravelServiceProvider'```
+2. In ```api.php``` (apI.php) fill 'vendor' and 'prefix' variables.
+3. In ```app.php``` add ```'Dingo\Api\Provider\LaravelServiceProvider',``` and alias ```'API' => 'Dingo\Api\Facade\API',```
+
+
 Screenshots
 ------------
 
