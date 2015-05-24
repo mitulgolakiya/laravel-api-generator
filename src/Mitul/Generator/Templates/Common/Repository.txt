@@ -21,24 +21,25 @@ class $MODEL_NAME$Repository extends Repository
     }
 
 	public function search($input)
-  {
-      $query = $MODEL_NAME$::query();
+    {
+        $query = $MODEL_NAME$::query();
 
-      $columns = Schema::getColumnListing('$TABLE_NAME$');
-      $attributes = array();
+        $columns = Schema::getColumnListing('$TABLE_NAME$');
+        $attributes = array();
 
-      foreach($columns as $attribute){
-          if(isset($input[$attribute]))
-          {
-              $query->where($attribute, $input[$attribute]);
-              $attributes[$attribute] =  $input[$attribute];
-          }else{
-              $attributes[$attribute] =  null;
-          }
-      };
+        foreach($columns as $attribute)
+        {
+            if(isset($input[$attribute]) and !empty($input[$attribute]))
+            {
+                $query->where($attribute, $input[$attribute]);
+                $attributes[$attribute] = $input[$attribute];
+            }
+            else
+            {
+                $attributes[$attribute] =  null;
+            }
+        }
 
-      return [$query->get(), $attributes];
-
-  }
-	
+        return [$query->get(), $attributes];
+    }
 }
