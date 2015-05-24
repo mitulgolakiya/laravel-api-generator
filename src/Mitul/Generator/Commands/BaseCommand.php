@@ -1,9 +1,4 @@
 <?php
-/**
- * User: Mitul
- * Date: 11/04/15
- * Time: 1:21 PM
- */
 
 namespace Mitul\Generator\Commands;
 

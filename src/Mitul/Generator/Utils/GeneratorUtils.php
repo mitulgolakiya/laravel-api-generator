@@ -1,12 +1,6 @@
 <?php
-/**
- * User: Mitul
- * Date: 19/05/15
- * Time: 12:14 AM
- */
 
 namespace Mitul\Generator\Utils;
-
 
 class GeneratorUtils
 {

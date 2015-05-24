@@ -1,12 +1,6 @@
 <?php
-/**
- * User: Mitul
- * Date: 14/02/15
- * Time: 4:34 PM
- */
 
 namespace Mitul\Generator\Generators\Common;
-
 
 use Config;
 use Mitul\Generator\CommandData;

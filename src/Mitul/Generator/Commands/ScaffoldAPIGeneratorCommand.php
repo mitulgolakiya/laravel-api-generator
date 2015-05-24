@@ -1,21 +1,16 @@
 <?php
-/**
- * User: Mitul
- * Date: 3/24/2015
- * Time: 2:44 PM
- */
+
 namespace Mitul\Generator\Commands;
 
 use Mitul\Generator\CommandData;
-use Mitul\Generator\Generators\API\RepoAPIControllerGenerator;
+use Mitul\Generator\Generators\API\APIControllerGenerator;
 use Mitul\Generator\Generators\Common\MigrationGenerator;
 use Mitul\Generator\Generators\Common\ModelGenerator;
 use Mitul\Generator\Generators\Common\RepositoryGenerator;
 use Mitul\Generator\Generators\Common\RequestGenerator;
 use Mitul\Generator\Generators\Common\RoutesGenerator;
-use Mitul\Generator\Generators\Scaffold\RepoViewControllerGenerator;
+use Mitul\Generator\Generators\Scaffold\ViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewGenerator;
-use Symfony\Component\Console\Input\InputArgument;
 
 class ScaffoldAPIGeneratorCommand extends BaseCommand
 {
@@ -63,13 +58,13 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
 		$repositoryGenerator = new RepositoryGenerator($this->commandData);
 		$repositoryGenerator->generate();
 
-		$repoControllerGenerator = new RepoAPIControllerGenerator($this->commandData);
+		$repoControllerGenerator = new APIControllerGenerator($this->commandData);
 		$repoControllerGenerator->generate();
 
 		$viewsGenerator = new ViewGenerator($this->commandData);
 		$viewsGenerator->generate();
 
-		$repoControllerGenerator = new RepoViewControllerGenerator($this->commandData);
+		$repoControllerGenerator = new ViewControllerGenerator($this->commandData);
 		$repoControllerGenerator->generate();
 
 		$routeGenerator = new RoutesGenerator($this->commandData);

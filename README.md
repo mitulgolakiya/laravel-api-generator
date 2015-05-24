@@ -9,7 +9,7 @@ This API generator allows you to use artisan commands to automatically generate 
 The artisan command can generate the following items:
   * Migration File
   * Model
-  * Repository (optional)
+  * Repository
   * Controller
   * View
     * index.blade.php
@@ -62,18 +62,17 @@ Steps to Get Started
         composer update
     
 3. Add the ServiceProviders to the providers array in ```config/app.php```.<br>
-   As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
+   As we are using these two packages [LaravelCollective/html](https://github.com/LaravelCollective/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
    so we need to add those ServiceProviders as well.
 
-        'Illuminate\View\ViewServiceProvider',
-        'Illuminate\Html\HtmlServiceProvider',
+        'Collective\Html\HtmlServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'Mitul\Generator\GeneratorServiceProvider'
         
    Also for convenience, add these facades in alias array in ```config/app.php```.
 
-		'Form'  => 'Illuminate\Html\FormFacade',
-		'HTML'  => 'Illuminate\Html\HtmlFacade',
+		'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
 		'Flash' => 'Laracasts\Flash\Flash'
 
 4. Publish ```generator.php```

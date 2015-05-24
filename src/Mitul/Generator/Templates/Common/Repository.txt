@@ -2,7 +2,6 @@
 
 namespace $NAMESPACE$;
 
-
 use $MODEL_NAMESPACE$;
 use Illuminate\Support\Facades\Schema;
 use Bosnadev\Repositories\Contracts\RepositoryInterface;

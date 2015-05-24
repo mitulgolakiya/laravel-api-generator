@@ -8,7 +8,6 @@ use Mitul\Generator\Generators\Common\ModelGenerator;
 use Mitul\Generator\Generators\Common\RepositoryGenerator;
 use Mitul\Generator\Generators\Common\RequestGenerator;
 use Mitul\Generator\Generators\Common\RoutesGenerator;
-use Mitul\Generator\Generators\Scaffold\RepoViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewControllerGenerator;
 use Mitul\Generator\Generators\Scaffold\ViewGenerator;
 
@@ -49,8 +48,6 @@ class ScaffoldGeneratorCommand extends BaseCommand
 	{
 		parent::handle();
 
-		$followRepoPattern = $this->confirm("\nDo you want to generate repository ? (y|N)", false);
-
 		$migrationGenerator = new MigrationGenerator($this->commandData);
 		$migrationGenerator->generate();
 
@@ -60,19 +57,11 @@ class ScaffoldGeneratorCommand extends BaseCommand
 		$requestGenerator = new RequestGenerator($this->commandData);
 		$requestGenerator->generate();
 
-		if($followRepoPattern)
-		{
-			$repositoryGenerator = new RepositoryGenerator($this->commandData);
-			$repositoryGenerator->generate();
+		$repositoryGenerator = new RepositoryGenerator($this->commandData);
+		$repositoryGenerator->generate();
 
-			$repoControllerGenerator = new RepoViewControllerGenerator($this->commandData);
-			$repoControllerGenerator->generate();
-		}
-		else
-		{
-			$controllerGenerator = new ViewControllerGenerator($this->commandData);
-			$controllerGenerator->generate();
-		}
+		$repoControllerGenerator = new ViewControllerGenerator($this->commandData);
+		$repoControllerGenerator->generate();
 
 		$viewsGenerator = new ViewGenerator($this->commandData);
 		$viewsGenerator->generate();
