@@ -13,15 +13,17 @@ class $MODEL_NAME$APIController extends AppBaseController
 	/**
 	 * Display a listing of the $MODEL_NAME$.
 	 *
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
 	public function index(Request $request)
 	{
-	     $input = $request->all();
+	    $input = $request->all();
 
-         $result = $this->$MODEL_NAME_CAMEL$Repository->search($input);
+		$result = $this->$MODEL_NAME_CAMEL$Repository->search($input);
 
-         $$MODEL_NAME_PLURAL_CAMEL$ = $result[0];
+		$$MODEL_NAME_PLURAL_CAMEL$ = $result[0];
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_PLURAL_CAMEL$->toArray(), "$MODEL_NAME_PLURAL$ retrieved successfully."));
 	}
@@ -45,9 +47,9 @@ class $MODEL_NAME$APIController extends AppBaseController
 	 */
 	public function store(Request $request)
 	{
-		if(sizeof($MODEL_NAME$::$rules) > 0)
+		if(sizeof($MODEL_NAME$::$rules) > 0) {
             $this->validateRequest($request, $MODEL_NAME$::$rules);
-
+    }
         $input = $request->all();
 
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::create($input);
@@ -58,8 +60,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 	/**
 	 * Display the specified $MODEL_NAME$.
 	 *
-	 * @param  int  $id
-	 * @param Request $request
+	 * @param  int $id
 	 *
 	 * @return Response
 	 */
@@ -68,8 +69,9 @@ class $MODEL_NAME$APIController extends AppBaseController
 		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
 
-		if(empty($$MODEL_NAME_CAMEL$))
+		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+    }
 
 		return Response::json(ResponseManager::makeResult($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ retrieved successfully."));
 	}
@@ -88,7 +90,9 @@ class $MODEL_NAME$APIController extends AppBaseController
 	/**
 	 * Update the specified $MODEL_NAME$ in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int    $id
+	 * @param Request $request
+	 *
 	 * @return Response
 	 */
 	public function update($id, Request $request)
@@ -96,9 +100,9 @@ class $MODEL_NAME$APIController extends AppBaseController
 		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
 
-		if(empty($$MODEL_NAME_CAMEL$))
+		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
-
+    }
 		$input = $request->all();
 
 		$$MODEL_NAME_CAMEL$->fill($input);
@@ -110,7 +114,8 @@ class $MODEL_NAME$APIController extends AppBaseController
 	/**
 	 * Remove the specified $MODEL_NAME$ from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function destroy($id)
@@ -118,12 +123,12 @@ class $MODEL_NAME$APIController extends AppBaseController
 		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
 
-		if(empty($$MODEL_NAME_CAMEL$))
+		if(empty($$MODEL_NAME_CAMEL$)) {
 			$this->throwRecordNotFoundException("$MODEL_NAME$ not found", ERROR_CODE_RECORD_NOT_FOUND);
+    }
 
 		$$MODEL_NAME_CAMEL$->delete();
 
-		return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
+        return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
 	}
-
 }

@@ -153,6 +153,6 @@ class $MODEL_NAME$APIController extends AppBaseController
 
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->delete($id);
 		
-    return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
+        return Response::json(ResponseManager::makeResult($id, "$MODEL_NAME$ deleted successfully."));
 	}
 }
