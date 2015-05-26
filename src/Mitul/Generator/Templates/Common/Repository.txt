@@ -4,7 +4,6 @@ namespace $NAMESPACE$;
 
 use $MODEL_NAMESPACE$;
 use Illuminate\Support\Facades\Schema;
-use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
 
 class $MODEL_NAME$Repository extends Repository
