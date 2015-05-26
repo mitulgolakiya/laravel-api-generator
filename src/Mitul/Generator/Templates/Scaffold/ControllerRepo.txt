@@ -38,7 +38,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		return view('$MODEL_NAME_PLURAL_CAMEL$.index')
 		    ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$)
-		    ->with('attributes', $attributes);;
+		    ->with('attributes', $attributes);
 	}
 
 	/**
@@ -60,11 +60,11 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function store(Create$MODEL_NAME$Request $request)
 	{
-    $input = $request->all();
+        $input = $request->all();
 
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
 
-		Flash::message('$MODEL_NAME$ saved successfully.');
+		Flash::info('$MODEL_NAME$ saved successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
@@ -128,7 +128,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->updateRich($request->all(), $id);
 
-		Flash::message('$MODEL_NAME$ updated successfully.');
+		Flash::info('$MODEL_NAME$ updated successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
@@ -152,7 +152,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->delete($id);
 		
-    Flash::message('$MODEL_NAME$ deleted successfully.');
+        Flash::info('$MODEL_NAME$ deleted successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
