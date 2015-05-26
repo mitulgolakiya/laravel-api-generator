@@ -150,8 +150,8 @@ class $MODEL_NAME$Controller extends AppBaseController
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->delete($id);
-		
+		$this->$MODEL_NAME_CAMEL$Repository->delete($id);
+
         Flash::info('$MODEL_NAME$ deleted successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
