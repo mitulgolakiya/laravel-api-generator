@@ -95,13 +95,10 @@ class Errors {
      * @param array $replacements additional info inside response
      */
     public static function
-        throwHttpException(Exception\HttpException $exception, $help_link, $system_message = '', $payload = [], $hateoas = [], $replacements = [])
+    throwHttpException(Exception\HttpException $exception, $help_link, $system_message = '', $payload = [], $hateoas = [], $replacements = [])
     {
-        if (!isset($exception->replacements)) {
-            $exception->replacements = self::getReplacements($system_message, $payload, $help_link, $replacements);
-        } else {
-            $exception->replacements += self::getReplacements($system_message, $payload, $help_link, $replacements);
-        }
+        $replacements = self::getReplacements($system_message, $payload, $help_link, $replacements);
+        app('api.exception')->setReplacements($replacements);
         throw $exception;
     }
 
@@ -117,8 +114,9 @@ class Errors {
     {
         $errors = static::getErrors([$error_code], [$error_code => $payload]);
         $error = current($errors);
+        $replacements = self::getReplacements($error['system_message'], $error['payload'], $error['help'], $hateoas, $replacements);
+        app('api.exception')->setReplacements($replacements);
         $exception = self::getExceptionObject(static::$errors[$error['error_code']]['exception'], $error);
-        $exception->replacements = self::getReplacements($error['system_message'], $error['payload'], $error['help'], $hateoas, $replacements);
         throw $exception;
     }
 
@@ -151,9 +149,8 @@ class Errors {
      *
      * <code>
      * <?php
-     * $exception = new HttpException(404, 'Sorry, article is not found');
-     * $exception->replacements = Errors::getReplacements('Not found', ['id' => 1111], 'help/article_not_found');
-     * throw $exception;
+     * app('api.exception')->setReplacements(Errors::getReplacements('Not found', ['id' => 1111], 'help/article_not_found'));
+     * throw new HttpException(404, 'Sorry, article is not found');
      * ?>
      * </code>
      *
