@@ -65,7 +65,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::create($input);
 
-		Flash::message('$MODEL_NAME$ saved successfully.');
+		Flash::info('$MODEL_NAME$ saved successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
@@ -131,7 +131,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 		$$MODEL_NAME_CAMEL$->fill($request->all());
 		$$MODEL_NAME_CAMEL$->save();
 
-		Flash::message('$MODEL_NAME$ updated successfully.');
+		Flash::info('$MODEL_NAME$ updated successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
@@ -156,7 +156,7 @@ class $MODEL_NAME$Controller extends AppBaseController
 
 		$$MODEL_NAME_CAMEL$->delete();
 
-		Flash::message('$MODEL_NAME$ deleted successfully.');
+		Flash::info('$MODEL_NAME$ deleted successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}

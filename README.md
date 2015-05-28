@@ -48,13 +48,56 @@ So we removed all extra Exception files. so you need to remove those things from
 
 [Upgrade Guide for older versions](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/Upgrade_Guide.md).
 
+Upgrade Guide from 1.3 to 2.0
+-------------------------------------
+
+API Controllers was extremely changed.
+
+1. Generate fresh API controllers without running migration.
+2. Make diff with your older laravel-api-generator API controller with new one.
+3. Merge changes and remove unnecessary files. 
+
+### Dingo/API compatibility
+
+This package used [dingo/api](https://github.com/dingo/api) in beta-mode.
+
+Install Dingo hints:
+
+1. In ```app.php``` add ```'Dingo\Api\Provider\LaravelServiceProvider',```
+2. Run ```php artisan vendor:publish --provider='Dingo\Api\Provider\LaravelServiceProvider'```
+3. In ```api.php``` (apI.php) fill 'vendor' and 'prefix' variables.
+4. Then, in ```api.php```, change errorFormat to this:
+
+```
+'errorFormat' => [
+        'message' => ':message',
+        'system_message' => ':system_message',
+        'errors' => ':errors',
+        'payload' => ':payload',
+        'code' => ':code',
+        'status_code' => ':status_code',
+        'help' => ':help',
+        'links' => ':links',
+        'debug' => ':debug',
+    ],
+```
+
+5. Open middleware ```VerifyCsrfToken.php``` and before ```return parent::handle($request, $next);``` add this
+```
+    if ($request->server('HTTP_HOST') == \Config::get('api.domain')
+    || 0 === strpos($request->server('REQUEST_URI'), '/' . \Config::get('api.prefix'))) {
+
+        return $next($request);
+    }
+```
+
 Steps to Get Started
 ---------------------
 
 1. Add this package to your composer.json:
   
         "require": {
-            "mitulgolakiya/laravel-api-generator": "1.3.*"
+            "mitulgolakiya/laravel-api-generator": "1.3.*",
         }
   
 2. Run composer update
@@ -78,6 +121,7 @@ Steps to Get Started
 4. Publish ```generator.php```
 
         php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=config
+        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=templates // If you need generate views
 
 5. Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
 

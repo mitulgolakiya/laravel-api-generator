@@ -58,9 +58,36 @@ class RoutesGenerator implements GeneratorProvider
 
 	private function generateAPIRoutes()
 	{
-		$apiNamespacePostfix = substr($this->apiNamespace, strlen('App\Http\Controllers\\'));
+        $api_prefix = $this->apiPrefix
+            ? "    'prefix' => '" . $this->apiPrefix . "'," . PHP_EOL
+            : '';
 
-		return "\n\nRoute::resource('" . $this->apiPrefix . "/" . $this->commandData->modelNamePluralCamel . "', '" . $apiNamespacePostfix . "\\" . $this->commandData->modelName . "APIController');";
+        return "
+/*
+|--------------------------------------------------------------------------
+| Dingo/api and Mitul/laravel-api-generator for {$this->commandData->modelName}
+|--------------------------------------------------------------------------
+*/
+\$api = app('api.router');
+
+\$api->group([
+    'version' => 'v1',
+{$api_prefix}    'namespace' => 'App\\Http\\Controllers\\API',
+], function (\$api) {
+    \$api->resource('{$this->commandData->modelNamePluralCamel}', '{$this->commandData->modelName}APIController');
+    \$api->get('errors/{id}', function(\$id) {
+        return \\Mitul\\Generator\\Errors::getErrors([\$id]);
+    });
+    \$api->get('errors', function() {
+        return \\Mitul\\Generator\\Errors::getErrors([], [], true);
+    });
+    \$api->get('/', function() {
+        \$links = \\App\\Http\\Controllers\\API\\{$this->commandData->modelName}ApiController::getHATEOAS();
+
+        return ['links' => \$links];
+    });
+});
+";
 	}
 
 	private function generateScaffoldRoutes()
