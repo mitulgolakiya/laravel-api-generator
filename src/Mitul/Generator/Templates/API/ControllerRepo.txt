@@ -47,7 +47,7 @@ class $MODEL_NAME$APIController extends AppBaseController
 
         foreach($columns as $attribute)
         {
-            if(isset($input[$attribute]))
+            if(isset($input[$attribute]) && !empty($input[$attribute]))
             {
                 $query->where($attribute, $input[$attribute]);
             }
