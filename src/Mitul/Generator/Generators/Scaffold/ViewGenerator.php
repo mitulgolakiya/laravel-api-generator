@@ -30,6 +30,7 @@ class ViewGenerator implements GeneratorProvider
 
 		$this->commandData->commandObj->comment("\nViews created: ");
 		$this->generateFields();
+		$this->generateShowFields();
 		$this->generateIndex();
 		$this->generateShow();
 		$this->generateCreate();
@@ -59,6 +60,33 @@ class ViewGenerator implements GeneratorProvider
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
 		$this->commandData->commandObj->info("field.blade.php created");
+	}
+
+	private function generateShowFields()
+	{
+		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show-field.blade", $this->viewsPath);
+
+		$fieldsStr = "";
+
+		foreach($this->commandData->inputFields as $field)
+		{
+			$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
+			$singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
+			$singleFieldStr = $this->fillTemplate($singleFieldStr);
+			
+			$fieldsStr .= $singleFieldStr . "\n\n";
+		}
+
+		$templateData = $this->commandData->templatesHelper->getTemplate("show-fields.blade", $this->viewsPath);
+
+		$templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
+
+		$fileName = "show-fields.blade.php";
+
+		$path = $this->path . $fileName;
+
+		$this->commandData->fileHelper->writeFile($path, $templateData);
+		$this->commandData->commandObj->info("show-field.blade.php created");
 	}
 
 	private function generateIndex()
