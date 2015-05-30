@@ -123,14 +123,16 @@ class ViewGenerator implements GeneratorProvider
 	private function generateShow()
 	{
 		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", $this->viewsPath);
+		$templateData = $this->fillTemplate($fieldTemplate);
 
 		$fileName = "show.blade.php";
 
 		$path = $this->path . $fileName;
 
-		$this->commandData->fileHelper->writeFile($path, $fieldTemplate);
+		$this->commandData->fileHelper->writeFile($path, $templateData);
 		$this->commandData->commandObj->info("show.blade.php created");
 	}
+
 
 	private function generateCreate()
 	{
