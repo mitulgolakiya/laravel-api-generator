@@ -21,8 +21,7 @@
         "php": ">=5.4.0",
         "laravelcollective/html": "~5.0",
         "laracasts/flash": "~1.3",
-        "bosnadev/repositories": "^0.8.0",
-        "dingo/api": "0.9.*@dev"
+        "bosnadev/repositories": "^0.8.0"
     },
     "autoload": {
         "psr-4": {
