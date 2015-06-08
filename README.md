@@ -72,7 +72,7 @@ Steps to Get Started
    Also for convenience, add these facades in alias array in ```config/app.php```.
 
 		'Form'  => 'Illuminate\Html\FormFacade',
-        'HTML'  => 'Illuminate\Html\HtmlFacade',
+        'Html'  => 'Illuminate\Html\HtmlFacade',
 		'Flash' => 'Laracasts\Flash\Flash'
 
 4. Publish ```generator.php```
