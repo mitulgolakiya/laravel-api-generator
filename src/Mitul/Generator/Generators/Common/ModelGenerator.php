@@ -43,7 +43,7 @@ class ModelGenerator implements GeneratorProvider
 
 	private function fillTemplate($templateData)
 	{
-		if(!$this->commandData->useSoftDelete)
+		if(is_null($this->commandData->useSoftDelete))
 		{
 			$templateData = str_replace('$SOFT_DELETE_IMPORT$', "", $templateData);
 			$templateData = str_replace('$SOFT_DELETE$', "", $templateData);

@@ -48,29 +48,32 @@ class ScaffoldGeneratorCommand extends BaseCommand
 	{
 		parent::handle();
 
-//		$migrationGenerator = new MigrationGenerator($this->commandData);
-//		$migrationGenerator->generate();
-//
-//		$modelGenerator = new ModelGenerator($this->commandData);
-//		$modelGenerator->generate();
-//
-//		$requestGenerator = new RequestGenerator($this->commandData);
-//		$requestGenerator->generate();
-//
-//		$repositoryGenerator = new RepositoryGenerator($this->commandData);
-//		$repositoryGenerator->generate();
-//
+		if(is_null($this->commandData->skipMigration))
+		{
+			$migrationGenerator = new MigrationGenerator($this->commandData);
+			$migrationGenerator->generate();
+		}
+
+		$modelGenerator = new ModelGenerator($this->commandData);
+		$modelGenerator->generate();
+
+		$requestGenerator = new RequestGenerator($this->commandData);
+		$requestGenerator->generate();
+
+		$repositoryGenerator = new RepositoryGenerator($this->commandData);
+		$repositoryGenerator->generate();
+
 		$repoControllerGenerator = new ViewControllerGenerator($this->commandData);
 		$repoControllerGenerator->generate();
 
 		$viewsGenerator = new ViewGenerator($this->commandData);
 		$viewsGenerator->generate();
 
-//		$routeGenerator = new RoutesGenerator($this->commandData);
-//		$routeGenerator->generate();
-//
-//		if($this->confirm("\nDo you want to migrate database? [y|N]", false))
-//			$this->call('migrate');
+		$routeGenerator = new RoutesGenerator($this->commandData);
+		$routeGenerator->generate();
+
+		if($this->confirm("\nDo you want to migrate database? [y|N]", false))
+			$this->call('migrate');
 	}
 
 	/**

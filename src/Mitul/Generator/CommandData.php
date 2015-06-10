@@ -17,6 +17,7 @@ class CommandData
 	public $modelNamespace;
 
 	public $tableName;
+	public $skipMigration;
 	public $inputFields;
 
 	/** @var  string */
@@ -68,6 +69,7 @@ class CommandData
 		$fields = [];
 
 		$this->commandObj->info("Specify fields for the model (skip id & timestamp fields, will be added automatically)");
+		$this->commandObj->info("Supported field types text, textarea, password, email, file, checkbox, radio, number, date, select.");
 		$this->commandObj->info("Left blank to finish");
 
 		while(true)
@@ -108,6 +110,11 @@ class CommandData
 
 			'$MODEL_NAME_PLURAL_CAMEL$' => $this->modelNamePluralCamel
 		]);
+
+		if(is_null($this->tableName))
+			$this->dynamicVars['$TABLE_NAME$'] = $this->modelNamePluralCamel;
+		else
+			$this->dynamicVars['$TABLE_NAME$'] = $this->tableName;
 	}
 
 	public function addDynamicVariable($name, $val)

@@ -25,6 +25,8 @@ class BaseCommand extends Command
 		$this->commandData->useSoftDelete = $this->option('softDelete');
 		$this->commandData->fieldsFile = $this->option('fieldsFile');
 		$this->commandData->paginate = $this->option('paginate');
+		$this->commandData->tableName = $this->option('tableName');
+		$this->commandData->skipMigration = $this->option('skipMigration');
 
 		if($this->commandData->paginate <= 0)
 			$this->commandData->paginate = 10;
@@ -85,7 +87,9 @@ class BaseCommand extends Command
 		return [
 			['softDelete', null, InputOption::VALUE_NONE, 'Use Soft Delete trait'],
 			['fieldsFile', null, InputOption::VALUE_REQUIRED, 'Fields input as json file'],
-			['paginate', null, InputOption::VALUE_REQUIRED, 'Pagination for index.blade.php']
+			['paginate', null, InputOption::VALUE_OPTIONAL, 'Pagination for index.blade.php', 10],
+			['tableName', null, InputOption::VALUE_REQUIRED, 'Table Name'],
+			['skipMigration', null, InputOption::VALUE_NONE, 'Skip Migration generation']
 		];
 	}
 }

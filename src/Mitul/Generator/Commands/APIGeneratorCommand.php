@@ -46,8 +46,11 @@ class APIGeneratorCommand extends BaseCommand
 	{
 		parent::handle();
 
-		$migrationGenerator = new MigrationGenerator($this->commandData);
-		$migrationGenerator->generate();
+		if(is_null($this->commandData->skipMigration))
+		{
+			$migrationGenerator = new MigrationGenerator($this->commandData);
+			$migrationGenerator->generate();
+		}
 
 		$modelGenerator = new ModelGenerator($this->commandData);
 		$modelGenerator->generate();
