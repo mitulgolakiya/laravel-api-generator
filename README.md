@@ -1,4 +1,4 @@
-Laravel API/Scaffold/CRUD Generator (Laravel5)
+Laravel API/Scaffold/CRUD Generator (Laravel5.1)
 =======================
 [![Latest Stable Version](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/v/stable)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Total Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/downloads)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Monthly Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/d/monthly)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Daily Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/d/daily)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Latest Unstable Version](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/v/unstable)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![License](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/license)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator)
 
@@ -23,73 +23,7 @@ And your simple CRUD API is ready in mere seconds.
 
 Here is the full documentation.
 
-Upgrade Guide from 1.2 to 1.3
--------------------------------------
-
-We are no longer using our own ```APIExceptionsHandler``` to send API fail responses and using Laravel's own ```HttpResponseException``` to overcome ```App\Exceptions\Handler``` overwrite problem.
-
-So we removed all extra Exception files. so you need to remove those things from your API Controllers.
-
-1. In all your API Controllers and find ```throw new RecordNotFoundException```.
-
-2. Replace it with ```$this->throwRecordNotFoundException```.
-
-3. Remove use statements
-
-        use Mitul\Generator\Exceptions\AppValidationException;
-        use Mitul\Generator\Exceptions\RecordNotFoundException;
-
-4. Remove throw statement from PHPDoc Blocks of functions
-
-        @throws AppValidationException
-        @throws RecordNotFoundException
-
-5. Enjoy Upgrade :)
-
-[Upgrade Guide for older versions](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/Upgrade_Guide.md).
-
-Upgrade Guide from 1.3 to 2.0
--------------------------------------
-
-API Controllers was extremely changed.
-
-1. Generate fresh API controllers without running migration.
-2. Make diff with your older laravel-api-generator API controller with new one.
-3. Merge changes and remove unnecessary files. 
-
-### Dingo/API compatibility
-
-This package used [dingo/api](https://github.com/dingo/api) in beta-mode.
-
-Install Dingo hints:
-
-1. In ```app.php``` add ```'Dingo\Api\Provider\LaravelServiceProvider',```
-2. Run ```php artisan vendor:publish --provider='Dingo\Api\Provider\LaravelServiceProvider'```
-3. In ```api.php``` (apI.php) fill 'vendor' and 'prefix' variables.
-4. Then, in ```api.php```, change errorFormat to this:
-
-```
-'errorFormat' => [
-        'message' => ':message',
-        'system_message' => ':system_message',
-        'errors' => ':errors',
-        'payload' => ':payload',
-        'code' => ':code',
-        'status_code' => ':status_code',
-        'help' => ':help',
-        'links' => ':links',
-        'debug' => ':debug',
-    ],
-```
-
-5. Open middleware ```VerifyCsrfToken.php``` and before ```return parent::handle($request, $next);``` add this
-```
-    if ($request->server('HTTP_HOST') == \Config::get('api.domain')
-    || 0 === strpos($request->server('REQUEST_URI'), '/' . \Config::get('api.prefix'))) {
-
-        return $next($request);
-    }
-```
+[Upgrade Guide](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/Upgrade_Guide.md).
 
 Steps to Get Started
 ---------------------
@@ -97,7 +31,7 @@ Steps to Get Started
 1. Add this package to your composer.json:
   
         "require": {
-            "mitulgolakiya/laravel-api-generator": "1.3.*",
+            "mitulgolakiya/laravel-api-generator": "dev-master",
         }
   
 2. Run composer update
@@ -108,22 +42,25 @@ Steps to Get Started
    As we are using these two packages [illuminate/html](https://github.com/illuminate/html) & [laracasts/flash](https://github.com/laracasts/flash) as a dependency.<br>
    so we need to add those ServiceProviders as well.
 
-        'Illuminate\Html\HtmlServiceProvider',
-        'Laracasts\Flash\FlashServiceProvider',
-        'Mitul\Generator\GeneratorServiceProvider'
+		Collective\Html\HtmlServiceProvider::class,
+		Laracasts\Flash\FlashServiceProvider::class,
+		Mitul\Generator\GeneratorServiceProvider::class,
         
    Also for convenience, add these facades in alias array in ```config/app.php```.
 
-		'Form'  => 'Illuminate\Html\FormFacade',
-        'Html'  => 'Illuminate\Html\HtmlFacade',
-		'Flash' => 'Laracasts\Flash\Flash'
+		'Form'      => Collective\Html\FormFacade::class,
+		'Html'      => Collective\Html\HtmlFacade::class,
+		'Flash'     => Laracasts\Flash\Flash::class
 
 4. Publish ```generator.php```
 
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=config
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=templates // If you need generate views
+        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
+        
+5. Publish generator stuff
 
-5. Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
+        php artisan mitul.generator:publisher
+
+6. Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
 
         php artisan mitul.generator:api ModelName
         php artisan mitul.generator:scaffold ModelName
@@ -153,12 +90,16 @@ Steps to Get Started
 8. And you are ready to go. :)
 
 
+# Full Documentation is Coming soon...
+
 Documentation
 --------------
 
 ### Generator Config file
 
 Config file (```config/generator.php```) contains path for all generated files
+
+```base_controller``` - Base Controller for all Controllers<br>
 
 ```path_migration``` - Path where Migration file to be generated<br>
 ```path_model``` - Path where Model file to be generated<br>
@@ -168,6 +109,7 @@ Config file (```config/generator.php```) contains path for all generated files
 ```path_views``` - Path where views will be created<br>
 ```path_request``` -  Path where request file will be created<br>
 ```path_routes``` - Path of routes.php (if you are using any custom routes file)<br>
+```path_api_routes``` - Path of api_routes.php (this file will contain all api routes)<br>
 
 ```namespace_model``` - Namespace of Model<br>
 ```namespace_repository``` - Namespace of Repository<br>
@@ -175,11 +117,12 @@ Config file (```config/generator.php```) contains path for all generated files
 ```namespace_api_controller``` - Namespace of API Controller<br>
 ```namespace_request``` - Namespace for Request<br>
 
-```model_extend``` - Use custom Model extend<br>
-```model_extend_namespace``` - Namespace of custom extended model<br>
-```model_extend_class``` - Class name to extend<br>
+```model_extend_class``` - Extend class of Models<br>
 
 ```api_prefix``` - API Prefix
+```api_version``` - API Version
+
+```use_dingo_api``` - Integrate APIs with dingo/api package
 
 ### Field Input
 
@@ -196,85 +139,6 @@ e.g.,
 
 Parameters will be in the same sequence as ```Blueprint``` class function for all types.
 Option will be printed as it is given in input except unique & primary.
-
-### API Response Structure
- 
-**Remember: This response structure is based on the most of my API response structure, you can change it to your API response after file generation in controller.**
- 
-**Success**
-
-        {
-            "flag":true,
-            "message":"success message",
-            "data":{}
-        }
-
-
-data can be anything as per response.
-
-**Failure**
-
-        {
-            "flag":false,
-            "message":"failure message",
-            "code": 0
-            "data":{}
-        }
-
-data will be optional. And code will be error code.
-
-### Generated Views
-
-While generating scaffold, all views are created with basic CRUD functionality.
-
-Views will be created in ```resources/views/modelName``` folder,
-
-        index.blade.php - Main Index file for listing records
-        create.blade.php - To insert a new record
-        edit.blade.php - To edit a record
-        fields.blade.php - Common file of all model fields, which will be used create and edit record
-        show.blade.php - To display a record
-        
-### Using with Custom Application namespace
-
-Sometimes, we are using different namespace rather than default ```App``` namespace.
-
-Generator's ```AppBaseController``` is extending Laravel's ```App\Http\Controllers\Controller```. so while using diff namespace, we need to publish it with custom namespace.
-
-You need to give a full path of default Controller with your namespace as input. For e.g.,
-
-        php artisan mitul.generator.publish:base_controller "MyApp\Http\Controllers\Controller"
-             
-It will generate AppBaseController again with extending custom namespace controller.
-
-### Customizing generated files
-
-1. Publish templates into ```/resources/api-generator-templates```
-
-        php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider" --tag=templates
-
-2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
-
-3. Add the remaining files to git and make your magic!
-
-### Passing fields from file
-
-If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample [fields.json](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/samples/fields.json)
-
-You have to pass option ```--fieldsFile=absolute_file_path_or_path_from_base_directory``` with command. e.g.
-
-         php artisan mitul.generator:scaffold_api Post --fieldsFile="/Users/Mitul/laravel-api-generator/fields.json"
-         php artisan mitul.generator:scaffold_api Post --fieldsFile="fields.json"
-
-
-### Search in Views
-
-Include search functionality in view ```index.php```
-
-You have to pass option ```--search``` with command. e.g.
-
-         php artisan mitul.generator:scaffold_api Post --search"
-
 
 Screenshots
 ------------
