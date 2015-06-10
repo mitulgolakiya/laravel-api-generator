@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+    $FIELD_HEADERS$
+    <th width="50px">Action</th>
+    </thead>
+    <tbody>
+    @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
+        <tr>
+            $FIELD_BODY$
+            <td>
+                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.delete', [$$MODEL_NAME_CAMEL$->id]) !!}" onclick="return confirm('Are you sure wants to delete this $MODEL_NAME$?')"><i class="glyphicon glyphicon-remove"></i></a>
+            </td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>

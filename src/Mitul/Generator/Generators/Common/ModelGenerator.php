@@ -5,36 +5,27 @@ namespace Mitul\Generator\Generators\Common;
 use Config;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\GeneratorProvider;
+use Mitul\Generator\Utils\GeneratorUtils;
 
 class ModelGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
 
+	/** @var string */
 	private $path;
-
-	private $namespace;
-
-	private $customModelExtend;
 
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_model', app_path('/'));
-		$this->namespace = Config::get('generator.namespace_model', 'App');
-		$this->customModelExtend = Config::get('generator.model_extend', false);
+		$this->path = Config::get('generator.path_model', app_path('Models/'));
 	}
 
 	function generate()
 	{
 		$templateName = "Model";
 
-		if($this->customModelExtend)
-		{
-			$templateName = "Model_Extended";
-		}
-
-		$templateData = $this->commandData->templatesHelper->getTemplate($templateName, "Common");
+		$templateData = $this->commandData->templatesHelper->getTemplate($templateName, "common");
 
 		$templateData = $this->fillTemplate($templateData);
 
@@ -52,39 +43,14 @@ class ModelGenerator implements GeneratorProvider
 
 	private function fillTemplate($templateData)
 	{
-		$templateData = str_replace('$NAMESPACE$', $this->namespace, $templateData);
-
-		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
-
-		if($this->commandData->useSoftDelete)
-		{
-			$templateData = str_replace('$SOFT_DELETE_IMPORT$', "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n", $templateData);
-			$templateData = str_replace('$SOFT_DELETE$', "use SoftDeletes;\n", $templateData);
-			$templateData = str_replace('$SOFT_DELETE_DATES$', "\n\tprotected \$dates = ['deleted_at'];\n", $templateData);
-		}
-		else
+		if(!$this->commandData->useSoftDelete)
 		{
 			$templateData = str_replace('$SOFT_DELETE_IMPORT$', "", $templateData);
 			$templateData = str_replace('$SOFT_DELETE$', "", $templateData);
 			$templateData = str_replace('$SOFT_DELETE_DATES$', "", $templateData);
 		}
 
-		$templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
-
-		if($this->customModelExtend)
-		{
-			$templateData = str_replace(
-				'$MODEL_EXTEND_NAMESPACE$',
-				Config::get('generator.model_extend_namespace', 'Illuminate\Database\Eloquent\Model'),
-				$templateData
-			);
-
-			$templateData = str_replace(
-				'$MODEL_EXTEND_CLASS$',
-				Config::get('generator.model_extend_class', 'Model'),
-				$templateData
-			);
-		}
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
 		$fillables = [];
 
@@ -96,6 +62,8 @@ class ModelGenerator implements GeneratorProvider
 		$templateData = str_replace('$FIELDS$', implode(",\n\t\t", $fillables), $templateData);
 
 		$templateData = str_replace('$RULES$', implode(",\n\t\t", $this->generateRules()), $templateData);
+
+		$templateData = str_replace('$CAST$', implode(",\n\t\t", $this->generateCasts()), $templateData);
 
 		return $templateData;
 	}
@@ -116,5 +84,40 @@ class ModelGenerator implements GeneratorProvider
 		return $rules;
 	}
 
+	public function generateCasts()
+	{
+		$casts = [];
 
+		foreach($this->commandData->inputFields as $field)
+		{
+			switch($field['fieldType'])
+			{
+				case 'integer':
+					$rule = '"' . $field['fieldName'] . '" => "integer"';
+					break;
+				case 'double':
+					$rule = '"' . $field['fieldName'] . '" => "double"';
+					break;
+				case 'float':
+					$rule = '"' . $field['fieldName'] . '" => "float"';
+					break;
+				case 'boolean':
+					$rule = '"' . $field['fieldName'] . '" => "boolean"';
+					break;
+				case 'string':
+				case 'char':
+				case 'text':
+					$rule = '"' . $field['fieldName'] . '" => "string"';
+					break;
+				default:
+					$rule = '';
+					break;
+			}
+
+			if(!empty($rule))
+				$casts[] = $rule;
+		}
+
+		return $casts;
+	}
 }

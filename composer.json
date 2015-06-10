@@ -17,11 +17,18 @@
             "email": "me@mitul.me"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/mitulgolakiya/laracast-flash"
+        }
+    ],
     "require": {
-        "php": ">=5.4.0",
-        "laravelcollective/html": "~5.0",
-        "laracasts/flash": "~1.3",
-        "bosnadev/repositories": "^0.8.0"
+        "php": ">=5.5.9",
+        "illuminate/support": "5.1.*",
+        "laracasts/flash": "dev-master",
+        "laravelcollective/html": "5.1.*@dev",
+        "bosnadev/repositories": "dev-master"
     },
     "autoload": {
         "psr-4": {

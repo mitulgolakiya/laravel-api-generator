@@ -23,9 +23,15 @@ class BaseCommand extends Command
 	{
 		$this->commandData->modelName = $this->argument('model');
 		$this->commandData->useSoftDelete = $this->option('softDelete');
-		$this->commandData->useSearch = $this->option('search');
 		$this->commandData->fieldsFile = $this->option('fieldsFile');
+		$this->commandData->paginate = $this->option('paginate');
+
+		if($this->commandData->paginate <= 0)
+			$this->commandData->paginate = 10;
+
 		$this->commandData->initVariables();
+		$this->commandData->addDynamicVariable('$NAMESPACE_APP$', $this->getLaravel()->getNamespace());
+
 		if($this->commandData->fieldsFile)
 		{
 			$fileHelper = new FileHelper();
@@ -78,8 +84,8 @@ class BaseCommand extends Command
 	{
 		return [
 			['softDelete', null, InputOption::VALUE_NONE, 'Use Soft Delete trait'],
-			['search', null, InputOption::VALUE_NONE, 'Add Search functionality to index'],
-			['fieldsFile', null, InputOption::VALUE_REQUIRED, 'Fields input as json file']
+			['fieldsFile', null, InputOption::VALUE_REQUIRED, 'Fields input as json file'],
+			['paginate', null, InputOption::VALUE_REQUIRED, 'Pagination for index.blade.php']
 		];
 	}
 }

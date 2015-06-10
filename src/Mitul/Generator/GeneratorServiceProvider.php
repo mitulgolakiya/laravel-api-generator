@@ -4,7 +4,8 @@ namespace Mitul\Generator;
 
 use Illuminate\Support\ServiceProvider;
 use Mitul\Generator\Commands\APIGeneratorCommand;
-use Mitul\Generator\Commands\PublishBaseControllerCommand;
+use Mitul\Generator\Commands\InitAppCommand;
+use Mitul\Generator\Commands\PublisherCommand;
 use Mitul\Generator\Commands\ScaffoldAPIGeneratorCommand;
 use Mitul\Generator\Commands\ScaffoldGeneratorCommand;
 
@@ -21,13 +22,8 @@ class GeneratorServiceProvider extends ServiceProvider
 		$configPath = __DIR__ . '/../../../config/generator.php';
 
 		$this->publishes([
-			$configPath                 => config_path('generator.php'),
-			__DIR__ . '/../../../views' => base_path('resources/views'),
-		], 'config');
-
-		$this->publishes([
-			__DIR__ . '/Templates' => base_path('resources/api-generator-templates'),
-		], 'templates');
+			$configPath => config_path('generator.php')
+		]);
 	}
 
 	/**
@@ -37,6 +33,16 @@ class GeneratorServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
+		$this->app->singleton('mitul.generator.publisher', function ($app)
+		{
+			return new PublisherCommand();
+		});
+
+		$this->app->singleton('mitul.generator.init', function ($app)
+		{
+			return new InitAppCommand();
+		});
+
 		$this->app->singleton('mitul.generator.api', function ($app)
 		{
 			return new APIGeneratorCommand();
@@ -52,11 +58,12 @@ class GeneratorServiceProvider extends ServiceProvider
 			return new ScaffoldAPIGeneratorCommand();
 		});
 
-		$this->app->singleton('mitul.generator.publish.base_controller', function ($app)
-		{
-			return new PublishBaseControllerCommand();
-		});
-
-		$this->commands(['mitul.generator.api', 'mitul.generator.scaffold', 'mitul.generator.scaffold_api', 'mitul.generator.publish.base_controller']);
+		$this->commands([
+			'mitul.generator.publisher',
+			'mitul.generator.init',
+			'mitul.generator.api',
+			'mitul.generator.scaffold',
+			'mitul.generator.scaffold_api'
+		]);
 	}
 }

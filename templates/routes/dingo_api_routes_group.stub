@@ -1,0 +1,33 @@
+/*
+|--------------------------------------------------------------------------
+| dingo/api and mitulgolakiya/laravel-api-generator api routes
+|--------------------------------------------------------------------------
+*/
+
+$api = app('api.router');
+
+$api->group([
+	'version'   => '$API_VERSION$',
+	'prefix'    => '$API_PREFIX$',
+	'namespace' => '$API_CONTROLLER_NAMESPACE$',
+], function ($api)
+{
+	include_once __DIR__ . '/api_routes.php';
+
+	$api->get('errors/{id}', function ($id)
+	{
+		return \Mitul\Generator\Errors::getErrors([$id]);
+	});
+
+	$api->get('errors', function ()
+	{
+		return \Mitul\Generator\Errors::getErrors([], [], true);
+	});
+
+	$api->get('/', function ()
+	{
+		$links = [];
+
+		return ['links' => $links];
+	});
+});

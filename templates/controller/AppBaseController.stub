@@ -1,6 +1,6 @@
-<?php namespace Mitul\Controller;
+<?php namespace $NAMESPACE_CONTROLLER$;
 
-use App\Http\Controllers\Controller as Controller;
+use $NAMESPACE_APP$\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request;
 use Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -18,7 +18,7 @@ class AppBaseController extends Controller
     public function validateRequestOrFail($request, array $rules, $messages = [], $customAttributes = [])
     {
         $validator = $this->getValidationFactory()->make($request->all(), $rules, $messages, $customAttributes);
-
+	    
         if ($validator->fails())
         {
 	        throw new HttpException(400, $validator->errors()->getMessages());

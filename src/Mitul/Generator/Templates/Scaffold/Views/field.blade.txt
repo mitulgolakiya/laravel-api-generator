@@ -1,5 +1,0 @@
-<!--- $FIELD_NAME_TITLE$ Field --->
-<div class="form-group col-sm-6 col-lg-4">
-    {!! Form::label('$FIELD_NAME$', '$FIELD_NAME_TITLE$:') !!}
-    {!! Form::text('$FIELD_NAME$', null, ['class' => 'form-control']) !!}
-</div>

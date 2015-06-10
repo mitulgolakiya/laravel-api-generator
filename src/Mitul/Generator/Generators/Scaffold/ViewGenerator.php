@@ -5,22 +5,26 @@ namespace Mitul\Generator\Generators\Scaffold;
 use Config;
 use Illuminate\Support\Str;
 use Mitul\Generator\CommandData;
+use Mitul\Generator\FormFieldsGenerator;
 use Mitul\Generator\Generators\GeneratorProvider;
+use Mitul\Generator\Utils\GeneratorUtils;
 
 class ViewGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
 
+	/** @var string */
 	private $path;
 
+	/** @var string */
 	private $viewsPath;
 
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_views', base_path('resources/views')) . '/' . $this->commandData->modelNamePluralCamel . '/';
-		$this->viewsPath = "Scaffold/Views";
+		$this->viewsPath = "scaffold/views";
 	}
 
 	public function generate()
@@ -31,6 +35,7 @@ class ViewGenerator implements GeneratorProvider
 		$this->commandData->commandObj->comment("\nViews created: ");
 		$this->generateFields();
 		$this->generateShowFields();
+		$this->generateTable();
 		$this->generateIndex();
 		$this->generateShow();
 		$this->generateCreate();
@@ -45,9 +50,39 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
-			$singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
-			$fieldsStr .= $singleFieldStr . "\n\n";
+			switch($field['type'])
+			{
+				case 'text':
+					$fieldsStr .= FormFieldsGenerator::text($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'textarea':
+					$fieldsStr .= FormFieldsGenerator::textarea($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'password':
+					$fieldsStr .= FormFieldsGenerator::password($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'email':
+					$fieldsStr .= FormFieldsGenerator::email($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'file':
+					$fieldsStr .= FormFieldsGenerator::file($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'checkbox':
+					$fieldsStr .= FormFieldsGenerator::checkbox($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'radio':
+					$fieldsStr .= FormFieldsGenerator::radio($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'number':
+					$fieldsStr .= FormFieldsGenerator::number($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'date':
+					$fieldsStr .= FormFieldsGenerator::date($fieldTemplate, $field) . "\n\n";
+					break;
+				case 'select':
+					$fieldsStr .= FormFieldsGenerator::select($fieldTemplate, $field) . "\n\n";
+					break;
+			}
 		}
 
 		$templateData = $this->commandData->templatesHelper->getTemplate("fields.blade", $this->viewsPath);
@@ -64,7 +99,7 @@ class ViewGenerator implements GeneratorProvider
 
 	private function generateShowFields()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show-field.blade", $this->viewsPath);
+		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show_field.blade", $this->viewsPath);
 
 		$fieldsStr = "";
 
@@ -72,20 +107,16 @@ class ViewGenerator implements GeneratorProvider
 		{
 			$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
 			$singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
-			$singleFieldStr = $this->fillTemplate($singleFieldStr);
-			
+			$singleFieldStr = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $singleFieldStr);
+
 			$fieldsStr .= $singleFieldStr . "\n\n";
 		}
 
-		$templateData = $this->commandData->templatesHelper->getTemplate("show-fields.blade", $this->viewsPath);
-
-		$templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
-
-		$fileName = "show-fields.blade.php";
+		$fileName = "show_fields.blade.php";
 
 		$path = $this->path . $fileName;
 
-		$this->commandData->fileHelper->writeFile($path, $templateData);
+		$this->commandData->fileHelper->writeFile($path, $fieldsStr);
 		$this->commandData->commandObj->info("show-field.blade.php created");
 	}
 
@@ -93,32 +124,36 @@ class ViewGenerator implements GeneratorProvider
 	{
 		$templateData = $this->commandData->templatesHelper->getTemplate("index.blade", $this->viewsPath);
 
-		if($this->commandData->useSearch)
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
+
+		if($this->commandData->paginate)
 		{
-			$searchLayout = $this->commandData->templatesHelper->getTemplate("search.blade", $this->viewsPath);
-			$templateData = str_replace('$SEARCH$', $searchLayout, $templateData);
+			$paginateTemplate = $this->commandData->templatesHelper->getTemplate("paginate.blade", "scaffold/views");
 
-			$fieldTemplate = $this->commandData->templatesHelper->getTemplate("field.blade", $this->viewsPath);
+			$paginateTemplate = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $paginateTemplate);
 
-			$fieldsStr = "";
-
-			foreach($this->commandData->inputFields as $field)
-			{
-				$singleFieldStr = str_replace('$FIELD_NAME_TITLE$', Str::title(str_replace("_", " ", $field['fieldName'])), $fieldTemplate);
-				$singleFieldStr = str_replace('$FIELD_NAME$', $field['fieldName'], $singleFieldStr);
-				$fieldsStr .= "\n\n" . $singleFieldStr . "\n\n";
-			}
-
-			$templateData = str_replace('$FIELDS$', $fieldsStr, $templateData);
+			$templateData = str_replace('$PAGINATE$', $paginateTemplate, $templateData);
 		}
 		else
 		{
-			$templateData = str_replace('$SEARCH$', '', $templateData);
+			$templateData = str_replace('$PAGINATE$', '', $templateData);
 		}
 
-		$templateData = $this->fillTemplate($templateData);
-
 		$fileName = "index.blade.php";
+
+		$path = $this->path . $fileName;
+
+		$this->commandData->fileHelper->writeFile($path, $templateData);
+		$this->commandData->commandObj->info("index.blade.php created");
+	}
+
+	private function generateTable()
+	{
+		$templateData = $this->commandData->templatesHelper->getTemplate("table.blade", $this->viewsPath);
+
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
+
+		$fileName = "table.blade.php";
 
 		$headerFields = "";
 
@@ -135,7 +170,7 @@ class ViewGenerator implements GeneratorProvider
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$tableBodyFields .= "<td>{!! $" . $this->commandData->modelNameCamel . "->" . $field['fieldName'] . " !!}</td>\n\t\t\t\t\t";
+			$tableBodyFields .= "<td>{!! $" . $this->commandData->modelNameCamel . "->" . $field['fieldName'] . " !!}</td>\n\t\t\t";
 		}
 
 		$tableBodyFields = trim($tableBodyFields);
@@ -145,13 +180,14 @@ class ViewGenerator implements GeneratorProvider
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->info("index.blade.php created");
+		$this->commandData->commandObj->info("table.blade.php created");
 	}
 
 	private function generateShow()
 	{
-		$fieldTemplate = $this->commandData->templatesHelper->getTemplate("show.blade", $this->viewsPath);
-		$templateData = $this->fillTemplate($fieldTemplate);
+		$templateData = $this->commandData->templatesHelper->getTemplate("show.blade", $this->viewsPath);
+
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
 		$fileName = "show.blade.php";
 
@@ -161,12 +197,11 @@ class ViewGenerator implements GeneratorProvider
 		$this->commandData->commandObj->info("show.blade.php created");
 	}
 
-
 	private function generateCreate()
 	{
 		$templateData = $this->commandData->templatesHelper->getTemplate("create.blade", $this->viewsPath);
 
-		$templateData = $this->fillTemplate($templateData);
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
 		$fileName = "create.blade.php";
 
@@ -180,7 +215,7 @@ class ViewGenerator implements GeneratorProvider
 	{
 		$templateData = $this->commandData->templatesHelper->getTemplate("edit.blade", $this->viewsPath);
 
-		$templateData = $this->fillTemplate($templateData);
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
 		$fileName = "edit.blade.php";
 
@@ -188,16 +223,5 @@ class ViewGenerator implements GeneratorProvider
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
 		$this->commandData->commandObj->info("edit.blade.php created");
-	}
-
-	private function fillTemplate($templateData)
-	{
-		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
-		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);
-
-		$templateData = str_replace('$MODEL_NAME_CAMEL$', $this->commandData->modelNameCamel, $templateData);
-		$templateData = str_replace('$MODEL_NAME_PLURAL_CAMEL$', $this->commandData->modelNamePluralCamel, $templateData);
-
-		return $templateData;
 	}
 }

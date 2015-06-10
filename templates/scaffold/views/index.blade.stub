@@ -1,0 +1,25 @@
+@extends('app')
+
+@section('content')
+
+    <div class="container">
+
+        @include('flash::message')
+
+        <div class="row">
+            <h1 class="pull-left">$MODEL_NAME_PLURAL$</h1>
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}">Add New</a>
+        </div>
+
+        <div class="row">
+            @if($$MODEL_NAME_PLURAL_CAMEL$->isEmpty())
+                <div class="well text-center">No $MODEL_NAME_PLURAL$ found.</div>
+            @else
+                @include('$MODEL_NAME_PLURAL_CAMEL$.table')
+            @endif
+        </div>
+
+        $PAGINATE$
+
+    </div>
+@endsection

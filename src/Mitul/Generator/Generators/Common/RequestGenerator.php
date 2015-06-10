@@ -5,45 +5,55 @@ namespace Mitul\Generator\Generators\Common;
 use Config;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\GeneratorProvider;
+use Mitul\Generator\Utils\GeneratorUtils;
 
 class RequestGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
 
+	/** @var string */
 	private $path;
-
-	private $namespace;
 
 	function __construct($commandData)
 	{
 		$this->commandData = $commandData;
 		$this->path = Config::get('generator.path_request', app_path('Http/Requests/'));
-		$this->namespace = Config::get('generator.namespace_request', 'App\Http\Requests');
 	}
 
-	function generate()
+	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Request", "Scaffold");
+		$this->generateCreateRequest();
+		$this->generateUpdateRequest();
+	}
 
-		$templateData = $this->fillTemplate($templateData);
+	private function generateCreateRequest()
+	{
+		$templateData = $this->commandData->templatesHelper->getTemplate("CreateRequest", "scaffold/requests");
+
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
 		$fileName = "Create" . $this->commandData->modelName . "Request.php";
 
 		$path = $this->path . $fileName;
 
 		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->comment("\nRequest created: ");
+		$this->commandData->commandObj->comment("\nCreate Request created: ");
 		$this->commandData->commandObj->info($fileName);
 	}
 
-	private function fillTemplate($templateData)
+	private function generateUpdateRequest()
 	{
-		$templateData = str_replace('$NAMESPACE$', $this->namespace, $templateData);
-		$templateData = str_replace('$MODEL_NAMESPACE$', $this->commandData->modelNamespace, $templateData);
+		$templateData = $this->commandData->templatesHelper->getTemplate("UpdateRequest", "scaffold/requests");
 
-		$templateData = str_replace('$MODEL_NAME$', $this->commandData->modelName, $templateData);
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
-		return $templateData;
+		$fileName = "Update" . $this->commandData->modelName . "Request.php";
+
+		$path = $this->path . $fileName;
+
+		$this->commandData->fileHelper->writeFile($path, $templateData);
+		$this->commandData->commandObj->comment("\nUpdate Request created: ");
+		$this->commandData->commandObj->info($fileName);
 	}
 }

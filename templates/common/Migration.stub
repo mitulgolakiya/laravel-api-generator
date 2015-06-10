@@ -13,7 +13,7 @@ class Create$MODEL_NAME_PLURAL$Table extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('$TABLE_NAME$', function(Blueprint $table)
+		Schema::create('$MODEL_NAME_PLURAL_CAMEL$', function(Blueprint $table)
 		{
 			$FIELDS$
 		});
@@ -26,7 +26,7 @@ class Create$MODEL_NAME_PLURAL$Table extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('$TABLE_NAME$');
+		Schema::drop('$MODEL_NAME_PLURAL_CAMEL$');
 	}
 
 }

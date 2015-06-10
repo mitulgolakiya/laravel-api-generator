@@ -1,7 +1,7 @@
-<?php namespace $NAMESPACE$;
+<?php namespace $NAMESPACE_REQUEST$;
 
 use App\Http\Requests\Request;
-use $MODEL_NAMESPACE$;
+use $NAMESPACE_MODEL$\$MODEL_NAME$;
 
 class Create$MODEL_NAME$Request extends Request {
 

@@ -1,0 +1,13 @@
+/*
+|--------------------------------------------------------------------------
+| API routes
+|--------------------------------------------------------------------------
+*/
+
+Route::group(['prefix' => '$API_PREFIX$', 'namespace' => '$NAMESPACE_API_CONTROLLER$'], function ()
+{
+	Route::group(['prefix' => '$API_VERSION$'], function ()
+	{
+        include_once Config::get('generator.path_api_routes');
+	});
+});

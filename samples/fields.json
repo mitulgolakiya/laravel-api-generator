@@ -1,10 +1,52 @@
 [
     {
         "field":"title:string",
+        "type":"text",
         "validations": "required"
     },
     {
         "field":"body:text",
+        "type":"textarea",
+        "validations": ""
+    },
+    {
+        "field":"password:string",
+        "type":"password",
+        "validations": ""
+    },
+    {
+        "field":"email:string",
+        "type":"email",
+        "validations": ""
+    },
+    {
+        "field":"profile:string",
+        "type":"file",
+        "validations": ""
+    },
+    {
+        "field":"remember:boolean",
+        "type":"checkbox",
+        "validations": ""
+    },
+    {
+        "field":"gender:integer",
+        "type":"radio:male,female",
+        "validations": ""
+    },
+    {
+        "field":"order:integer",
+        "type":"number",
+        "validations": ""
+    },
+    {
+        "field":"birth_date:timestamp",
+        "type":"date",
+        "validations": ""
+    },
+    {
+        "field":"location:string",
+        "type":"select:Surat,Mumbai",
         "validations": ""
     }
 ]

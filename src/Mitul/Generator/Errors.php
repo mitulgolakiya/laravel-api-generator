@@ -94,8 +94,7 @@ class Errors {
      * @param array $hateoas Send here static::getHATEOAS(['%id' => $id, '%placeholder' => 'value']) from generated controller
      * @param array $replacements additional info inside response
      */
-    public static function
-    throwHttpException(Exception\HttpException $exception, $help_link, $system_message = '', $payload = [], $hateoas = [], $replacements = [])
+    public static function throwHttpException(Exception\HttpException $exception, $help_link, $system_message = '', $payload = [], $hateoas = [], $replacements = [])
     {
         $replacements = self::getReplacements($system_message, $payload, $help_link, $replacements);
         app('api.exception')->setReplacements($replacements);

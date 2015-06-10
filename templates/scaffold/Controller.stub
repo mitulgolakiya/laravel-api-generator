@@ -1,45 +1,35 @@
-<?php namespace $NAMESPACE$;
+<?php namespace $NAMESPACE_CONTROLLER$;
 
-use App\Http\Requests;
-use $REQUEST_NAMESPACE$\Create$MODEL_NAME$Request;
-use $MODEL_NAMESPACE$;
-use Illuminate\Http\Request;
-use Mitul\Controller\AppBaseController;
-use Response;
+use $NAMESPACE_REQUEST$;
+use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
+use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
+use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
 use Flash;
-use Schema;
+use $BASE_CONTROLLER$ as Controller;
+use Response;
 
-class $MODEL_NAME$Controller extends AppBaseController
+class $MODEL_NAME$Controller extends Controller
 {
 
+	/** @var  $MODEL_NAME$Repository */
+	private $$MODEL_NAME_CAMEL$Repository;
+
+	function __construct($MODEL_NAME$Repository $$MODEL_NAME_CAMEL$Repo)
+	{
+		$this->$MODEL_NAME_CAMEL$Repository = $$MODEL_NAME_CAMEL$Repo;
+	}
+
 	/**
-	 * Display a listing of the Post.
-	 *
-	 * @param Request $request
+	 * Display a listing of the $MODEL_NAME$.
 	 *
 	 * @return Response
 	 */
-	public function index(Request $request)
+	public function index()
 	{
-		$query = $MODEL_NAME$::query();
-        $columns = Schema::getColumnListing('$TABLE_NAME$');
-        $attributes = array();
+		$$MODEL_NAME_PLURAL_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->$RENDER_TYPE$;
 
-        foreach($columns as $attribute){
-            if($request[$attribute] == true)
-            {
-                $query->where($attribute, $request[$attribute]);
-                $attributes[$attribute] =  $request[$attribute];
-            }else{
-                $attributes[$attribute] =  null;
-            }
-        };
-
-        $$MODEL_NAME_PLURAL_CAMEL$ = $query->get();
-
-        return view('$MODEL_NAME_PLURAL_CAMEL$.index')
-            ->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$)
-            ->with('attributes', $attributes);
+		return view('$MODEL_NAME_PLURAL_CAMEL$.index')
+			->with('$MODEL_NAME_PLURAL_CAMEL$', $$MODEL_NAME_PLURAL_CAMEL$);
 	}
 
 	/**
@@ -61,11 +51,11 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function store(Create$MODEL_NAME$Request $request)
 	{
-        $input = $request->all();
+		$input = $request->all();
 
-		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::create($input);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->create($input);
 
-		Flash::info('$MODEL_NAME$ saved successfully.');
+		Flash::success('$MODEL_NAME$ saved successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
@@ -79,11 +69,12 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function show($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
 			Flash::error('$MODEL_NAME$ not found');
+
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
@@ -93,16 +84,18 @@ class $MODEL_NAME$Controller extends AppBaseController
 	/**
 	 * Show the form for editing the specified $MODEL_NAME$.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 *
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
 			Flash::error('$MODEL_NAME$ not found');
+
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
@@ -112,26 +105,25 @@ class $MODEL_NAME$Controller extends AppBaseController
 	/**
 	 * Update the specified $MODEL_NAME$ in storage.
 	 *
-	 * @param  int    $id
-	 * @param Create$MODEL_NAME$Request $request
+	 * @param  int              $id
+	 * @param Update$MODEL_NAME$Request $request
 	 *
 	 * @return Response
 	 */
-	public function update($id, Create$MODEL_NAME$Request $request)
+	public function update($id, Update$MODEL_NAME$Request $request)
 	{
-		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
-		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
 			Flash::error('$MODEL_NAME$ not found');
+
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$->fill($request->all());
-		$$MODEL_NAME_CAMEL$->save();
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->updateRich($request->all(), $id);
 
-		Flash::info('$MODEL_NAME$ updated successfully.');
+		Flash::success('$MODEL_NAME$ updated successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}
@@ -145,18 +137,18 @@ class $MODEL_NAME$Controller extends AppBaseController
 	 */
 	public function destroy($id)
 	{
-		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
-		$$MODEL_NAME_CAMEL$ = $MODEL_NAME$::find($id);
+		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->find($id);
 
 		if(empty($$MODEL_NAME_CAMEL$))
 		{
 			Flash::error('$MODEL_NAME$ not found');
+
 			return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 		}
 
-		$$MODEL_NAME_CAMEL$->delete();
+		$this->$MODEL_NAME_CAMEL$Repository->delete($id);
 
-		Flash::info('$MODEL_NAME$ deleted successfully.');
+		Flash::success('$MODEL_NAME$ deleted successfully.');
 
 		return redirect(route('$MODEL_NAME_PLURAL_CAMEL$.index'));
 	}

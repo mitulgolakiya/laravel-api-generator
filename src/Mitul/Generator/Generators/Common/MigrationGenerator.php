@@ -5,13 +5,15 @@ namespace Mitul\Generator\Generators\Common;
 use Config;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\Generators\GeneratorProvider;
-use Mitul\Generator\SchemaCreator;
+use Mitul\Generator\SchemaGenerator;
+use Mitul\Generator\Utils\GeneratorUtils;
 
 class MigrationGenerator implements GeneratorProvider
 {
 	/** @var  CommandData */
 	private $commandData;
 
+	/** @var string */
 	private $path;
 
 	function __construct($commandData)
@@ -22,11 +24,13 @@ class MigrationGenerator implements GeneratorProvider
 
 	public function generate()
 	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Migration", "Common");
+		$templateData = $this->commandData->templatesHelper->getTemplate("Migration", "common");
 
-		$templateData = $this->fillTemplate($templateData);
+		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
-		$fileName = date('Y_m_d_His') . "_" . "create_" . $this->commandData->tableName . "_table.php";
+		$templateData = str_replace('$FIELDS$', $this->generateFieldsStr(), $templateData);
+
+		$fileName = date('Y_m_d_His') . "_" . "create_" . $this->commandData->modelNamePluralCamel . "_table.php";
 
 		$path = $this->path . $fileName;
 
@@ -35,24 +39,13 @@ class MigrationGenerator implements GeneratorProvider
 		$this->commandData->commandObj->info($fileName);
 	}
 
-	private function fillTemplate($templateData)
-	{
-		$templateData = str_replace('$MODEL_NAME_PLURAL$', $this->commandData->modelNamePlural, $templateData);
-
-		$templateData = str_replace('$TABLE_NAME$', $this->commandData->tableName, $templateData);
-
-		$templateData = str_replace('$FIELDS$', $this->generateFieldsStr(), $templateData);
-
-		return $templateData;
-	}
-
 	private function generateFieldsStr()
 	{
 		$fieldsStr = "\$table->increments('id');\n";
 
 		foreach($this->commandData->inputFields as $field)
 		{
-			$fieldsStr .= SchemaCreator::createField($field['fieldInput']);
+			$fieldsStr .= SchemaGenerator::createField($field['fieldInput']);
 		}
 
 		$fieldsStr .= "\t\t\t\$table->timestamps();";

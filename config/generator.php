@@ -4,6 +4,18 @@ return [
 
 	/*
 	|--------------------------------------------------------------------------
+	| Base Controller
+	|--------------------------------------------------------------------------
+	|
+	| This controller will be used as a base controller of all controllers
+	|
+	*/
+
+	'base_controller'          => 'Mitul\Controller\AppBaseController',
+
+
+	/*
+	|--------------------------------------------------------------------------
 	| Path for classes
 	|--------------------------------------------------------------------------
 	|
@@ -21,11 +33,13 @@ return [
 
 	'path_api_controller'      => app_path('Http/Controllers/API/'),
 
-	'path_views'               => base_path('resources/views'),
+	'path_views'               => base_path('resources/views/'),
 
 	'path_request'             => app_path('Http/Requests/'),
 
 	'path_routes'              => app_path('Http/routes.php'),
+
+	'path_api_routes'          => app_path('Http/api_routes.php'),
 
 
 	/*
@@ -47,6 +61,7 @@ return [
 
 	'namespace_request'        => 'App\Http\Requests',
 
+
 	/*
 	|--------------------------------------------------------------------------
 	| Model extend
@@ -63,11 +78,7 @@ return [
 	|
 	*/
 
-	'model_extend'             => false,
-
-	'model_extend_namespace'   => 'Illuminate\Database\Eloquent\Model',
-
-	'model_extend_class'       => 'Model',
+	'model_extend_class'   => 'Illuminate\Database\Eloquent\Model',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -79,4 +90,19 @@ return [
 	*/
 
 	'api_prefix'               => 'api',
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| dingo API integration
+	|--------------------------------------------------------------------------
+	|
+	| By default dingo API Integration will not be enabled. Dingo API is in beta.
+	|
+	*/
+
+	'use_dingo_api'            => false,
+
+	'api_version'              => 'v1'
+
 ];

@@ -2,7 +2,7 @@
 
 namespace Mitul\Generator;
 
-class SchemaCreator
+class SchemaGenerator
 {
 	public static function createField($field)
 	{
