@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Mitul\Generator\CommandData;
 use Mitul\Generator\File\FileHelper;
 use Mitul\Generator\Utils\GeneratorUtils;
+use Mitul\Generator\Utils\TableFieldsGenerator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -27,6 +28,16 @@ class BaseCommand extends Command
 		$this->commandData->paginate = $this->option('paginate');
 		$this->commandData->tableName = $this->option('tableName');
 		$this->commandData->skipMigration = $this->option('skipMigration');
+		$this->commandData->fromTable = $this->option('fromTable');
+
+		if(!is_null($this->commandData->fromTable))
+		{
+			if(is_null($this->commandData->tableName))
+			{
+				$this->error("tableName required with table option.");
+				exit;
+			}
+		}
 
 		if($this->commandData->paginate <= 0)
 			$this->commandData->paginate = 10;
@@ -61,6 +72,10 @@ class BaseCommand extends Command
 				exit;
 			}
 		}
+		elseif($this->commandData->fromTable)
+		{
+			$this->commandData->inputFields = TableFieldsGenerator::generateFieldsFromTable($this->commandData->tableName);
+		}
 		else
 			$this->commandData->inputFields = $this->commandData->getInputFields();
 	}
@@ -89,7 +104,8 @@ class BaseCommand extends Command
 			['fieldsFile', null, InputOption::VALUE_REQUIRED, 'Fields input as json file'],
 			['paginate', null, InputOption::VALUE_OPTIONAL, 'Pagination for index.blade.php', 10],
 			['tableName', null, InputOption::VALUE_REQUIRED, 'Table Name'],
-			['skipMigration', null, InputOption::VALUE_NONE, 'Skip Migration generation']
+			['skipMigration', null, InputOption::VALUE_NONE, 'Skip Migration generation'],
+			['fromTable', null, InputOption::VALUE_NONE, 'Generate from table']
 		];
 	}
 }

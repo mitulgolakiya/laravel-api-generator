@@ -17,6 +17,7 @@ class CommandData
 	public $modelNamespace;
 
 	public $tableName;
+	public $fromTable;
 	public $skipMigration;
 	public $inputFields;
 
@@ -41,7 +42,7 @@ class CommandData
 	/** @var  string */
 	public $fieldsFile;
 
-	/** @var array  */
+	/** @var array */
 	public $dynamicVars = [];
 
 	public static $COMMAND_TYPE_API = 'api';
@@ -89,7 +90,7 @@ class CommandData
 
 			$validations = $this->commandObj->ask("Enter validations: ", false);
 
-            $validations = ($validations == false) ? '': $validations;
+			$validations = ($validations == false) ? '' : $validations;
 
 			$fields[] = GeneratorUtils::processFieldInput($fieldInputStr, $type, $validations);
 		}
@@ -102,11 +103,11 @@ class CommandData
 		$this->dynamicVars = self::getConfigDynamicVariables();
 
 		$this->dynamicVars = array_merge($this->dynamicVars, [
-			'$MODEL_NAME$' => $this->modelName,
+			'$MODEL_NAME$'              => $this->modelName,
 
-			'$MODEL_NAME_CAMEL$' => $this->modelNameCamel,
+			'$MODEL_NAME_CAMEL$'        => $this->modelNameCamel,
 
-			'$MODEL_NAME_PLURAL$' => $this->modelNamePlural,
+			'$MODEL_NAME_PLURAL$'       => $this->modelNamePlural,
 
 			'$MODEL_NAME_PLURAL_CAMEL$' => $this->modelNamePluralCamel
 		]);
@@ -126,29 +127,31 @@ class CommandData
 	{
 		return [
 
-			'$BASE_CONTROLLER$' => Config::get('generator.base_controller', 'Mitul\Controller\AppBaseController'),
+			'$BASE_CONTROLLER$'          => Config::get('generator.base_controller', 'Mitul\Controller\AppBaseController'),
 
-			'$NAMESPACE_CONTROLLER$' => Config::get('generator.namespace_controller', 'App\Http\Controllers'),
+			'$NAMESPACE_CONTROLLER$'     => Config::get('generator.namespace_controller', 'App\Http\Controllers'),
 
 			'$NAMESPACE_API_CONTROLLER$' => Config::get('generator.namespace_api_controller', 'App\Http\Controllers\API'),
 
-			'$NAMESPACE_REQUEST$' => Config::get('generator.namespace_request', 'App\Http\Requests'),
+			'$NAMESPACE_REQUEST$'        => Config::get('generator.namespace_request', 'App\Http\Requests'),
 
-			'$NAMESPACE_REPOSITORY$' => Config::get('generator.namespace_repository', 'App\Libraries\Repositories'),
+			'$NAMESPACE_REPOSITORY$'     => Config::get('generator.namespace_repository', 'App\Libraries\Repositories'),
 
-			'$NAMESPACE_MODEL$' => Config::get('generator.namespace_model', 'App\Models'),
+			'$NAMESPACE_MODEL$'          => Config::get('generator.namespace_model', 'App\Models'),
 
-			'$NAMESPACE_MODEL_EXTEND$' => Config::get('generator.model_extend_class', 'Illuminate\Database\Eloquent\Model'),
+			'$NAMESPACE_MODEL_EXTEND$'   => Config::get('generator.model_extend_class', 'Illuminate\Database\Eloquent\Model'),
 
-			'$SOFT_DELETE_DATES$' => "\n\tprotected \$dates = ['deleted_at'];\n",
+			'$SOFT_DELETE_DATES$'        => "\n\tprotected \$dates = ['deleted_at'];\n",
 
-			'$SOFT_DELETE$' => "use SoftDeletes;\n",
+			'$SOFT_DELETE$'              => "use SoftDeletes;\n",
 
-			'$SOFT_DELETE_IMPORT$' => "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n",
+			'$SOFT_DELETE_IMPORT$'       => "use Illuminate\\Database\\Eloquent\\SoftDeletes;\n",
 
-			'$API_PREFIX$' => Config::get('generator.api_prefix', "api"),
+			'$API_PREFIX$'               => Config::get('generator.api_prefix', "api"),
 
-			'$API_VERSION$' => Config::get('generator.api_version', "v1")
+			'$API_VERSION$'              => Config::get('generator.api_version', "v1"),
+
+			'$PRIMARY_KEY$'              => 'id'
 		];
 	}
 }
