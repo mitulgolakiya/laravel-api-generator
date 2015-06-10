@@ -1,17 +1,70 @@
 <?php namespace Mitul\Generator\Utils;
 
+use DB;
+
 class TableFieldsGenerator
 {
-	/**
-	 * @param string $tableName
-	 *
-	 * @return array
-	 */
-	public static function generateFieldsFromTable($tableName)
-	{
-		$schema = \DB::getDoctrineSchemaManager($tableName);
+	/** @var  string */
+	public $tableName;
 
-		$columns = $schema->listTableColumns($tableName);
+	/** @var \Doctrine\DBAL\Schema\AbstractSchemaManager  */
+	public $schema;
+
+	/** @var \Doctrine\DBAL\Schema\Table  */
+	public $table;
+
+//	/** @var array  */
+//	public $dates = [];
+//
+//	/** @var array  */
+//	public $uniqueFields = [];
+
+	function __construct($tableName)
+	{
+		$this->tableName = $tableName;
+		$this->schema = DB::getDoctrineSchemaManager($tableName);
+//		$this->table = $this->schema->listTableDetails($tableName);
+
+//		$this->analyzeIndexes();
+	}
+
+//	private function analyzeIndexes()
+//	{
+//		$indexes = $this->table->getIndexes();
+//
+//		$this->uniqueFields = [];
+//
+//		foreach($indexes as $index)
+//		{
+//			if($index->isPrimary())
+//			{
+//				$columns = $index->getColumns();
+//
+//				if(sizeof($columns) == 1)
+//				{
+//					$this->primaryKey = $columns[0];
+//				}
+//			}
+//
+//			if($index->isUnique())
+//			{
+//				$columns = $index->getColumns();
+//
+//				if(sizeof($columns) == 1)
+//				{
+//					$column = $columns[0];
+//					if($column != $this->primaryKey)
+//					{
+//						$this->uniqueFields[] = $column;
+//					}
+//				}
+//			}
+//		}
+//	}
+
+	public function generateFieldsFromTable()
+	{
+		$columns = $this->schema->listTableColumns($this->tableName);
 
 		$fields = [];
 
@@ -20,55 +73,55 @@ class TableFieldsGenerator
 			switch($column->getType()->getName())
 			{
 				case 'integer':
-					$fieldInput = self::generateIntFieldInput($column->getName(), 'integer', $column);
+					$fieldInput = $this->generateIntFieldInput($column->getName(), 'integer', $column);
 					$type = "number";
 					break;
 				case 'smallint':
-					$fieldInput = self::generateIntFieldInput($column->getName(), 'smallInteger', $column);
+					$fieldInput = $this->generateIntFieldInput($column->getName(), 'smallInteger', $column);
 					$type = "number";
 					break;
 				case 'bigint':
-					$fieldInput = self::generateIntFieldInput($column->getName(), 'bigInteger', $column);
+					$fieldInput = $this->generateIntFieldInput($column->getName(), 'bigInteger', $column);
 					$type = "number";
 					break;
 				case 'boolean':
-					$fieldInput = self::generateSingleFieldInput($column->getName(), 'boolean');
+					$fieldInput = $this->generateSingleFieldInput($column->getName(), 'boolean');
 					$type = "text";
 					break;
 				case 'datetime':
-					$fieldInput = self::generateSingleFieldInput($column->getName(), 'dateTime');
+					$fieldInput = $this->generateSingleFieldInput($column->getName(), 'dateTime');
 					$type = "date";
 					break;
 				case 'datetimetz':
-					$fieldInput = self::generateSingleFieldInput($column->getName(), 'dateTimeTz');
+					$fieldInput = $this->generateSingleFieldInput($column->getName(), 'dateTimeTz');
 					$type = "date";
 					break;
 				case 'date':
-					$fieldInput = self::generateSingleFieldInput($column->getName(), 'date');
+					$fieldInput = $this->generateSingleFieldInput($column->getName(), 'date');
 					$type = "date";
 					break;
 				case 'time':
-					$fieldInput = self::generateSingleFieldInput($column->getName(), 'time');
+					$fieldInput = $this->generateSingleFieldInput($column->getName(), 'time');
 					$type = "text";
 					break;
 				case 'decimal':
-					$fieldInput = self::generateDecimalInput($column, 'decimal');
+					$fieldInput = $this->generateDecimalInput($column, 'decimal');
 					$type = "number";
 					break;
 				case 'float':
-					$fieldInput = self::generateFloatInput($column);
+					$fieldInput = $this->generateFloatInput($column);
 					$type = "number";
 					break;
 				case 'string':
-					$fieldInput = self::generateStringInput($column);
+					$fieldInput = $this->generateStringInput($column);
 					$type = "text";
 					break;
 				case 'text':
-					$fieldInput = self::generateTextInput($column);
+					$fieldInput = $this->generateTextInput($column);
 					$type = "textarea";
 					break;
 				default:
-					$fieldInput = self::generateTextInput($column);
+					$fieldInput = $this->generateTextInput($column);
 					$type = "text";
 			}
 
@@ -78,7 +131,12 @@ class TableFieldsGenerator
 				$type = "email";
 
 			if(!empty($fieldInput))
+			{
+//				$fieldInput .= $this->checkForDefault($column);
+//				$fieldInput .= $this->checkForNullable($column);
+//				$fieldInput .= $this->checkForUnique($column);
 				$fields [] = GeneratorUtils::processFieldInput($fieldInput, $type, '');
+			}
 		}
 
 		return $fields;
@@ -91,7 +149,7 @@ class TableFieldsGenerator
 	 *
 	 * @return string
 	 */
-	private static function generateIntFieldInput($name, $type, $column)
+	private function generateIntFieldInput($name, $type, $column)
 	{
 		$fieldInput = "$name:$type";
 
@@ -104,7 +162,7 @@ class TableFieldsGenerator
 		return $fieldInput;
 	}
 
-	private static function generateSingleFieldInput($name, $type)
+	private function generateSingleFieldInput($name, $type)
 	{
 		$fieldInput = "$name:$type";
 
@@ -116,9 +174,9 @@ class TableFieldsGenerator
 	 *
 	 * @return string
 	 */
-	private static function generateDecimalInput($column)
+	private function generateDecimalInput($column)
 	{
-		$fieldInput = $column->getName().":decimal,".$column->getPrecision().",".$column->getScale();
+		$fieldInput = $column->getName() . ":decimal," . $column->getPrecision() . "," . $column->getScale();
 
 		return $fieldInput;
 	}
@@ -128,9 +186,9 @@ class TableFieldsGenerator
 	 *
 	 * @return string
 	 */
-	private static function generateFloatInput($column)
+	private function generateFloatInput($column)
 	{
-		$fieldInput = $column->getName().":float,".$column->getPrecision().",".$column->getScale();
+		$fieldInput = $column->getName() . ":float," . $column->getPrecision() . "," . $column->getScale();
 
 		return $fieldInput;
 	}
@@ -142,9 +200,9 @@ class TableFieldsGenerator
 	 *
 	 * @return string
 	 */
-	private static function generateStringInput($column, $length = 255)
+	private function generateStringInput($column, $length = 255)
 	{
-		$fieldInput = $column->getName().":string,".$length;
+		$fieldInput = $column->getName() . ":string," . $length;
 
 		return $fieldInput;
 	}
@@ -154,10 +212,49 @@ class TableFieldsGenerator
 	 *
 	 * @return string
 	 */
-	private static function generateTextInput($column)
+	private function generateTextInput($column)
 	{
-		$fieldInput = $column->getName().":text";
+		$fieldInput = $column->getName() . ":text";
 
 		return $fieldInput;
 	}
+
+//	/**
+//	 * @param \Doctrine\DBAL\Schema\Column $column
+//	 *
+//	 * @return string
+//	 */
+//	private function checkForNullable($column)
+//	{
+//		if(!$column->getNotnull())
+//			return ":nullable";
+//
+//		return '';
+//	}
+//
+//	/**
+//	 * @param \Doctrine\DBAL\Schema\Column $column
+//	 *
+//	 * @return string
+//	 */
+//	private function checkForDefault($column)
+//	{
+//		if($column->getDefault())
+//			return ":default," . $column->getDefault();
+//
+//		return '';
+//	}
+//
+//	/**
+//	 * @param \Doctrine\DBAL\Schema\Column $column
+//	 *
+//	 * @return string
+//	 */
+//	private function checkForUnique($column)
+//	{
+//		if(in_array($column->getName(), $this->uniqueFields))
+//			return ":unique";
+//
+//		return '';
+//	}
 }

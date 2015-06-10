@@ -34,7 +34,7 @@ class BaseCommand extends Command
 		{
 			if(is_null($this->commandData->tableName))
 			{
-				$this->error("tableName required with table option.");
+				$this->error("tableName required with fromTable option.");
 				exit;
 			}
 		}
@@ -74,7 +74,8 @@ class BaseCommand extends Command
 		}
 		elseif($this->commandData->fromTable)
 		{
-			$this->commandData->inputFields = TableFieldsGenerator::generateFieldsFromTable($this->commandData->tableName);
+			$tableFieldsGenerator = new TableFieldsGenerator($this->commandData->tableName);
+			$this->commandData->inputFields = $tableFieldsGenerator->generateFieldsFromTable();
 		}
 		else
 			$this->commandData->inputFields = $this->commandData->getInputFields();
