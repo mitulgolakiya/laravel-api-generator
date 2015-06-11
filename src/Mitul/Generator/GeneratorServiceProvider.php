@@ -33,7 +33,7 @@ class GeneratorServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->singleton('mitul.generator.publisher', function ($app)
+		$this->app->singleton('mitul.generator.publish', function ($app)
 		{
 			return new PublisherCommand();
 		});
@@ -59,7 +59,7 @@ class GeneratorServiceProvider extends ServiceProvider
 		});
 
 		$this->commands([
-			'mitul.generator.publisher',
+			'mitul.generator.publish',
 			'mitul.generator.init',
 			'mitul.generator.api',
 			'mitul.generator.scaffold',

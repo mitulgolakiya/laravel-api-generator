@@ -17,7 +17,7 @@ class PublisherCommand extends Command
 	 *
 	 * @var string
 	 */
-	protected $name = 'mitul.generator:publisher';
+	protected $name = 'mitul.generator:publish';
 
 	/**
 	 * The console command description.

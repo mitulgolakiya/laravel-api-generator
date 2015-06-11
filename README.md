@@ -33,20 +33,20 @@ Documentation
 --------------
 
 1. [Installation](#installation)
-2. [Configuration]()
-3. [Publish & Initialization]()
-4. [Generator]()
-5. [Customization]()
-	1. [Base Controller]()
-	2. [Customize Templates]()
-	3. [Use Dingo API Integration]()
-6. [Options]()
-	1. [Paginate Records]()
-	2. [Model Soft Deletes]()
-	3. [Fields From File]()
-	4. [Custom Table Name]()
-	5. [Skip Migration]()
-7. [Generator from existing tables]()
+2. [Configuration](#configuration)
+3. [Publish & Initialization](#publish--initialization)
+4. [Generator](#generator)
+5. [Customization](#customization)
+	1. [Base Controller](#base-controller)
+	2. [Customize Templates](#customize-templates)
+	3. [Use Dingo API Integration](#use-dingo-api-integration)
+6. [Options](#options)
+	1. [Paginate Records](#paginate-records)
+	2. [Model Soft Deletes](#model-soft-deletes)
+	3. [Fields From File](#fields-from-file)
+	4. [Custom Table Name](#custom-table-name)
+	5. [Skip Migration](#skip-migration)
+7. [Generator from existing tables](#generator-from-existing-tables)
 
 ## Installation
 
@@ -122,7 +122,7 @@ Mainly, we need to do three basic things to get started.
 2. Publish ```api_routes.php``` which will contain all our api routes.
 3. Init ```routes.php``` for api routes. We need to include ```api_routes.php``` into main ```routes.php```.
 
-        php artisan mitul.generator:publisher
+        php artisan mitul.generator:publish
 
 ## Generator
 
@@ -156,7 +156,27 @@ e.g.
 
 ### Base Controller
 
+If you want to use your own base controller or want to extend/modify default AppBaseController then you can have following options:
+
+1. If you want to use another controller (recommended to extends AppBaseController with new controller) as base controller then modify ```base_controller``` value in ```config/generator.php```
+
+2. If you want to modify AppBaseController then,
+
+    1. Publish AppBaseController in your controllers path
+    
+        php artisan mitul.generator:publish baseController
+        
+    2. Modify the content of ```AppBaseController.php``` and set it as a ```base_controller``` in ```config/generator.php```
+
 ### Customize Templates
+
+To use your own custom templates,
+
+1. Publish templates to  ```/resources/api-generator-templates```
+
+        php artisan mitul.generator:publish templates
+
+2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
 
 ### Use Dingo API Integration
 
