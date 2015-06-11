@@ -17,12 +17,6 @@
             "email": "me@mitul.me"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/mitulgolakiya/laracast-flash"
-        }
-    ],
     "require": {
         "php": ">=5.5.9",
         "illuminate/support": "5.1.*",

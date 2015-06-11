@@ -13,23 +13,51 @@ The artisan command can generate the following items:
   * Controller
   * View
     * index.blade.php
+    * table.blade.php
     * show.blade.php
+    * show_fields.blade.php
     * create.blade.php
     * edit.blade.php
     * fields.blade.php
   * adjusts routes.php
 
-And your simple CRUD API is ready in mere seconds.
+And your simple CRUD and APIs are ready in mere seconds.
 
 Here is the full documentation.
 
-[Upgrade Guide](https://github.com/mitulgolakiya/laravel-api-generator/blob/1.3/Upgrade_Guide.md).
+[Upgrade Guide](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/Upgrade_Guide.md).
 
-Steps to Get Started
----------------------
+# Full Documentation is in process...
+
+Documentation
+--------------
+
+1. [Installation](#installation)
+2. [Configuration]()
+3. [Publish & Initialization]()
+4. [Generator]()
+5. [Customization]()
+	1. [Base Controller]()
+	2. [Customize Templates]()
+	3. [Use Dingo API Integration]()
+6. [Options]()
+	1. [Paginate Records]()
+	2. [Model Soft Deletes]()
+	3. [Fields From File]()
+	4. [Custom Table Name]()
+	5. [Skip Migration]()
+7. [Generator from existing tables]()
+
+## Installation
 
 1. Add this package to your composer.json:
   
+        "repositories": [
+            {
+                "type": "git",
+                "url": "https://github.com/mitulgolakiya/laracast-flash"
+            }
+        ],
         "require": {
             "mitulgolakiya/laravel-api-generator": "dev-master",
         }
@@ -52,51 +80,14 @@ Steps to Get Started
 		'Html'      => Collective\Html\HtmlFacade::class,
 		'Flash'     => Laracasts\Flash\Flash::class
 
-4. Publish ```generator.php```
+## Configuration
+
+Publish Configuration file.
+
+Publish ```generator.php```
 
         php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
         
-5. Publish generator stuff
-
-        php artisan mitul.generator:publisher
-
-6. Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
-
-        php artisan mitul.generator:api ModelName
-        php artisan mitul.generator:scaffold ModelName
-        php artisan mitul.generator:scaffold_api ModelName
-        
-    e.g.
-    
-        php artisan mitul.generator:api Project
-        php artisan mitul.generator:api Post
- 
-        php artisan mitul.generator:scaffold Project
-        php artisan mitul.generator:scaffold Post
- 
-        php artisan mitul.generator:scaffold_api Project
-        php artisan mitul.generator:scaffold_api Post
- 
-6. If you want to use SoftDelete trait with your models then you can specify softDelete option.
- 
-        php artisan mitul.generator:api ModelName --softDelete
-        
-    e.g.
-    
-        php artisan mitul.generator:api Post --softDelete
-        
-7. Enter the fields with options<br>
-
-8. And you are ready to go. :)
-
-
-# Full Documentation is Coming soon...
-
-Documentation
---------------
-
-### Generator Config file
-
 Config file (```config/generator.php```) contains path for all generated files
 
 ```base_controller``` - Base Controller for all Controllers<br>
@@ -124,22 +115,65 @@ Config file (```config/generator.php```) contains path for all generated files
 
 ```use_dingo_api``` - Integrate APIs with dingo/api package
 
-### Field Input
+## Publish & Initialization
 
-Here is the input for the fields by which you can specify Input.
+Mainly, we need to do three basic things to get started.
+1. Publish some common views like ```errors.blade.php``` & ```paginate.blade.php```.
+2. Publish ```api_routes.php``` which will contain all our api routes.
+3. Init ```routes.php``` for api routes. We need to include ```api_routes.php``` into main ```routes.php```.
 
-        fieldName:fieldType,options:fieldOptions
+        php artisan mitul.generator:publisher
+
+## Generator
+
+Fire artisan command to generate API, Scaffold with CRUD views or both API as well as CRUD views.
+
+Generate API:
+
+        php artisan mitul.generator:api ModelName
+    
+Generate CRUD Scaffold:
+ 
+        php artisan mitul.generator:scaffold ModelName
         
-e.g.,
+Generate CRUD Scaffold with API:
+        
+        php artisan mitul.generator:scaffold_api ModelName
+        
+e.g.
+    
+    php artisan mitul.generator:api Project
+    php artisan mitul.generator:api Post
 
-        email:string:unique
-        email:string:default('me@mitul.me')
-        title:string,100
-        price:flat,8,4
+    php artisan mitul.generator:scaffold Project
+    php artisan mitul.generator:scaffold Post
 
-Parameters will be in the same sequence as ```Blueprint``` class function for all types.
-Option will be printed as it is given in input except unique & primary.
+    php artisan mitul.generator:scaffold_api Project
+    php artisan mitul.generator:scaffold_api Post
 
+
+## Customization
+
+### Base Controller
+
+### Customize Templates
+
+### Use Dingo API Integration
+
+## Options
+
+### Paginate Records
+
+### Model Soft Deletes
+
+### Fields From File
+
+### Custom Table Name
+
+### Skip Migration
+
+## Generator from existing tables
+ 
 Screenshots
 ------------
 
