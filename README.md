@@ -231,38 +231,6 @@ You can also skip migration generation,
         php artisan mitul.generator:api Post --skipMigration
 
 ## Generator from existing tables
- 
-Screenshots
-------------
-
-### Command Execution
-![Image of Command Execution]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RbTRvTEswQ0tfOEU)
-
-### Generated Files & routes.php
-![Image of Generated Files]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RZ1VMcXlsM1Z2MDg)
-
-### Migration File
-![Image of Migration File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RMWtnN1RxUzdmTUE)
-
-### Model File
-![Image of Model File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RRUJfdHE4MVRaeXM)
-
-### Repository File
-![Image of Repository File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7ROUdNVTVORm5nQ1E)
-
-### Controller File
-![Image of Controller File]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RREVacVlOZDhxNDQ)
-
-### View Files
-![Image of View Files]
-(http://drive.google.com/uc?export=view&id=0B5kWGBdVjC7RQW5FOXExOFhEbms)
-
 
 Credits
 --------
