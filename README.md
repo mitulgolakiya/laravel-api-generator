@@ -27,7 +27,7 @@ Here is the full documentation.
 
 [Upgrade Guide](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/Upgrade_Guide.md).
 
-# Full Documentation is in process...
+# Documentation is in process...
 
 Documentation
 --------------
@@ -40,7 +40,7 @@ Documentation
 5. [Customization](#customization)
 	1. [Base Controller](#base-controller)
 	2. [Customize Templates](#customize-templates)
-	3. [Use Dingo API Integration](#use-dingo-api-integration)
+	3. [Dingo API Integration](#dingo-api-integration)
 6. [Options](#options)
 	1. [Paginate Records](#paginate-records)
 	2. [Model Soft Deletes](#model-soft-deletes)
@@ -190,7 +190,7 @@ To use your own custom templates,
 
 2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
 
-### Use Dingo API Integration
+### Dingo API Integration
 
 Coming soon...
 
