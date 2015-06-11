@@ -36,6 +36,7 @@ Documentation
 2. [Configuration](#configuration)
 3. [Publish & Initialization](#publish--initialization)
 4. [Generator](#generator)
+5. [Supported Field Types](#supported-field-types)
 5. [Customization](#customization)
 	1. [Base Controller](#base-controller)
 	2. [Customize Templates](#customize-templates)
@@ -82,9 +83,7 @@ Documentation
 
 ## Configuration
 
-Publish Configuration file.
-
-Publish ```generator.php```
+Publish Configuration file ```generator.php```.
 
         php artisan vendor:publish --provider="Mitul\Generator\GeneratorServiceProvider"
         
@@ -151,6 +150,19 @@ e.g.
     php artisan mitul.generator:scaffold_api Project
     php artisan mitul.generator:scaffold_api Post
 
+## Supported Field Types
+
+Here is the list of supported field types with options:
+  * text
+  * textarea
+  * password
+  * email
+  * file
+  * checkbox
+  * radio:male,female,option3,option4
+  * number
+  * date
+  * select:India,USA,
 
 ## Customization
 
@@ -180,17 +192,43 @@ To use your own custom templates,
 
 ### Use Dingo API Integration
 
+Coming soon...
+
 ## Options
 
 ### Paginate Records
 
+To paginate records, you can specify paginate option,
+e.g.
+
+        php artisan mitul.generator:api Post --paginate=10
+
 ### Model Soft Deletes
+
+To use SoftDelete, use softDelete option,
+
+        php artisan mitul.generator:api Post --softDelete
 
 ### Fields From File
 
+If you want to pass fields from file then you can create fields json file and pass it via command line. Here is the sample [fields.json](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/samples/fields.json)
+
+You have to pass option ```--fieldsFile=absolute_file_path_or_path_from_base_directory``` with command. e.g.
+
+         php artisan mitul.generator:scaffold_api Post --fieldsFile="/Users/Mitul/laravel-api-generator/fields.json"
+         php artisan mitul.generator:scaffold_api Post --fieldsFile="fields.json"
+
 ### Custom Table Name
 
+You can also specify your own custom table name by,
+
+        php artisan mitul.generator:api Post --tableName=custom_table_name
+
 ### Skip Migration
+
+You can also skip migration generation,
+
+        php artisan mitul.generator:api Post --skipMigration
 
 ## Generator from existing tables
  
