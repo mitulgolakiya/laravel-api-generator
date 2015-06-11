@@ -46,7 +46,7 @@ class ScaffoldAPIGeneratorCommand extends BaseCommand
 	{
 		parent::handle();
 
-		if(is_null($this->commandData->skipMigration))
+		if(!$this->commandData->skipMigration)
 		{
 			$migrationGenerator = new MigrationGenerator($this->commandData);
 			$migrationGenerator->generate();

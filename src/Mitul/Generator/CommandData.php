@@ -70,14 +70,13 @@ class CommandData
 		$fields = [];
 
 		$this->commandObj->info("Specify fields for the model (skip id & timestamp fields, will be added automatically)");
-		$this->commandObj->info("Supported field types text, textarea, password, email, file, checkbox, radio, number, date, select.");
-		$this->commandObj->info("Left blank to finish");
+		$this->commandObj->info("Enter exit to finish");
 
 		while(true)
 		{
-			$fieldInputStr = $this->commandObj->ask("Field:", false);
+			$fieldInputStr = $this->commandObj->ask("Field:", '');
 
-			if(empty($fieldInputStr) || $fieldInputStr == false)
+			if(empty($fieldInputStr) || $fieldInputStr == false || $fieldInputStr == "exit")
 				break;
 
 			if(!GeneratorUtils::validateFieldInput($fieldInputStr))
@@ -112,10 +111,10 @@ class CommandData
 			'$MODEL_NAME_PLURAL_CAMEL$' => $this->modelNamePluralCamel
 		]);
 
-		if(is_null($this->tableName))
-			$this->dynamicVars['$TABLE_NAME$'] = $this->modelNamePluralCamel;
-		else
+		if($this->tableName)
 			$this->dynamicVars['$TABLE_NAME$'] = $this->tableName;
+		else
+			$this->dynamicVars['$TABLE_NAME$'] = $this->modelNamePluralCamel;
 	}
 
 	public function addDynamicVariable($name, $val)

@@ -50,7 +50,7 @@ class MigrationGenerator implements GeneratorProvider
 
 		$fieldsStr .= "\t\t\t\$table->timestamps();";
 
-		if(!is_null($this->commandData->useSoftDelete))
+		if($this->commandData->useSoftDelete)
 			$fieldsStr .= "\n\t\t\t\$table->softDeletes();";
 
 		return $fieldsStr;

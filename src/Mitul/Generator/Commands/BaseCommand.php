@@ -30,9 +30,9 @@ class BaseCommand extends Command
 		$this->commandData->skipMigration = $this->option('skipMigration');
 		$this->commandData->fromTable = $this->option('fromTable');
 
-		if(!is_null($this->commandData->fromTable))
+		if($this->commandData->fromTable)
 		{
-			if(is_null($this->commandData->tableName))
+			if($this->commandData->tableName)
 			{
 				$this->error("tableName required with fromTable option.");
 				exit;
