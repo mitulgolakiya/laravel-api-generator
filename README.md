@@ -162,7 +162,7 @@ Here is the list of supported field types with options:
   * radio:male,female,option3,option4
   * number
   * date
-  * select:India,USA,
+  * select:India,USA
 
 ## Customization
 
