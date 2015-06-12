@@ -176,7 +176,7 @@ If you want to use your own base controller or want to extend/modify default App
 
     1. Publish AppBaseController in your controllers path
     
-        php artisan mitul.generator:publish baseController
+        php artisan mitul.generator:publish --baseController
         
     2. Modify the content of ```AppBaseController.php``` and set it as a ```base_controller``` in ```config/generator.php```
 
@@ -186,7 +186,7 @@ To use your own custom templates,
 
 1. Publish templates to  ```/resources/api-generator-templates```
 
-        php artisan mitul.generator:publish templates
+        php artisan mitul.generator:publish --templates
 
 2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
 

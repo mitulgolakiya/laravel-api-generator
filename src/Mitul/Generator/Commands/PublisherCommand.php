@@ -33,26 +33,27 @@ class PublisherCommand extends Command
 	 */
 	public function handle()
 	{
-		$this->publishCommonViews();
-		$this->publishAPIRoutes();
-		$this->initAPIRoutes();
-
 		if($this->option('all'))
 		{
+			$this->publishCommonViews();
+			$this->publishAPIRoutes();
+			$this->initAPIRoutes();
 			$this->publishTemplates();
 			$this->publishAppBaseController();
-
-			return;
 		}
-
-		if($this->option('templates'))
+		elseif($this->option('templates'))
 		{
 			$this->publishTemplates();
 		}
-
-		if($this->option('baseController'))
+		elseif($this->option('baseController'))
 		{
 			$this->publishAppBaseController();
+		}
+		else
+		{
+			$this->publishCommonViews();
+			$this->publishAPIRoutes();
+			$this->initAPIRoutes();
 		}
 	}
 
