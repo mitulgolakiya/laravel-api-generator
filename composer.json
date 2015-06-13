@@ -28,5 +28,8 @@
         "psr-4": {
             "Mitul\\": "src/Mitul/"
         }
+    },
+    "suggest": {
+        "doctrine/dbal": "Required to use generator from existing table."
     }
 }

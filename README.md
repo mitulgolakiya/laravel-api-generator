@@ -232,6 +232,14 @@ You can also skip migration generation,
 
 ## Generator from existing tables
 
+To use generator with existing table, you can specify ```--fromTable``` option. ```--tableName``` option is required and you need to specify table name.
+
+Just make sure, you have installed ```doctrine/dbal``` package.
+
+**Limitation:** As of now it is not fully working (work is in progress). It will not create migration file. You need to tweak some of the things in your generated files like timestamps, primary key etc. 
+
+        php artisan mitul.generator:api Post --fromTable --tableName=posts
+
 Credits
 --------
 

@@ -32,7 +32,7 @@ class BaseCommand extends Command
 
 		if($this->commandData->fromTable)
 		{
-			if($this->commandData->tableName)
+			if(!$this->commandData->tableName)
 			{
 				$this->error("tableName required with fromTable option.");
 				exit;
