@@ -60,7 +60,10 @@ Documentation
             }
         ],
         "require": {
-            "mitulgolakiya/laravel-api-generator": "dev-master",
+            "laracasts/flash": "dev-master",
+            "laravelcollective/html": "5.1.*@dev",
+            "bosnadev/repositories": "dev-master",
+            "mitulgolakiya/laravel-api-generator": "dev-master"
         }
   
 2. Run composer update
