@@ -31,5 +31,6 @@
     },
     "suggest": {
         "doctrine/dbal": "Required to use generator from existing table."
-    }
+    },
+    "minimum-stability": "dev"
 }
