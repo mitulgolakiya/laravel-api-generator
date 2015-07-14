@@ -216,7 +216,7 @@ class PublisherCommand extends Command
 		$apiNamespace = Config::get('generator.namespace_api_controller');
 
 		$templateData = str_replace('$API_VERSION$', $apiVersion, $templateData);
-		$templateData = str_replace('$API_CONTROLLER_NAMESPACE$', $apiNamespace, $templateData);
+		$templateData = str_replace('$NAMESPACE_API_CONTROLLER$', $apiNamespace, $templateData);
 		$templateData = str_replace('$API_PREFIX$', $apiPrefix, $templateData);
 
 		return $templateData;

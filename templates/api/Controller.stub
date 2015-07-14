@@ -102,9 +102,12 @@ class $MODEL_NAME$APIController extends Controller
 	{
 		$input = $request->all();
 
+		/** @var $MODEL_NAME$ $$MODEL_NAME_CAMEL$ */
 		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->apiFindOrFail($id);
 
-		$$MODEL_NAME_CAMEL$ = $this->$MODEL_NAME_CAMEL$Repository->updateRich($input, $id);
+		$result = $this->$MODEL_NAME_CAMEL$Repository->updateRich($input, $id);
+
+		$$MODEL_NAME_CAMEL$ = $$MODEL_NAME_CAMEL$->fresh();
 
 		return $this->sendResponse($$MODEL_NAME_CAMEL$->toArray(), "$MODEL_NAME$ updated successfully");
 	}
