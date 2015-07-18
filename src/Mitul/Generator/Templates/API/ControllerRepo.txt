@@ -53,7 +53,7 @@ class $MODEL_NAME$APIController extends AppBaseController
             }
         }
 
-        return $query->get();
+        return [$query->get(), $attributes];
     }
 
 	/**
