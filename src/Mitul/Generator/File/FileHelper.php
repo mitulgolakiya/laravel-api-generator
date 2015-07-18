@@ -1,16 +1,17 @@
 <?php
-
 namespace Mitul\Generator\File;
+
+use Storage;
 
 class FileHelper
 {
 	public function writeFile($file, $contents)
 	{
-		file_put_contents($file, $contents);
+		Storage::put($file, $contents);
 	}
 
 	public function getFileContents($file)
 	{
-		return file_get_contents($file);
+		return Storage::get($file);
 	}
 }
