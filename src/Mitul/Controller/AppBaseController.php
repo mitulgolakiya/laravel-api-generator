@@ -21,7 +21,7 @@ class AppBaseController extends Controller
 
         if ($validator->fails())
         {
-	        throw new HttpException(400, $validator->errors()->getMessages());
+            throw new HttpException(400, json_encode($validator->errors()->getMessages()));
         }
     }
 
