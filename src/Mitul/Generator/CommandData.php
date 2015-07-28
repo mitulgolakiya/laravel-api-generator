@@ -85,7 +85,7 @@ class CommandData
 				continue;
 			}
 
-			$type = $this->commandObj->ask("Enter field type (text): ", "text");
+			$type = $this->commandObj->ask("Enter field html input type (text): ", "text");
 
 			$validations = $this->commandObj->ask("Enter validations: ", false);
 

@@ -157,7 +157,7 @@ e.g.
 
 Here is the sample [fields input json](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/samples/fields.json)
 
-## Supported Field Types
+## Supported HTML Field Types
 
 Here is the list of supported field types with options:
   * text
