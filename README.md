@@ -155,6 +155,8 @@ e.g.
     php artisan mitul.generator:scaffold_api Project
     php artisan mitul.generator:scaffold_api Post
 
+Here is the sample [fields input json](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/samples/fields.json)
+
 ## Supported Field Types
 
 Here is the list of supported field types with options:
