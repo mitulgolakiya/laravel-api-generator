@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 */
 
-Route::group(['prefix' => '$API_PREFIX$', 'namespace' => '$NAMESPACE_API_CONTROLLER$'], function ()
+Route::group(['prefix' => '$API_PREFIX$', 'namespace' => 'API'], function ()
 {
 	Route::group(['prefix' => '$API_VERSION$'], function ()
 	{
