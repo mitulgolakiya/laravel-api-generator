@@ -74,7 +74,7 @@ class CommandData
 
 		while(true)
 		{
-			$fieldInputStr = $this->commandObj->ask("Field:", '');
+			$fieldInputStr = $this->commandObj->ask("Field: (field_name:field_database_type)", '');
 
 			if(empty($fieldInputStr) || $fieldInputStr == false || $fieldInputStr == "exit")
 				break;
