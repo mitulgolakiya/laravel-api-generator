@@ -4,5 +4,5 @@ namespace Mitul\Generator\Generators;
 
 interface GeneratorProvider
 {
-	function generate();
+    public function generate();
 }

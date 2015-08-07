@@ -4,57 +4,52 @@ namespace Mitul\Generator;
 
 class SchemaGenerator
 {
-	public static function createField($field)
-	{
-		$fieldInputs = explode(':', $field);
+    public static function createField($field)
+    {
+        $fieldInputs = explode(':', $field);
 
-		$fieldName = array_shift($fieldInputs);
+        $fieldName = array_shift($fieldInputs);
 
-		$fieldTypeInputs = array_shift($fieldInputs);
+        $fieldTypeInputs = array_shift($fieldInputs);
 
-		$fieldTypeInputs = explode(",", $fieldTypeInputs);
+        $fieldTypeInputs = explode(',', $fieldTypeInputs);
 
-		$fieldType = array_shift($fieldTypeInputs);
+        $fieldType = array_shift($fieldTypeInputs);
 
-		$fieldStr = "\t\t\t\$table->" . $fieldType . "('" . $fieldName . "'";
+        $fieldStr = "\t\t\t\$table->".$fieldType."('".$fieldName."'";
 
-		if(sizeof($fieldTypeInputs) > 0)
-		{
-			foreach($fieldTypeInputs as $param)
-			{
-				$fieldStr .= ", " . $param;
-			}
-		}
+        if (count($fieldTypeInputs) > 0) {
+            foreach ($fieldTypeInputs as $param) {
+                $fieldStr .= ', '.$param;
+            }
+        }
 
-		$fieldStr .= ")";
+        $fieldStr .= ')';
 
-		if(sizeof($fieldInputs) > 0)
-		{
-			foreach($fieldInputs as $input)
-			{
-				$input = explode(",", $input);
+        if (count($fieldInputs) > 0) {
+            foreach ($fieldInputs as $input) {
+                $input = explode(',', $input);
 
-				$option = array_shift($input);
+                $option = array_shift($input);
 
-				$fieldStr .= '->' . $option . '(';
+                $fieldStr .= '->'.$option.'(';
 
-				if(sizeof($input) > 0)
-				{
-					foreach($input as $param)
-					{
-						$fieldStr .= "'" . $param . "', ";
-					}
+                if (count($input) > 0) {
+                    foreach ($input as $param) {
+                        $fieldStr .= "'".$param."', ";
+                    }
 
-					$fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
-				}
+                    $fieldStr = substr($fieldStr, 0, strlen($fieldStr) - 2);
+                }
 
-				$fieldStr .= ")";
-			}
-		}
+                $fieldStr .= ')';
+            }
+        }
 
-		if(!empty($fieldStr))
-			$fieldStr .= ";\n";
+        if (!empty($fieldStr)) {
+            $fieldStr .= ";\n";
+        }
 
-		return $fieldStr;
-	}
+        return $fieldStr;
+    }
 }
