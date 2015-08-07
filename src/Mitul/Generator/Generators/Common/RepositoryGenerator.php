@@ -9,33 +9,34 @@ use Mitul\Generator\Utils\GeneratorUtils;
 
 class RepositoryGenerator implements GeneratorProvider
 {
-	/** @var  CommandData */
-	private $commandData;
+    /** @var  CommandData */
+    private $commandData;
 
-	/** @var string */
-	private $path;
+    /** @var string */
+    private $path;
 
-	function __construct($commandData)
-	{
-		$this->commandData = $commandData;
-		$this->path = Config::get('generator.path_repository', app_path('/Libraries/Repositories/'));
-	}
+    public function __construct($commandData)
+    {
+        $this->commandData = $commandData;
+        $this->path = Config::get('generator.path_repository', app_path('/Libraries/Repositories/'));
+    }
 
-	function generate()
-	{
-		$templateData = $this->commandData->templatesHelper->getTemplate("Repository", "common");
+    public function generate()
+    {
+        $templateData = $this->commandData->templatesHelper->getTemplate('Repository', 'common');
 
-		$templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
+        $templateData = GeneratorUtils::fillTemplate($this->commandData->dynamicVars, $templateData);
 
-		$fileName = $this->commandData->modelName . "Repository.php";
+        $fileName = $this->commandData->modelName.'Repository.php';
 
-		if(!file_exists($this->path))
-			mkdir($this->path, 0755, true);
+        if (!file_exists($this->path)) {
+            mkdir($this->path, 0755, true);
+        }
 
-		$path = $this->path . $fileName;
+        $path = $this->path.$fileName;
 
-		$this->commandData->fileHelper->writeFile($path, $templateData);
-		$this->commandData->commandObj->comment("\nRepository created: ");
-		$this->commandData->commandObj->info($fileName);
-	}
+        $this->commandData->fileHelper->writeFile($path, $templateData);
+        $this->commandData->commandObj->comment("\nRepository created: ");
+        $this->commandData->commandObj->info($fileName);
+    }
 }
