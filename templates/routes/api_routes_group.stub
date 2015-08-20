@@ -8,6 +8,6 @@ Route::group(['prefix' => '$API_PREFIX$', 'namespace' => 'API'], function ()
 {
 	Route::group(['prefix' => '$API_VERSION$'], function ()
 	{
-        include_once Config::get('generator.path_api_routes');
+        require Config::get('generator.path_api_routes');
 	});
 });
