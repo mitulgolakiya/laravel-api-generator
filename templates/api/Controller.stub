@@ -4,10 +4,10 @@ use $NAMESPACE_REQUEST$;
 use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
 use App\Models\$MODEL_NAME$;
 use Illuminate\Http\Request;
-use $BASE_CONTROLLER$ as Controller;
+use $BASE_CONTROLLER$ as AppBaseController;
 use Response;
 
-class $MODEL_NAME$APIController extends Controller
+class $MODEL_NAME$APIController extends AppBaseController
 {
 	/** @var  $MODEL_NAME$Repository */
 	private $$MODEL_NAME_CAMEL$Repository;

@@ -5,10 +5,10 @@ use $NAMESPACE_REQUEST$\Create$MODEL_NAME$Request;
 use $NAMESPACE_REQUEST$\Update$MODEL_NAME$Request;
 use $NAMESPACE_REPOSITORY$\$MODEL_NAME$Repository;
 use Flash;
-use $BASE_CONTROLLER$ as Controller;
+use $BASE_CONTROLLER$ as AppBaseController;
 use Response;
 
-class $MODEL_NAME$Controller extends Controller
+class $MODEL_NAME$Controller extends AppBaseController
 {
 
 	/** @var  $MODEL_NAME$Repository */
