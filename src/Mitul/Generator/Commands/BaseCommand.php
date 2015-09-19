@@ -29,6 +29,7 @@ class BaseCommand extends Command
         $this->commandData->tableName = $this->option('tableName');
         $this->commandData->skipMigration = $this->option('skipMigration');
         $this->commandData->fromTable = $this->option('fromTable');
+        $this->commandData->rememberToken = $this->option('rememberToken');
 
         if ($this->commandData->fromTable) {
             if (!$this->commandData->tableName) {
@@ -100,6 +101,7 @@ class BaseCommand extends Command
             ['tableName', null, InputOption::VALUE_REQUIRED, 'Table Name'],
             ['skipMigration', null, InputOption::VALUE_NONE, 'Skip Migration generation'],
             ['fromTable', null, InputOption::VALUE_NONE, 'Generate from table'],
+            ['rememberToken', null, InputOption::VALUE_NONE, 'Generate rememberToken field in migration'],
         ];
     }
 }

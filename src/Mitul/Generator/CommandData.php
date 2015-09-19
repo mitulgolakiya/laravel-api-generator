@@ -40,6 +40,9 @@ class CommandData
     public $paginate;
 
     /** @var  string */
+    public $rememberToken;
+
+    /** @var  string */
     public $fieldsFile;
 
     /** @var array */

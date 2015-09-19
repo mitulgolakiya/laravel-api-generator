@@ -197,10 +197,6 @@ To use your own custom templates,
 
 2. Leave only those templates that you want to change. Remove the templates that do not plan to change.
 
-### Dingo API Integration
-
-Coming soon...
-
 ## Options
 
 ### Paginate Records
@@ -236,6 +232,12 @@ You can also specify your own custom table name by,
 You can also skip migration generation,
 
         php artisan mitul.generator:api Post --skipMigration
+
+### Remember Token
+
+To generate rememberToken field in migration file,
+
+        php artisan mitul.generator:api Post --rememberToken
 
 ## Generator from existing tables
 
