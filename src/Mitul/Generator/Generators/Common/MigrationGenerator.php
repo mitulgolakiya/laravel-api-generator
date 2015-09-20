@@ -47,6 +47,10 @@ class MigrationGenerator implements GeneratorProvider
             $fieldsStr .= SchemaGenerator::createField($field['fieldInput']);
         }
 
+        if ($this->commandData->rememberToken) {
+            $fieldsStr .= "\t\t\t\$table->rememberToken();\n";
+        }
+
         $fieldsStr .= "\t\t\t\$table->timestamps();";
 
         if ($this->commandData->useSoftDelete) {
