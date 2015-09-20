@@ -49,6 +49,7 @@ Documentation
 	3. [Fields From File](#fields-from-file)
 	4. [Custom Table Name](#custom-table-name)
 	5. [Skip Migration](#skip-migration)
+	6. [Remember Token](#remember-token)
 7. [Generator from existing tables](#generator-from-existing-tables)
 
 ## Installation
