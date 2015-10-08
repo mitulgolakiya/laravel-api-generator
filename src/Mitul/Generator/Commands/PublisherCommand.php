@@ -178,7 +178,7 @@ class PublisherCommand extends Command
         $useDingo = Config::get('generator.use_dingo_api', false);
 
         if ($useDingo) {
-            $template = 'ding_api_routes_group';
+            $template = 'dingo_api_routes_group';
         } else {
             $template = 'api_routes_group';
         }
