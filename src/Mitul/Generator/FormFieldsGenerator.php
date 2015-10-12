@@ -124,7 +124,7 @@ class FormFieldsGenerator
                 $textField .= "\n\t<div class=\"radio-inline\">";
                 $textField .= "\n\t\t<label>";
 
-                $textField .= "\n\t\t\t{!! Form::radio('gender', '".$item."', null) !!} $label";
+                $textField .= "\n\t\t\t{!! Form::radio('\$FIELD_NAME\$', '".$item."', null) !!} $label";
 
                 $textField .= "\n\t\t</label>";
                 $textField .= "\n\t</div>";
