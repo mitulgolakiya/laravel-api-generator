@@ -66,6 +66,7 @@ class TableFieldsGenerator
 
     public function generateFieldsFromTable()
     {
+        $this->schema->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         $columns = $this->schema->listTableColumns($this->tableName);
 
         $fields = [];
