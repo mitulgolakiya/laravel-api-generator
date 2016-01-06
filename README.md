@@ -2,8 +2,13 @@ Laravel API/Scaffold/CRUD Generator
 =======================
 [![Latest Stable Version](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/v/stable)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Total Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/downloads)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Monthly Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/d/monthly)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Daily Downloads](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/d/daily)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![Latest Unstable Version](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/v/unstable)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator) [![License](https://poser.pugx.org/mitulgolakiya/laravel-api-generator/license)](https://packagist.org/packages/mitulgolakiya/laravel-api-generator)
 
-### For Laravel 5.0, check out [1.3 branch](https://github.com/mitulgolakiya/laravel-api-generator/tree/1.3)
-### For Laravel 5.2, check out [`master` branch](https://github.com/mitulgolakiya/laravel-api-generator)
+### Version Compability
+
+ Laravel  | Branch 
+:---------|:------------
+ 5.0      | [1.3](https://github.com/mitulgolakiya/laravel-api-generator/tree/1.3)
+ 5.1.*    | [1.4](https://github.com/mitulgolakiya/laravel-api-generator/tree/1.4)
+ 5.2.*    | [master](https://github.com/mitulgolakiya/laravel-api-generator)
 
 I enjoy creating API's and I have worked on many projects that required them. But the problem I always faced was setting up all the boilerplate code. For example each end point needs a migration, model, controller, repository, and on and on. I wanted a way to streamline this process and that is how this package was born.
 
