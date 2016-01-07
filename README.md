@@ -62,15 +62,9 @@ Documentation
 
 1. Add this package to your composer.json:
   
-        "repositories": [
-            {
-                "type": "git",
-                "url": "https://github.com/mitulgolakiya/laracast-flash"
-            }
-        ],
         "require": {
-            "laracasts/flash": "dev-master",
-            "laravelcollective/html": "5.1.*@dev",
+            "laracasts/flash": "~1.3",
+            "laravelcollective/html": "5.2.*",
             "bosnadev/repositories": "dev-master",
             "mitulgolakiya/laravel-api-generator": "dev-master"
         }
