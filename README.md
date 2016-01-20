@@ -70,9 +70,9 @@ Documentation
         ],
         "require": {
             "laracasts/flash": "dev-master",
-            "laravelcollective/html": "5.1.*@dev",
+            "laravelcollective/html": "~5.1",
             "bosnadev/repositories": "dev-master",
-            "mitulgolakiya/laravel-api-generator": "dev-master"
+            "mitulgolakiya/laravel-api-generator": "~1.4"
         }
   
 2. Run composer update
