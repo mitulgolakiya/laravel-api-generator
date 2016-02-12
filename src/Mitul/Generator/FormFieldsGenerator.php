@@ -91,7 +91,7 @@ class FormFieldsGenerator
 
     public static function radio($templateData, $field)
     {
-        $textField = "";
+        $textField = ''
 
         if (count($field['typeOptions']) > 0) {
             $arr = explode(',', $field['typeOptions']);
