@@ -2,10 +2,13 @@
 
 @section('content')
 <div class="container">
+<ol class="breadcrumb">
+  <li><a href="/">HomePage</a></li>
+  <li><a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.index') !!}">$MODEL_NAME_PLURAL$</a></li>
+  <li class="active">Edit</li>
+</ol>
 
-    @include('common.errors')
-
-    {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch']) !!}
+    {!! Form::model($$MODEL_NAME_CAMEL$, ['route' => ['$MODEL_NAME_PLURAL_CAMEL$.update', $$MODEL_NAME_CAMEL$->id], 'method' => 'patch','class'=>'form-horizontal']) !!}
 
         @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
 
