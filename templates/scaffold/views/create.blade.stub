@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
 
-
     {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store']) !!}
 
         @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
