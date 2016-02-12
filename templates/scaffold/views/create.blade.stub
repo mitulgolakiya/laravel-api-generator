@@ -2,7 +2,11 @@
 
 @section('content')
 <div class="container">
-
+<ol class="breadcrumb">
+  <li><a href="/">HomePage</a></li>
+  <li><a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.index') !!}">$MODEL_NAME_PLURAL$</a></li>
+  <li class="active">Create</li>
+</ol>
       {!! Form::open(['route' => '$MODEL_NAME_PLURAL_CAMEL$.store','class'=>'form-horizontal']) !!}
 
         @include('$MODEL_NAME_PLURAL_CAMEL$.fields')
