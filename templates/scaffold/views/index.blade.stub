@@ -4,6 +4,12 @@
 
     <div class="container">
 
+<ol class="breadcrumb">
+  <li><a href="/">HomePage</a></li>
+  <li><a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.index') !!}">$MODEL_NAME_PLURAL$</a></li>
+  <li class="active">List</li>
+</ol>
+
         @include('flash::message')
 
         <div class="row">
