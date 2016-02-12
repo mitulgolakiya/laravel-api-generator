@@ -8,6 +8,9 @@ class FormFieldsGenerator
 {
     public static function generateLabel($field)
     {
+        //Field label to field.blade in the custom.
+        return "";
+        
         $label = Str::title(str_replace('_', ' ', $field['fieldName']));
 
         $template = "{!! Form::label('\$FIELD_NAME\$', '\$FIELD_NAME_TITLE\$:') !!}";
