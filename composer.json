@@ -27,6 +27,7 @@
         }
     },
     "suggest": {
-        "doctrine/dbal": "Required to use generator from existing table."
+        "doctrine/dbal": "Required to use generator from existing table.",
+        "infyomlabs/laravel-generator": "This package is deprecated. we recommend to use this package instead of current package."
     }
 }
