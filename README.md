@@ -4,6 +4,8 @@ Laravel API/Scaffold/CRUD Generator
 
 # THIS PACKAGE IS DEPRECATED. USE NEW ONE FROM [HERE](https://github.com/InfyOmLabs/laravel-generator)
 
+# IF YOU STILL WANT TO USE THIS PACKAGE. [HERE](https://github.com/mitulgolakiya/laravel-api-generator/blob/master/installation.md) ARE THE INSTALLATION STEPS.
+
 ### Version Compability
 
  Laravel  | Branch 
