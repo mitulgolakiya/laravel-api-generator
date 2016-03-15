@@ -6,15 +6,13 @@ use Illuminate\Support\Str;
 
 class FormFieldsGenerator
 {
-    public static function generateLabel($field)
+    //added bootstrap default class to the label
+  public static function generateLabel($field)
     {
         $label = Str::title(str_replace('_', ' ', $field['fieldName']));
-
-        $template = "{!! Form::label('\$FIELD_NAME\$', '\$FIELD_NAME_TITLE\$:') !!}";
-
+        $template = "{!! Form::label('\$FIELD_NAME\$', '\$FIELD_NAME_TITLE\$:', ['class' => 'form-control-label $FIELD_NAME_TITLE$']) !!}";
         $template = str_replace('$FIELD_NAME_TITLE$', $label, $template);
         $template = str_replace('$FIELD_NAME$', $field['fieldName'], $template);
-
         return $template;
     }
 
