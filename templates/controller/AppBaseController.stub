@@ -1,6 +1,5 @@
 <?php namespace $NAMESPACE_CONTROLLER$;
 
-use $NAMESPACE_APP$\Http\Controllers\Controller as AppBaseController;
 use Illuminate\Http\Request;
 use Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
